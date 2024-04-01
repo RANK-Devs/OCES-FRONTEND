@@ -1,0 +1,306 @@
+<div class="app-content p-md-3 p-lg-4">
+  <div class="container-xl">
+    <div class="row justify-content-between align-items-center">
+      <div class="col-auto">
+        <h1 class="app-page-title">View Project Proposal</h1>
+      </div>
+    </div>
+
+    <h6
+      *ngIf="hasRevisions(proposalID)"
+      class="alert alert-warning text-center"
+    >
+      This is the First Draft<br />
+      <small
+        >(You may view the <b>Revision(s)</b> history below the document
+        viewer)</small
+      >
+    </h6>
+
+    <div id="body-wrapper" class="overflow-auto p-5 my-3">
+      <div class="document-viewer">
+        <div class="document-body p-3" #content>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-3 text-center">
+                <img src="/assets/img/OCES-Logo.png" style="height: 125px" />
+              </div>
+              <div class="col-md-6 text-center">
+                <p>
+                  <small
+                    ><small class="text-black"
+                      >OFFICE OF THE COMMUNITY EXTENSION SERVICES</small
+                    ></small
+                  >
+                </p>
+                <h6>
+                  <small
+                    ><small class="text-black"
+                      >Institute for Christian Formation and Social
+                      Integration</small
+                    ></small
+                  >
+                </h6>
+                <h6>
+                  <small
+                    ><small class="text-black"
+                      >HOLY ANGEL UNIVERSITY</small
+                    ></small
+                  >
+                </h6>
+                <h6><small>Sto. Rosario, Angeles City</small></h6>
+              </div>
+              <div class="col-md-3">
+                <small style="color: #000" [contentEditable]="true">
+                  <div>
+                    FM-CES 4009<br />
+                    Rev. 1<br />
+                    Effectivity Date: September 7 2021
+                  </div>
+                </small>
+              </div>
+            </div>
+            <!-- row header -->
+
+            <div class="row">
+              <div class="col-md-3 text-center"></div>
+              <div class="col-md-6 text-center">
+                <h5>COMMUNITY EXTENSION SERVICE PROJECT PROPOSAL</h5>
+              </div>
+              <div class="col-md-3"></div>
+            </div>
+            <!-- row title -->
+
+            <h6
+              class="row"
+              *ngFor="let item of proposalDetailsForm; index as i"
+            >
+              <div class="col-md-12 my-3">
+                <table class="table table-responsive mx-2">
+                  <tr class="my-2">
+                    <td class="mx-5">
+                      Sponsoring Department(s)/Proponent(s) :
+                    </td>
+                    <td style="border: solid 1px #000" width="65%" class="p-2">
+                      {{ item.sponsor_department }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Project Title :</td>
+                    <td style="border: solid 1px #000" width="65%" class="p-2">
+                      {{ item.project_title }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Target Beneficiaries :</td>
+                    <td style="border: solid 1px #000" width="65%" class="p-2">
+                      {{ item.target_beneficiary }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Venue of CES Activity :</td>
+                    <td style="border: solid 1px #000" width="50%" class="p-2">
+                      {{ item.venue }}
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </h6>
+            <!-- row details -->
+
+            <h6 class="row">
+              <div class="col-md-12 my-3">
+                <table
+                  class="table app-table-hover table-bordered mx-2 text-center"
+                >
+                  <thead>
+                    <th>Objectives</th>
+                    <th>Activities</th>
+                    <th>Responsible Person(s)</th>
+                    <th>Budget Requirement</th>
+                    <th>Time Frame</th>
+                    <th>Output</th>
+                  </thead>
+
+                  <tbody>
+                    <tr
+                      *ngFor="
+                        let item_action_plan of proposedActionPlan;
+                        index as i
+                      "
+                    >
+                      <td class="cell">
+                        <p>{{ item_action_plan.objectives }}</p>
+                      </td>
+                      <td class="cell">
+                        <b>{{ item_action_plan.activity_title }}</b
+                        ><br /><small>{{
+                          item_action_plan.activity_details
+                        }}</small>
+                      </td>
+                      <td class="cell">
+                        {{ item_action_plan.responsible_persons }}
+                      </td>
+                      <td class="cell">
+                        {{ item_action_plan.budget_requirements }}
+                      </td>
+                      <td class="cell">
+                        {{
+                          item_action_plan.time_frame_start
+                            | date : "MMM dd, yyyy"
+                        }}
+                        to
+                        {{
+                          item_action_plan.time_frame_end
+                            | date : "MMM dd, yyyy"
+                        }}
+                      </td>
+                      <td class="cell">
+                        {{ item_action_plan.proposed_output }}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </h6>
+            <!-- row proposed action plan -->
+          </div>
+          <!-- container-fluid -->
+        </div>
+        <!--#content-->
+      </div>
+      <!-- document-viewer class -->
+    </div>
+    <!-- #body-wrapper -->
+
+    <h6>Revision(s):</h6>
+
+    <button
+      class="btn btn-secondary mx-1"
+      (click)="onViewRevisionDocumentReport(revision_items._id)"
+      *ngFor="
+        let revision_items of proposalDocumentRevisionVersions;
+        index as i
+      "
+    >
+      {{ revision_items.project_title }}
+      <span
+        *ngIf="revision_items.status === '2' || revision_items.status === '1'"
+        >({{ getProposalStatus(revision_items.status) }})</span
+      >
+    </button>
+
+    <div *ngIf="proposalDocumentRevisionVersions">
+      <h6 *ngIf="proposalDocumentRevisionVersions.length < 1">N/A</h6>
+    </div>
+
+    <h6 class="row" *ngFor="let item of proposalDetailsForm; index as i">
+      <div class="col-md-12 my-3">
+        <div class="my-2">
+          <h5
+            class="my-3 mx-1 alert alert-warning"
+            *ngIf="item.revision_remarks !== ''"
+          >
+            Revision Notes:<br /><small>{{ item.revision_remarks }}</small>
+            <br />
+            <small
+              ><small
+                ><small>
+                  FROM:
+                  <span *ngIf="item.revision_by_user_id === userId">(You)</span>
+                  {{ getUserDetails(item.revision_by_user_id) }} ON
+                  {{ item.revision_remarks_date_time | date : "medium" }}
+                </small></small
+              ></small
+            >
+          </h5>
+          <h5
+            class="my-3 mx-1 alert alert-warning"
+            *ngIf="
+              administrativeRole == true && item.proposal_root_id !== ' -- '
+            "
+          >
+            This is a Revision for Proposal:<br /><small
+              (click)="onViewDocumentReport(item.proposal_root_id)"
+              >{{ getProposalDetails(item.proposal_root_id) }}</small
+            >
+            <br />
+            <small
+              ><small><small> </small></small
+            ></small>
+          </h5>
+
+          <button
+            type="button"
+            *ngIf="item.status == '4' && item.sent_by_role == 'Employee'"
+            (click)="onReviseProposal(item._id)"
+            class="btn btn-success text-white mx-1 px-4"
+          >
+            Make Revision
+          </button>
+          <button
+            type="button"
+            *ngIf="item.status == '4' && item.user_id == userId"
+            (click)="onReviseProposal(item._id)"
+            class="btn btn-success text-white mx-1 px-4"
+          >
+            <i class="fa fa-recycle"></i> Make Revision
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary text-white mx-1 px-5"
+            (click)="makePDF()"
+          >
+            <i class="fa fa-print"></i> Export
+          </button>
+        </div>
+
+        <div *ngIf="administrativeRole == true && item.status == '3'">
+          <button
+            type="button"
+            (click)="
+              onPromptDisapprove(
+                notifID,
+                item.user_id,
+                item._id,
+                item.project_title
+              )
+            "
+            class="btn btn-danger text-white mx-1 px-5"
+          >
+            Disapprove
+          </button>
+          <button
+            type="button"
+            (click)="
+              onPromptRevise(
+                notifID,
+                item.user_id,
+                item._id,
+                item.project_title
+              )
+            "
+            class="btn btn-warning text-white mx-1 px-5"
+          >
+            Revise
+          </button>
+          <button
+            type="button"
+            (click)="
+              onPromptApprove(
+                notifID,
+                item.user_id,
+                item._id,
+                item.project_title
+              )
+            "
+            class="btn btn-success text-white mx-1 px-5"
+          >
+            Approve
+          </button>
+        </div>
+      </div>
+    </h6>
+    <!-- row details -->
+  </div>
+</div>

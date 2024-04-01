@@ -1,0 +1,20 @@
+<div class="app-content p-md-3 p-lg-4">
+    <div class="container-xl">
+  
+      <div class="row justify-content-between align-items-center">
+        <div class="col-auto">
+            <h3 class = "text-center text-black">View Uploaded Images</h3>
+        </div> <!-- col-md-12 -->
+    </div> <!-- row menu title -->
+
+    <div class="row" *ngFor = "let cloud_file_item of fileUploadFilter;index as i;">
+        <div class="col-md-12 text-center">
+            <a [href] = "cloud_file_item.cloud_file_path" target = "_blank">
+                <img [src] = "cloud_file_item.cloud_file_path" width = "650px" class = "img img-responsive"/> <!-- img src = cloud_file_path -->
+            </a>
+        </div>
+    </div> <!-- row images -->
+   
+   
+</div> <!-- container-fluid -->
+</div>

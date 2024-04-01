@@ -1,0 +1,438 @@
+<div class="app-content p-md-3 p-lg-4">
+  <div class="container-xl">
+    <div class="row justify-content-between align-items-center">
+      <div class="col-auto">
+        <h1 class="app-page-title">Dashboard</h1>
+        <span class="app-page-subtitle"
+          >As of {{ currentDate | date : "medium" }}</span
+        >
+        <br /><br />
+      </div>
+    </div>
+    <div class="row g-4 mb-4">
+      <div class="col-8">
+        <div class="row g-0 mb-4">
+          <div
+            class="app-card app-card-chart h-100 shadow-sm"
+            id="introductory"
+          >
+            <div class="app-card-body p-4">
+              <h4 class="mb-3 text-white" *ngIf="roleName !== 'CSCB'">
+                Hello {{ user_fname }}!
+              </h4>
+              <h4 class="mb-3 text-white" *ngIf="roleName === 'CSCB'">
+                Hello {{ user_fname }}!
+              </h4>
+              <div class="row gx-5 gy-3">
+                <div class="col-12 col-lg-8 text-white">
+                  <div>
+                    Track all proposal details and progress on OCES! You can now
+                    view documents based on your role type
+                  </div>
+                </div>
+                <!--//col-->
+                <div class="col-12 col-lg-4">
+                  <a
+                    class="btn app-btn-primary"
+                    (click)="onViewDocumentReports()"
+                    >View Reports</a
+                  >
+                </div>
+                <!--//col-->
+              </div>
+              <!--//row-->
+            </div>
+            <!--//app-card-body-->
+          </div>
+          <!--//app-card-->
+        </div>
+
+        <div class="row g-4 mb-4">
+          <div class="col-6">
+            <div class="app-card app-card-chart h-100 shadow-sm">
+              <div class="app-card-header p-3 border-0">
+                <h4 class="app-card-title">{{ monthYearString }}</h4>
+              </div>
+              <!--//app-card-header-->
+              <div class="app-card-body p-4">
+                <full-calendar [options]="calendarOptions"></full-calendar>
+              </div>
+              <!--//app-card-body-->
+            </div>
+            <!--//app-card-->
+          </div>
+
+          <div class="col-6">
+            <div class="app-card app-card-chart h-100 shadow-sm">
+              <div class="app-card-header p-3 border-0">
+                <h4 class="app-card-title">Progress Report</h4>
+              </div>
+              <!--//app-card-header-->
+              <div class="app-card-body p-4">
+                <div class="chart-container">
+                  <canvas id="pieChart-progress-report"></canvas>
+
+                  <h6
+                    class="text-center"
+                    *ngIf="
+                      approved_projects_count < 1 && done_projects_count < 1
+                    "
+                  >
+                    No Record(s) yet
+                  </h6>
+                </div>
+              </div>
+              <!--//app-card-body-->
+            </div>
+            <!--//app-card-->
+          </div>
+        </div>
+
+        <div class="row g-0 mb-4">
+          <div class="app-card app-card-chart h-100 shadow-sm">
+            <div class="app-card-header p-3 border-0">
+              <h4 class="app-card-title">
+                Overall Report | {{ currentDate | date : "yyyy" }}
+              </h4>
+            </div>
+            <!--//app-card-header-->
+            <div class="app-card-body p-4">
+              <div class="chart-container">
+                <canvas id="barChartOverallReport"></canvas>
+              </div>
+            </div>
+            <!--//app-card-body-->
+          </div>
+          <!--//app-card-->
+        </div>
+
+        <div class="row g-0 mb-4">
+          <div class="app-card app-card-chart h-100 shadow-sm">
+            <div class="app-card-header p-3 border-0">
+              <div class="row">
+                <div class="col-md-4">
+                  <h4 class="app-card-title">Projects by Month</h4>
+                </div>
+
+                <div class="col-md-4"></div>
+
+                <div class="col-md-4">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <small class="text-black text-right"
+                        >Filter by Year</small
+                      >
+                    </div>
+                    <!-- col-md-6 -->
+                    <div class="col-md-6">
+                      <select
+                        (change)="onViewLineGraph2()"
+                        [(ngModel)]="line_graph_year_selection"
+                        class="form-control"
+                      >
+                        <option
+                          *ngFor="
+                            let year_item of years_proposal_collections;
+                            index as i
+                          "
+                          [value]="year_item"
+                        >
+                          {{ year_item }}
+                        </option>
+                      </select>
+                    </div>
+                    <!-- col-md-6 -->
+                  </div>
+                  <!-- row -->
+                </div>
+              </div>
+              <!-- projects by month header  -->
+            </div>
+            <!--//app-card-header-->
+            <div class="app-card-body p-4">
+              <div class="chart-container">
+                <canvas id="lineGraph-projects"></canvas>
+              </div>
+            </div>
+            <!--//app-card-body-->
+          </div>
+          <!--//app-card-->
+        </div>
+      </div>
+      <!--//1st col-->
+
+      <div class="col-4">
+        <div class="row g-0 mb-4">
+          <div class="app-card app-card-chart h-100 shadow-sm">
+            <div class="app-card-header p-3 border-0">
+              <h4 class="app-card-title">Recent Proposals</h4>
+            </div>
+            <!--//app-card-header-->
+            <div class="app-card-body p-4">
+              <div
+                class="overflow-auto"
+                *ngIf="roleName === 'Employee'"
+                style="height: 490px"
+              >
+                <div
+                  class="card my-2"
+                  *ngFor="
+                    let item_proposals of proposalDetailsFilterByCurrentUser;
+                    index as i
+                  "
+                >
+                  <div class="card-body" *ngIf="item_proposals.status !== '0'">
+                    <div class="row">
+                      <div class="col-auto">
+                        <i class="fa fa-image fa-4x text-danger"></i>
+                      </div>
+                      <div class="col-auto">
+                        <b>{{ item_proposals.project_title }}</b>
+
+                        <p>
+                          <small
+                            >Target: {{ item_proposals.target_period }} <br />
+                            Location: {{ item_proposals.venue }}
+                          </small>
+                          <small
+                            ><small>
+                              Submitted on
+                              {{ item_proposals.createdAt | date : "short" }}
+                            </small></small
+                          >
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- overflow-auto -->
+
+              <div
+                class="overflow-auto"
+                *ngIf="roleName === 'Super Admin' || roleName === 'Admin'"
+                style="height: 490px"
+              >
+                <div
+                  class="card my-2"
+                  *ngFor="
+                    let item_proposals of proposalDetailsDisplay;
+                    index as i
+                  "
+                >
+                  <div
+                    class="card-body"
+                    *ngIf="item_proposals.status !== '0'"
+                    (click)="onViewDocumentReport(item_proposals._id)"
+                  >
+                    <div class="row">
+                      <div class="col-auto">
+                        <svg
+                          *ngIf="
+                            item_proposals.proposal_type === 'proposal_intake'
+                          "
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="icon icon-tabler icon-tabler-notebook"
+                          width="70"
+                          height="70"
+                          viewBox="0 0 24 24"
+                          stroke-width="1.5"
+                          stroke="#700F1D"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <path
+                            d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-11a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1m3 0v18"
+                          />
+                          <path d="M13 8l2 0" />
+                          <path d="M13 12l2 0" />
+                        </svg>
+                        <svg
+                          *ngIf="!item_proposals.proposal_type"
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="icon icon-tabler icon-tabler-clipboard-data"
+                          width="70"
+                          height="70"
+                          viewBox="0 0 24 24"
+                          stroke-width="1.5"
+                          stroke="#700F1D"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <path
+                            d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"
+                          />
+                          <path
+                            d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"
+                          />
+                          <path d="M9 17v-4" />
+                          <path d="M12 17v-1" />
+                          <path d="M15 17v-2" />
+                          <path d="M12 17v-1" />
+                        </svg>
+                      </div>
+                      <div class="col-auto">
+                        <b
+                          *ngIf="
+                            item_proposals.proposal_type === 'proposal_intake'
+                          "
+                          >{{
+                            getLastIntakeDocumentRevision(
+                              item_proposals._id,
+                              "project_title",
+                              item_proposals.project_title
+                            )
+                          }}
+                        </b>
+                        <b *ngIf="!item_proposals.proposal_type"
+                          >{{
+                            getLastDocumentRevision(
+                              item_proposals._id,
+                              "project_title",
+                              item_proposals.project_title
+                            )
+                          }}
+                        </b>
+
+                        <p>
+                          <small
+                            >Target:
+                            {{
+                              item_proposals.target_period
+                                | date : "MMM dd, yyyy"
+                            }}
+                            <br />
+                            Location: {{ item_proposals.venue }} </small
+                          ><br />
+                          <small
+                            ><small>
+                              Submitted on
+                              {{ item_proposals.createdAt | date : "short" }}
+                            </small></small
+                          >
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- overflow-auto Super Admin and Admin View of Recent Proposals -->
+
+              <div
+                class="overflow-auto"
+                style="height: 490px"
+                *ngIf="roleName === 'Student'"
+              >
+                <div
+                  class="card my-2"
+                  *ngFor="
+                    let item_proposals of proposalDetailsFilterByCurrentUser;
+                    index as i
+                  "
+                >
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-auto">
+                        <i class="fa fa-image fa-4x text-danger"></i>
+                      </div>
+                      <div class="col-auto">
+                        <b>{{ item_proposals.project_title }}</b>
+
+                        <p>
+                          <small
+                            >Target: {{ item_proposals.target_period }} <br />
+                            Location: {{ item_proposals.venue }} </small
+                          ><br />
+                          <small
+                            ><small>
+                              Submitted on
+                              {{ item_proposals.createdAt | date : "short" }}
+                            </small></small
+                          >
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- overflow-auto Student View of Recent Proposals -->
+            </div>
+            <!--//app-card-body-->
+          </div>
+          <!--//app-card-->
+        </div>
+        <div class="row g-0 mb-4">
+          <div class="app-card app-card-chart h-100 shadow-sm">
+            <div class="app-card-header p-3 border-0">
+              <h4 class="app-card-title">Top Chart</h4>
+            </div>
+            <!--//app-card-header-->
+
+            <div class="app-card-body p-4 overflow-auto" style="height: 920px">
+              <div
+                class="card my-2"
+                *ngFor="let top_chart_dept of proposal_counts; index as i"
+              >
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-auto">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="50"
+                        height="50"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="icon icon-tabler icons-tabler-outline icon-tabler-affiliate"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path
+                          d="M5.931 6.936l1.275 4.249m5.607 5.609l4.251 1.275"
+                        />
+                        <path d="M11.683 12.317l5.759 -5.759" />
+                        <path
+                          d="M5.5 5.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0"
+                        />
+                        <path
+                          d="M18.5 5.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0"
+                        />
+                        <path
+                          d="M18.5 18.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0"
+                        />
+                        <path
+                          d="M8.5 15.5m-4.5 0a4.5 4.5 0 1 0 9 0a4.5 4.5 0 1 0 -9 0"
+                        />
+                      </svg>
+                    </div>
+                    <div class="col-auto">
+                      <b> {{ top_chart_dept.departments }} </b>
+
+                      <p>
+                        <small> On-going: {{ top_chart_dept.on_going }} </small
+                        ><br />
+                        <small>
+                          Completed: {{ top_chart_dept.completed }}
+                        </small>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--//app-card-body-->
+          </div>
+          <!--//app-card-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--//container-fluid-->
+</div>
+<!--//app-content-->

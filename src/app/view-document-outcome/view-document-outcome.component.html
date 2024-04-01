@@ -1,0 +1,102 @@
+<div class="app-content p-md-3 p-lg-4">
+  <div class="container-xl">
+    <div class="row justify-content-between align-items-center">
+      <div class="col-auto">
+        <h1 class="app-page-title">Outcome Assesment Document</h1>
+      </div>
+    </div>
+
+
+<div id = "body-wrapper" class = "overflow-auto p-5 my-3">
+      
+
+    <div class="document-viewer">
+      
+        
+        <div class="document-body p-3" #content>
+           
+            <div class="container-fluid">
+
+              <div class="row">
+
+                <div class="col-md-3"></div>
+                <div class="col-md-4">
+                  <img src = "assets/img/HAU-output-header.png" height = "65px"/>
+                </div>
+                
+              </div> <!-- row HEADER -->
+
+              <div class="row">
+              
+                <div class="col-md-12 text-center">
+                  <h6><small>APPENDICES&nbsp;SET&nbsp;A&nbsp; - Activities Conducted by Departments</small></h6>
+                </div> <!-- col-md-12 -->
+                
+              </div> <!-- row TITLE -->
+
+              <div class="row">
+              
+                <div class="col-md-12 text-center">
+                  <p><small class = "text-black"><small>Table 3: Activities Conducted by Departments vis-i-vis Proponents and Host Communities</small></small></p>
+                </div> <!-- col-md-12 -->
+                
+              </div> <!-- row Table 3 Description -->
+
+              <div *ngFor = "let activity_items of activity_category_collections;index as i;">              
+
+               
+
+                <div class="row" *ngIf = "checkIfCategoryExistInImplementation(activity_items)">
+
+                  <h6><small><small>Table 3.{{ i }} {{ activity_items }} Related Services</small></small></h6>
+
+                  <table class = "table table-bordered">
+                    <thead class = "text-center">
+                      <th><small><small class = "transparent-bg">Department</small></small></th>
+                      <th><small><small>Area</small></small></th>
+                      <th><small><small>Description</small></small></th>
+                      <th><small><small>Duration</small></small></th>
+                    </thead>
+                    <tbody>
+                      
+                      
+                      <tr *ngFor = "let outcome_item of implementationReports;index as i;">
+
+                        <td contentEditable="true" *ngIf = "outcome_item.activity_category === activity_items"><small>{{ getFromProposal(outcome_item.proposal_id,'sponsor_department') }}</small></td>
+                        <td contentEditable="true" *ngIf = "outcome_item.activity_category === activity_items"><small>{{ outcome_item.venue }}</small></td>
+
+                        <td contentEditable="true" *ngIf = "outcome_item.activity_category === activity_items">
+                         <div *ngFor = "let act_items of getAllProposedActionPlanActivities(outcome_item.proposal_id);"><b>{{ act_items.activity_title }}</b><br/>{{ act_items.activity_details }}<br/><br/></div>
+                        </td>
+
+                        <td contentEditable="true" *ngIf = "outcome_item.activity_category === activity_items"><small>{{ getFromProposal(outcome_item.proposal_id,'for_schoolyear') }}</small></td>
+
+                      </tr>
+        
+                    </tbody>
+                  </table>
+                
+
+                </div>
+              </div> <!-- row -->
+          
+            </div> <!-- activity_items *ngFor -->
+
+        </div> <!-- document-body -->
+      
+    </div> <!-- document-viewer class -->
+    
+   
+  </div> <!-- #body-wrapper -->
+
+
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <button class = "btn btn-success px-5 text-white mx-1">Save</button>
+      <button class = "btn btn-warning px-5 text-white mx-1" (click) = "makePDF()">Export</button>
+    </div>
+  </div> <!-- row SAVE and EXPORT -->
+  </div>
+  </div>

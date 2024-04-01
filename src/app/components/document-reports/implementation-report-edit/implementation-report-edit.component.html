@@ -1,0 +1,86 @@
+<form
+  [formGroup]="EditImplementationForm"
+  (ngSubmit)="onEditImplement()"
+  class="project-form"
+>
+  <label for="dateImplemented">Date Implemented:</label>
+  <input type="date" id="dateImplemented" formControlName="dateImplemented" />
+
+  <label for="timeImplemented">Time Implemented:</label>
+  <input type="time" id="timeImplemented" formControlName="timeImplemented" />
+
+  <label for="accomplishedObjective">Accomplished Objective:</label>
+  <input
+    type="text"
+    id="accomplishedObjective"
+    formControlName="accomplishedObjective"
+  />
+
+  <label for="briefNarrative">Brief Narrative:</label>
+  <textarea id="briefNarrative" formControlName="briefNarrative"></textarea>
+
+  <label for="projectTopic">Project Topic:</label>
+  <input type="text" id="projectTopic" formControlName="projectTopic" />
+
+  <label for="activitySpeaker">Activity Speaker:</label>
+  <input type="text" id="activitySpeaker" formControlName="activitySpeaker" />
+
+  <label for="projectVolunteers">Project Volunteers:</label>
+  <input
+    type="text"
+    id="projectVolunteers"
+    formControlName="projectVolunteers"
+  />
+
+  <label for="designation">Designation:</label>
+  <input type="text" id="designation" formControlName="designation" />
+
+  <label for="participationType">Participation Type:</label>
+  <input
+    type="text"
+    id="participationType"
+    formControlName="participationType"
+  />
+
+  <label for="prepStartTime">Prep Start Time:</label>
+  <input type="time" id="prepStartTime" formControlName="prepStartTime" />
+
+  <label for="prepEndTime">Prep End Time:</label>
+  <input type="time" id="prepEndTime" formControlName="prepEndTime" />
+
+  <label for="learnings">Learnings:</label>
+  <textarea id="learnings" formControlName="learnings"></textarea>
+
+  <label for="projectStrengths">Project Strengths:</label>
+  <textarea id="projectStrengths" formControlName="projectStrengths"></textarea>
+
+  <label for="projectWeakness">Project Weakness:</label>
+  <textarea id="projectWeakness" formControlName="projectWeakness"></textarea>
+
+  <label for="projectImprovement">Project Improvement:</label>
+  <textarea
+    id="projectImprovement"
+    formControlName="projectImprovement"
+  ></textarea>
+
+  <label for="projectCounterpart">Project Counterpart:</label>
+  <input
+    type="text"
+    id="projectCounterpart"
+    formControlName="projectCounterpart"
+  />
+
+  <label for="projectParticulars">Project Particulars:</label>
+  <input
+    type="text"
+    id="projectParticulars"
+    formControlName="projectParticulars"
+  />
+
+  <label for="projectAmount">Project Amount:</label>
+  <input type="text" id="projectAmount" formControlName="projectAmount" />
+
+  <button type="submit" [disabled]="EditImplementationForm.invalid">
+    Submit
+  </button>
+</form>

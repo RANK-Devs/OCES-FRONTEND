@@ -1,0 +1,348 @@
+<div class="app-content p-md-3 p-lg-4">
+  <div class="container-xl">
+    <div class="row justify-content-between align-items-center">
+      <div class="col-auto">
+        <h1 class="app-page-title">Output Assesment Document</h1>
+      </div>
+    </div>
+<div id = "body-wrapper" class = "overflow-auto p-5 my-3">
+      
+
+    <div class="document-viewer">
+      
+        
+        <div class="document-body p-3" #content_output>
+           
+         <div class="container-fluid">
+
+          <div class="row text-center">
+
+            <div class="col-md-2">
+              <img src = "assets/img/HAU.png" height= "110px"/>
+            </div>
+
+            <div class="col-md-6 my-4 mx-1">
+              <img src = "assets/img/hau_text.png" height= "37px"/>
+            </div>
+
+         
+
+          </div> <!-- row -->
+
+          <div class="row text-center">
+
+            <div class="col-md-4"></div>
+
+            <div class="col-md-4">
+              <h6>{{ project_title }}</h6>
+              <h6><small class = "text-black">{{ project_date_implemented | date: 'MMM dd, yyyy' }}</small></h6>
+            </div>
+
+            <div class="col-md-4"></div>
+
+          </div> <!-- row -->
+
+          <div class="row my-4">
+
+            <div class="col-md-1"></div>
+
+            <div class="col-md-10">
+              <h6><small><small>Background of the Project</small></small></h6>
+
+              <h6>
+                <small>
+                  <small contentEditable="true">
+
+                    -	Needs analysis (what was the basis in proposing the project)<br/>
+                    -	Supporting details on the status of the beneficiary of the project  (at the time before project implementation? Beneficiaries maybe operationally defined as – group, individual,  ?<br/>
+                    -	Significance of the project 
+                    
+                  </small>
+                </small>
+              </h6>      
+
+            </div>
+
+          </div> <!-- row BACKGROUND OF THE PROJECT -->
+
+          <div class="row my-4">
+
+            <div class="col-md-1"></div>
+
+            <div class="col-md-10">
+              <h6><small><small>Objectives of the Project</small></small></h6>
+
+              <h6>
+                <small>
+                  <small contentEditable="true">
+
+                    -	{{ this.accomplished_objective }}
+                    
+                    
+                  </small>
+                </small>
+              </h6>      
+
+            </div>
+
+          </div> <!-- row OBJECTIVES -->
+
+          <div class="row my-4">
+
+            <div class="col-md-1"></div>
+
+            <div class="col-md-10">
+              <h6><small><small>Description of the Project</small></small></h6>
+
+              <h6>
+                <small>
+                  <small contentEditable="true">
+
+                    -	Discuss the project<br/>
+                    -	Plan of Activities with measurable targets
+
+                  </small>
+                </small>
+              </h6>      
+
+            </div>
+
+          </div> <!-- row DESCRIPTION OF THE PROJECT -->
+
+          
+          <div class="row my-4" *ngFor = "let item_implement of implementationReports;index as ii;">
+
+            <div class="col-md-1"></div>
+
+            <div class="col-md-8">            
+            
+              <table class = "table app-table-hover table-bordered" *ngIf = "item_implement.proposal_type === 'proposal_document'">
+
+                <thead>
+                  <th class = "cell"><small><small>Objectives</small></small></th>
+                  <th class = "cell"><small><small>Activities</small></small></th>
+                  <th class = "cell"><small><small>Timeline</small></small></th>
+                  <th class = "cell"><small><small>Manpower</small></small></th>
+                  <th class = "cell"><small><small>Finance</small></small></th>
+                  <th class = "cell"><small><small>Target</small></small></th>
+                </thead>
+                <tbody>
+
+
+                  <tr *ngFor = "let action_plan_items of proposalActionPlansFiltered;index as ii;">
+
+                 
+                    <td class = "cell" contentEditable="true">
+                      <small><small>{{ action_plan_items.objectives }}</small></small>
+                    </td>
+
+                    <td class = "cell" contentEditable="true">
+
+                      <small><small> {{ action_plan_items.activity_title }} <br/> {{ action_plan_items.activity_details }} </small></small>
+                     
+                    </td>
+
+                    <td class = "cell" contentEditable="true">
+                      <small><small>  {{ action_plan_items.time_frame_start | date: 'MMM dd, yyyy' }} to {{ action_plan_items.time_frame_end | date: 'MMM dd, yyyy' }} </small></small>
+                     
+                    </td>
+
+                    <td class = "cell" contentEditable="true">
+                      <small><small> {{ action_plan_items.activity_title }} </small></small>
+                      
+                    </td>
+
+                    <td class = "cell" contentEditable="true">
+                      <small><small> {{ action_plan_items.budget_requirements }} </small></small>
+                      
+                    </td>
+
+                    <td class = "cell" contentEditable="true">
+                      <small><small> {{ action_plan_items.proposed_output }}</small></small>
+                     
+                    </td>
+                                         
+
+                 </tr>
+
+                
+                </tbody>
+
+              </table> <!-- table proposal_document -->
+
+              <table class = "table app-table-hover table-bordered" *ngIf = "item_implement.proposal_type === 'proposal_intake'">
+
+                <thead>
+                  <th class = "cell"><small><small>Objectives</small></small></th>
+                  <th class = "cell"><small><small>Activities</small></small></th>
+                  <th class = "cell"><small><small>Timeline</small></small></th>
+                  <th class = "cell"><small><small>Manpower</small></small></th>
+                  <th class = "cell"><small><small>Finance</small></small></th>
+                  <th class = "cell"><small><small>Target</small></small></th>
+                </thead>
+                <tbody>
+
+               
+                    <tr *ngFor = "let intake_data of proposalIntakeFilter;index as i;">
+                    
+                        <td class = "cell" contentEditable="true">
+                          <small><small>{{ intake_data.target_objectives  }}</small></small>
+                        </td>
+
+                        <td class = "cell" contentEditable="true">
+
+                          <small><small>{{ intake_data.target_activities  }}</small></small>
+                        
+                        </td>
+
+                        <td class = "cell" contentEditable="true">
+
+                          <small><small>{{ intake_data.time_frame_start | date: 'MMM dd, yyyy' }} to {{ intake_data.time_frame_end | date: 'MMM dd, yyyy'  }} </small></small>
+                        
+                        </td>
+
+                        <td class = "cell" contentEditable="true">
+                          <small><small> </small></small>
+                          
+                        </td>
+
+                        <td class = "cell" contentEditable="true">
+                          <small><small>  </small></small>
+                          
+                        </td>
+
+                        <td class = "cell" contentEditable="true">
+
+                          <small><small>{{ intake_data.target_area  }}</small></small>
+                        
+                        </td>
+                                            
+
+                    </tr>
+                 
+                </tbody>
+
+              </table> <!-- table proposal_document -->
+
+              
+
+            </div>  <!-- col-md-8 -->
+
+           
+
+            <div class = "col-md-2"></div>
+
+          </div> <!-- row ACTIVITIES -->
+
+          <div class="row my-4">
+
+            <div class="col-md-1"></div>
+
+            <div class="col-md-10">
+              <h6><small><small></small></small></h6>
+
+              <h6>
+                <small>
+                  <small contentEditable="true">
+
+                    -	Logistics, Manpower, Time Table
+                  
+
+                  </small>
+                </small>
+              </h6>      
+
+            </div>
+
+          </div> <!-- row DESCRIPTION OF THE PROJECT additional detail -->
+
+          <div class="row my-4">
+
+            <div class="col-md-1"></div>
+
+            <div class="col-md-10">
+              <h6><small><small>Accomplishment Report</small></small></h6>
+
+              <h6>
+                <small>
+                  <small contentEditable="true">
+
+                    -	Discussion will be based on the objectives<br/>
+                    - If there are satisfaction reports, include here<br/>
+                    - Actual outcome of the project should be discussed (documentation is essential;compare with targets qualitatively as discussed in the plan of activities and objectives)<br/>
+                    - Brief Description of methodologies used to evaluate 
+
+                  </small>
+                </small>
+              </h6>      
+
+            </div>
+
+          </div> <!-- row ACCOMPLISHMENT REPORT -->
+
+          <div class="row my-4">
+
+            <div class="col-md-1"></div>
+
+            <div class="col-md-10">
+              <h6><small><small>Conclusion</small></small></h6>
+
+              <h6>
+                <small>
+                  <small contentEditable="true">
+
+                    -	One liner depicting the success of the project                          
+
+                  </small>
+                </small>
+              </h6>      
+
+            </div>
+
+          </div> <!-- row CONCLUSION -->
+
+          <div class="row my-4">
+
+            <div class="col-md-1"></div>
+
+            <div class="col-md-10">
+              <h6><small><small>Recommendation</small></small></h6>
+
+              <h6>
+                <small>
+                  <small contentEditable="true">
+
+                    -	Based on the accomplishment report, provide a suggestion                        
+
+                  </small>
+                </small>
+              </h6>      
+
+            </div>
+
+          </div> <!-- row CONCLUSION -->
+
+         </div> <!-- container-fluid -->              
+
+        </div> <!--#content_output-->
+      
+    </div> <!-- document-viewer class -->
+    
+   
+  </div> <!-- #body-wrapper -->
+
+  <div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <button class = "btn btn-success px-5 text-white mx-1">Save</button>
+          <button class = "btn btn-warning px-5 text-white mx-1" (click) = "makePDF_output()">Export</button>
+        </div>
+    </div> <!-- row -->
+
+  </div> <!-- container-fluid -->
+  </div>
+  </div>
+  

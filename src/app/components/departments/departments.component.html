@@ -1,0 +1,76 @@
+<div class="container dashboard-section">
+    <div class="row justify-content-between align-items-center">
+      <div class="col-auto">
+       
+       
+      </div>
+    </div>
+  
+    <div class = "row">
+      <div class="col-md-12">
+        <div class = "card p-2 mt-2">
+  
+          <div class="row">
+            <div class="col-md-1">
+  
+              <i class = "fa fa-filter fa-2x mx-2 mt-1"></i>
+  
+            </div> <!-- col-md-2 filter icon -->
+  
+            <div class="col-md-5">
+              <span class = "btn btn-primary text-white" (click) = "onClickAllRecords()">ALL</span>
+            </div>
+  
+            <div class="col-md-3">
+  
+              <input  #searchInput type = "text" class = "form-control" [(ngModel)] = "searchInputValue" placeholder = "Search" (keyup) = "onSearchChange()"/>
+  
+            </div> <!-- col-md-4 -->
+  
+            <div class="col-md-3">
+              
+              <button class="btn btn-primary add-button text-white mx-1" (click) = "onSearchDepartment()">
+                <i class = "fa fa-search"></i> Search
+              </button> <!-- btn-primary Search -->
+         
+              <button class="btn btn-primary add-button text-white mx-1 float-right" (click)="onAddDepartmentForm()">
+                <i class = "fa fa-plus"></i> Add New
+              </button> <!-- btn-primary Add New -->
+          
+            </div> <!-- col-md-2 Add New -->
+  
+          </div> <!-- row -->
+         
+  
+        </div> <!-- card -->
+      </div> <!-- col-md-12 -->
+    </div> <!-- row -->
+  
+  
+  
+  
+    <br />
+    <table class="table table-bordered data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Department</th>
+          <th>Abbreviation</th>
+          <th>Date/Time Added</th>
+          <th>Added By</th>
+          <th class="action-column">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+       <tr *ngFor = "let item of departmentForm; index as i">
+        <td>{{ item._id }}</td>
+        <td>{{ item.department_name }} </td>
+        <td>{{ item.department_abbrev }} </td>
+        <td>{{ item.date_time_added }} </td>
+        <td>{{ item.added_by }} </td>
+        <td></td>
+       </tr>
+      </tbody>
+    </table>
+  </div>
+  

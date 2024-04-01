@@ -1,0 +1,24 @@
+.bg-image-cover{
+
+
+    background-image: url('/assets/img/bg-login.png');
+    background-repeat:none;
+    background-size:cover;
+    height: 100vh;
+    position:relative;
+    
+ }
+    
+    
+.bg-shadow-logo{
+    position:relative;
+    bottom:40px;
+    border-radius:100%;
+    height:123px;
+    width:123px;
+}
+
+.shadow-bg-login{
+    border-radius:25px;
+    opacity:92%;
+}

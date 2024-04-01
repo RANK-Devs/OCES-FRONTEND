@@ -1,0 +1,190 @@
+<div class="app-content p-md-3 p-lg-4">
+  <div class="container-xl">
+    <!-- organization-form.component.html -->
+    <h1 class="app-page-title">Revise Document Proposal</h1>
+
+  <div class="row">
+    <div class="col-10">
+      <div class="app-card app-card-chart h-100 shadow-sm">
+        <div class="app-card-body p-4">
+  <!-- Proposed By -->
+  <div class="mb-3">
+    <label for="fullname" class="form-label text-black">Proposed by:</label>
+    <h4>{{ proposed_by_fullname }}</h4>
+  </div>
+
+  <!-- Sponsoring Department -->
+  <div class="mb-3">
+    <label for="sponsor_department"  class="form-label text-black">Sponsoring Department (Select to Choose Multiple Departments)</label>
+    <select
+      (click) = "onChangeSponsoringDepartment()" [(ngModel)] = "s_dept"
+      class="form-select"
+      id="sponsor_department"
+      [ngModel] = "department"
+      required
+    >
+      <option *ngFor="let dept of departmentNames" [value]="dept">
+        {{ dept }}
+      </option>
+    </select>
+
+    <div class = "d-flex justify-content-start">
+
+      <h6 class = "my-3 mx-1" *ngFor = "let dept_selected_item of sponsoring_department_collections">
+        <span class = "btn btn-xs btn-secondary float-right btn-right" (click) = "removeSelectedDepartment(dept_selected_item.item)"><i class = "fa fa-close mx-1"></i> {{ dept_selected_item.item }}</span>
+      </h6> <!-- iterate values from this.sponsoring_department_collections in the transferDepartmentData function from the component -->
+
+    </div>
+ 
+    <span></span>
+   
+  
+  </div>
+
+
+   <!-- For School Year -->
+   <div class="mb-3">
+    <label for="for_schoolyear" class="form-label text-black">For School Year</label>
+    <input
+      type="text"
+      class="form-control"
+      id="for_schoolyear"
+      (keyup) = "onSetForSchoolYear($event)"
+      [ngModel] = "for_schoolyear"
+      required
+    />
+  </div>
+
+   <!-- For Semester -->
+   <div class="mb-3">
+    <label for="for_semester" class="form-label text-black">For Semester</label>
+    <select
+      class="form-select"
+      id="for_semester"
+      (keyup) = "onSetForSemester($event)"
+      [ngModel] = "for_semester"
+      required
+    >
+      <option *ngFor="let sem of semesterData" [value]="sem">
+        {{ semesterTranslate(sem) }}
+      </option>
+    </select>
+  </div>
+
+
+   <!-- Project Title -->
+   <div class="mb-3">
+    <label for="projectTitle" class="form-label text-black">Project Title:</label>
+    <input
+      type="text"
+      class="form-control"
+      id="projectTitle"
+      (keyup) = "onSetProjectTitle($event)"
+      [ngModel] = "project_title"
+      required
+    />
+  </div>
+
+
+  <!-- Venue -->
+  <div class="mb-3">
+    <label for="venue" class="form-label text-black">Venue</label>
+    <input
+      type="text"
+      class="form-control"
+      id="venue"
+      [ngModel] = "venue"
+      required
+    />
+  </div>
+
+    <!-- Target Beneficiary -->
+    <div class="mb-3">
+      <label for="target_beneficiary" class="form-label text-black">Target Beneficiary</label>
+      <input
+        type="text"
+        class="form-control"
+        (keyup) = "onSetTargetBeneficiary($event)"
+        id="target_beneficiary"
+        [ngModel] = "target_beneficiary"
+        required
+      />
+    </div>
+  
+
+  <!-- Status -->
+  <div class="mb-3">
+    <label for="status" class="form-label text-black">Status: {{  getProposalStatus(proposal_status) }}</label>   
+  </div>
+
+  <h6 class = "text-center">Proposed Action Plan</h6>  
+
+  <table class = "my-5">
+
+    <tr *ngFor = "let item of proposedActionPlanItems; let j = index; let i = index;">
+      
+        
+
+        <td>
+
+          <label class = "text-black"><small>Objective</small></label>
+          <textarea class = "form-control h-100 py-2" [(ngModel)] = "objectives[j]" (keyup) = "onSetObjectives(j,$event)" placeholder = "Objective"></textarea>
+          
+        </td>      
+        
+       
+        <td>
+          <label class = "text-black"><small>Activity Title</small></label>
+          <input class = "form-control"  type = "text"  [(ngModel)] = "activity_title[j]" (keyup) = "onSetActivityTitle(j,$event)" placeholder = "Activity Title">
+          <label class = "text-black"><small>Activity Details</small></label>
+          <input class = "form-control" type = "text" [(ngModel)] = "activity_details[j]" (keyup) = "onSetActivityDetails(j,$event)" placeholder = "Activity Details">
+        </td>  
+
+        <td>
+          <label class = "text-black"><small>Responsible Persons</small></label>
+          <input class = "form-control" type = "text" [(ngModel)] = "responsible_persons[j]" (keyup) = "onSetResponsiblePersons(j,$event)" placeholder = "Responsible Persons">
+        </td> 
+     
+        <td>
+          <label class = "text-black"><small>Time Frame Start</small></label>
+          <input class = "form-control" type = "date" [(ngModel)] = "time_frame_start[j]" (change) = "onSetTimeFrameStart(j,$event)" placeholder = "Start">
+          <label class = "text-black"><small>Time Frame End</small></label>
+          <input class = "form-control" type = "date" [(ngModel)] = "time_frame_end[j]" (change) = "onSetTimeFrameEnd(j,$event)" placeholder = "End">
+        </td>  
+
+        
+        <td>
+          <label class = "text-black"><small>Budget Requirements</small></label>
+          <input class = "form-control" type = "number" [(ngModel)] = "budget_requirements[j]" (keyup) = "onSetBudgetRequirements(j,$event)" placeholder = "Budget Requirements">
+        </td> 
+
+        <td>
+          <label class = "text-black"><small>Proposed Output</small></label>
+          <input class = "form-control" type = "text" [(ngModel)] = "proposed_output[j]" (keyup) = "onSetProposedOutput(j,$event)" placeholder = "Proposed Output">
+        </td> 
+
+     
+
+    <tr>
+   
+  </table> <!-- input fields -->
+
+  <div class="row">
+    <div class="col-md-12 text-center">
+
+      <button type = "button" class = "btn btn-secondary mx-2 px-5" (click) = "onAddInput()"><i class = "fa fa-plus"></i> Add Another Field for Proposed Action Plan</button>
+
+      <!-- Submit Button -->
+      <button type="button" class="btn btn-primary text-white mx-5 px-5" (click) = "onUpdateRevisionEmployee()">
+        Submit
+      </button>
+
+    </div>
+  </div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>

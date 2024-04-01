@@ -1,0 +1,40 @@
+<!-- add-department.component.html -->
+
+<button class = "btn btn-warning mx-3" (click) = "backToDepartment()"><i class = "fa fa-arrow-left"></i> Back to Departments</button>
+
+<form
+  [formGroup]="departmentForm"
+  (ngSubmit)="onAddDepartment()"
+  class="container mt-4 text-dark"
+>
+  <!-- DEPARTMENT NAME -->
+  <div class="mb-3">
+    <label for="departmentName" class="form-label">Department Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="departmentName"
+      formControlName="department_name"
+      required
+    />
+  </div>
+
+
+  <!-- DEPARTMENT NAME -->
+  <div class="mb-3">
+    <label for="departmentAbbrev" class="form-label">Department Abbreviation</label>
+    <input
+      type="text"
+      class="form-control"
+      id="departmentAbbrev"
+      formControlName="department_abbrev"
+      required
+    />
+  </div>
+
+
+  <!-- Submit Button -->
+  <button type="submit" class="btn btn-primary text-white" [disabled]="!departmentForm.valid">
+    Submit
+  </button>
+</form>

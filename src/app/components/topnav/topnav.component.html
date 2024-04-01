@@ -1,0 +1,111 @@
+<div class="container-fluid px-4">
+  <div class="row justify-content-end align-items-right">
+          
+        <div class="col-md-2"></div>
+        
+
+        <!--//col-->
+        <div class="app-utilities col-auto mt-4">
+          <div class="app-utility-item app-notifications-dropdown dropdown">
+            <a
+              class="dropdown-toggle no-toggle-arrow"
+              id="notifications-dropdown-toggle"
+              data-bs-toggle="dropdown"
+              href="#"
+              role="button"
+              aria-expanded="false"
+              title="Notifications"
+            >
+              <div class = "shadow-lg bg-white d-flex justify-content-center align-items-center" style = "border-radius:100%;height:42px;width:42px;">
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-bell" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="#700f1d " fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" /><path d="M9 17v1a3 3 0 0 0 6 0v-1" /></svg>
+              
+              </div>
+              <span class="icon-badge" *ngIf = "pendingNotificationLength > 0">{{ pendingNotificationLength }}</span>
+
+            </a>
+
+            <!--//dropdown-toggle-->
+            <div
+              class="dropdown-menu p-0"
+              aria-labelledby="notifications-dropdown-toggle"
+            >
+              <div class="dropdown-menu-header p-3">
+                <h5 class="dropdown-menu-title mb-0">Notifications</h5>
+              </div>
+
+              <!--//dropdown-menu-title-->
+              <div class="dropdown-menu-content">
+
+                <div class="item p-3" *ngFor = "let notif of notificationObject;index as i">
+                  <div
+                    class="row gx-2 justify-content-between align-items-center" (click) = "onViewDocumentReport(notif._id,notif.document_id, notif.path_link)"
+                  >
+                    <div class="col-auto p-3">
+                      <svg  xmlns="http://www.w3.org/2000/svg"  width="45"  height="45"  viewBox="0 0 24 24"  fill="none"  stroke="#700F1D"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-notification"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 6h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" /><path d="M17 7m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /></svg>
+                    </div>
+
+                    <!--//col-->
+                    <div class="col">
+                      <div class="info">
+                        <div class="desc">
+                         
+                          <b>{{ notif.notification_title }}</b><br/>
+                          <small>{{ notif.notification_details }}</small>
+
+                        </div>
+                        <div class="meta">{{ notif.date_time_added | date: 'short' }}</div>
+                      </div>
+                    </div>
+                    <!--//col-->
+                  </div>
+
+                  <!--//row-->
+                  
+                </div>
+                <!--//item-->
+
+            
+              </div>
+              <!--//dropdown-menu-content-->
+              <div class="dropdown-menu-footer p-2 text-center">
+                <a (click) ="onViewNotificationIntake()">View all</a>
+              </div>
+            </div>
+            <!--//dropdown-menu-->
+          </div>
+          <!--//app-utility-item-->
+
+          <div class="app-utility-item app-user-dropdown dropdown">
+            <a
+              class="dropdown-toggle no-toggle-arrow"
+              id="notifications-dropdown-toggle"
+              data-bs-toggle="dropdown"
+              href="#"
+              role="button"
+              aria-expanded="false"             
+              >
+             
+              <div class = "shadow-lg bg-white d-flex justify-content-center align-items-center" style = "border-radius:100%;height:42px;width:42px;">
+       
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="#700f1d" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /></svg>
+              
+              </div>
+             
+
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
+              <li><a class="dropdown-item" (click) = "onViewProfile()">View Profile</a></li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li><a class="dropdown-item" (click) = "onLogout()">Log Out</a></li>
+            </ul>
+          </div>
+          <!--//app-user-dropdown-->
+        </div>
+        <!--//app-utilities-->
+      </div>
+      <!--//row-->
+      </div>
+       

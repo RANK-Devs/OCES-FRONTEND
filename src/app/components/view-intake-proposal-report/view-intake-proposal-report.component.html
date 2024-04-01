@@ -1,0 +1,1059 @@
+<div class="app-content p-md-3 p-lg-4">
+  <div class="container-xl">
+    <div class="row justify-content-between align-items-center">
+      <div class="col-auto">
+        <h1 class="app-page-title">Student Intake Form</h1>
+      </div>
+    </div>
+    <h6
+      *ngIf="hasRevisions(proposalIntakeID)"
+      class="alert alert-warning text-center"
+    >
+      This is the First Draft<br />
+      <small
+        >(You may view the <b>Revision(s)</b> history below the document
+        viewer)</small
+      >
+    </h6>
+
+    <div id="body-wrapper" class="overflow-auto p-5 my-3">
+      <div class="document-viewer">
+        <div class="document-body p-3" #content>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-2 text-center">
+                <img src="/assets/img/OCES-Logo.png" style="height: 120px" />
+              </div>
+              <div class="col-md-8 text-center text-black">
+                <small
+                  ><small
+                    >OFFICE&nbsp;&nbsp;&nbsp;&nbsp;OF&nbsp;&nbsp;&nbsp;&nbsp;THE&nbsp;&nbsp;&nbsp;&nbsp;COMMUNITY&nbsp;&nbsp;&nbsp;&nbsp;EXTENSION&nbsp;&nbsp;&nbsp;&nbsp;SERVICES</small
+                  ></small
+                ><br />
+                <small
+                  >Institute for Christian Formation and Social
+                  Integration</small
+                ><br />
+                <small
+                  ><b
+                    >HOLY&nbsp;&nbsp;&nbsp;ANGEL&nbsp;&nbsp;&nbsp;UNIVERSITY</b
+                  ></small
+                ><br />
+                <small>Sto. Rosario, Angeles City</small>
+              </div>
+              <div class="col-md-2">
+                <small style="color: #000" [contentEditable]="true">
+                  <div>
+                    FM-CES 4026<br />
+                    Rev. 0<br />
+                    Effectivity Date: September 7 2021
+                  </div>
+                </small>
+              </div>
+            </div>
+            <!-- row header -->
+
+            <div class="row">
+              <div class="col-md-3 text-center"></div>
+              <div class="col-md-6 text-center">
+                <small class="text-black my-3"
+                  ><b
+                    >STUDENT&nbsp;&nbsp;&nbsp;&nbsp;ORGANIZATION&nbsp;&nbsp;&nbsp;&nbsp;INTAKE&nbsp;&nbsp;&nbsp;&nbsp;FORM</b
+                  ></small
+                >
+              </div>
+              <div class="col-md-3"></div>
+            </div>
+            <!-- row title -->
+
+            <div class="row my-2 mx-3 text-black">
+              <div class="col-md-6">
+                <small
+                  ><small
+                    ><small><b>Name of Organization:</b></small></small
+                  ></small
+                ><br />
+                <small
+                  ><small
+                    ><small
+                      class="text-decoration-underline"
+                      contenteditable="true"
+                    >
+                      {{ name_of_organization }}
+                    </small></small
+                  ></small
+                >
+              </div>
+
+              <div class="col-md-6">
+                <small
+                  ><small
+                    ><small><b>Date Established:</b></small></small
+                  ></small
+                ><br />
+                <small
+                  ><small
+                    ><small
+                      class="text-decoration-underline"
+                      contenteditable="true"
+                      >{{ date_established | date : "MMM dd, yyyy" }}
+                    </small></small
+                  ></small
+                >
+              </div>
+            </div>
+            <!-- row details -->
+
+            <div class="row mx-3 text-black">
+              <div class="col-md-6">
+                <small
+                  ><small
+                    ><small><b>Type of Organization:</b></small></small
+                  ></small
+                >
+              </div>
+              <div class="col-md-6">
+                <small
+                  ><small
+                    ><small
+                      class="text-decoration-underline"
+                      contenteditable="true"
+                      >{{ organization_type }}</small
+                    ></small
+                  ></small
+                >
+              </div>
+            </div>
+            <!-- row org type -->
+
+            <div class="row mx-3 text-black">
+              <div class="col-md-4">
+                <small
+                  ><small
+                    ><small
+                      ><small
+                        ><b
+                          >Designated Contact Person/s for Community Outreach</b
+                        ></small
+                      ></small
+                    ></small
+                  ></small
+                >
+              </div>
+              <div class="col-md-4">
+                <small
+                  ><small
+                    ><small><b>Designation Position</b></small></small
+                  ></small
+                >
+              </div>
+              <div class="col-md-4">
+                <small
+                  ><small
+                    ><small><b>Contact Number</b></small></small
+                  ></small
+                >
+              </div>
+            </div>
+            <!-- designation -->
+
+            <div class="row mx-3 text-black">
+              <div class="col-md-4">
+                <small
+                  ><small
+                    ><small
+                      class="text-decoration-underline"
+                      contenteditable="true"
+                      >{{ contact_person }}</small
+                    ></small
+                  ></small
+                >
+              </div>
+              <div class="col-md-4">
+                <small
+                  ><small
+                    ><small
+                      class="text-decoration-underline"
+                      contenteditable="true"
+                      >{{ contact_person_position }}</small
+                    ></small
+                  ></small
+                >
+              </div>
+              <div class="col-md-4">
+                <small
+                  ><small
+                    ><small
+                      class="text-decoration-underline"
+                      contenteditable="true"
+                      >{{ contact_number }}</small
+                    ></small
+                  ></small
+                >
+              </div>
+            </div>
+            <!-- designation details -->
+
+            <div class="row my-2 mx-3 text-black">
+              <div class="col-md-6">
+                <small
+                  ><small
+                    ><small><b>No. of Members:</b></small></small
+                  ></small
+                ><br />
+                <small
+                  ><small
+                    ><small
+                      contenteditable="true"
+                      class="text-decoration-underline"
+                    >
+                      {{ num_members }}
+                    </small></small
+                  ></small
+                >
+              </div>
+
+              <div class="col-md-6">
+                <small
+                  ><small
+                    ><small
+                      ><b>Organizational Expertise/Skills:</b></small
+                    ></small
+                  ></small
+                ><br />
+                <small
+                  ><small>
+                    <small
+                      class="text-decoration-underline"
+                      contenteditable="true"
+                    >
+                      {{ organizational_expertise }}
+                    </small></small
+                  ></small
+                >
+              </div>
+            </div>
+            <!-- row no. of members and organizational skills -->
+
+            <div class="row my-2 mx-3 mt-4 text-black">
+              <div class="col-md-6">
+                <small>
+                  <small
+                    ><small
+                      ><b contenteditable="true">Title of Activity:</b></small
+                    ></small
+                  >
+                </small>
+              </div>
+
+              <div class="col-md-6">
+                <small
+                  ><small
+                    ><small
+                      class="text-decoration-underline"
+                      contenteditable="true"
+                    >
+                      {{ title_of_activity }}
+                    </small></small
+                  ></small
+                >
+              </div>
+            </div>
+            <!-- row title of activity -->
+
+            <div class="row my-2 mx-3 text-black">
+              <div class="col-md-6">
+                <small
+                  ><small
+                    ><small><b>Purpose of the Activity:</b></small></small
+                  ></small
+                >
+              </div>
+
+              <div class="col-md-6">
+                <small
+                  ><small
+                    ><small
+                      class="text-decoration-underline"
+                      contenteditable="true"
+                    >
+                      {{ activity_purpose }}
+                    </small></small
+                  ></small
+                >
+              </div>
+            </div>
+            <!-- row purpose of the activity -->
+
+            <div class="row my-2 mx-3 text-black">
+              <div class="col-md-6">
+                <small
+                  ><small
+                    ><small
+                      ><b>Reason for Choosing the Community/Sector:</b></small
+                    ></small
+                  ></small
+                >
+              </div>
+
+              <div class="col-md-6">
+                <small
+                  ><small
+                    ><small
+                      class="text-decoration-underline"
+                      contenteditable="true"
+                    >
+                      {{ reason_for_choosing_community_sector }}
+                    </small></small
+                  ></small
+                >
+              </div>
+            </div>
+            <!-- row reason for choosing the community/sector -->
+
+            <div class="row my-2 mx-3 text-black">
+              <div class="col-md-6">
+                <small
+                  ><small
+                    ><small><b>Target Date(s): </b></small>
+                  </small>
+                </small>
+                <small
+                  ><small
+                    ><small
+                      class="text-decoration-underline"
+                      contenteditable="true"
+                    >
+                      {{ target_date | date : "MMM dd, yyyy" }}
+                    </small></small
+                  >
+                </small>
+              </div>
+
+              <div class="col-md-6">
+                <small
+                  ><small
+                    ><small><b>Target Area(s): </b></small>
+                  </small></small
+                >
+                <small
+                  ><small
+                    ><small
+                      class="text-decoration-underline"
+                      contenteditable="true"
+                    >
+                      {{ target_area }}
+                    </small></small
+                  ></small
+                >
+              </div>
+            </div>
+            <!-- row target date and target areas -->
+
+            <div class="row my-2 mx-3 text-black">
+              <div class="col-md-6">
+                <small
+                  ><small
+                    ><small><b>Target Beneficiary:</b></small></small
+                  ></small
+                >
+                <small
+                  ><small
+                    ><small
+                      class="text-decoration-underline"
+                      contenteditable="true"
+                    >
+                      {{ target_beneficiary }}
+                    </small></small
+                  ></small
+                >
+              </div>
+
+              <div class="col-md-6">
+                <small
+                  ><small
+                    ><small><b>No. of Beneficiaries:</b></small></small
+                  ></small
+                >
+                <small
+                  ><small
+                    ><small
+                      class="text-decoration-underline"
+                      contenteditable="true"
+                    >
+                      {{ num_beneficiary }}
+                    </small></small
+                  ></small
+                >
+              </div>
+            </div>
+            <!-- row target beneficiary and no. of beneficiaries -->
+
+            <div class="row my-2 mx-3 mb-3 text-black">
+              <div class="col-md-6">
+                <small
+                  ><small
+                    ><small
+                      ><b
+                        >Classification of Community Extension Project:</b
+                      ></small
+                    ></small
+                  ></small
+                >
+              </div>
+
+              <div class="col-md-6">
+                <small
+                  ><small
+                    ><small
+                      class="text-decoration-underline"
+                      contenteditable="true"
+                    >
+                      {{ classification_community_extension_project }}
+                    </small></small
+                  ></small
+                >
+              </div>
+            </div>
+            <!-- row Classification of Community Extension Project -->
+
+            <div class="row my-2 mx-3 text-black">
+              <div class="col-md-12">
+                <small
+                  ><small
+                    ><small>
+                      <b>
+                        <i>
+                          I hereby take full responsibility&nbsp;&nbsp;to the
+                          conduct&nbsp;&nbsp;and implementation&nbsp;&nbsp;of
+                          the community outreach of by the
+                          abovementioned&nbsp;&nbsp; organization. I will be
+                          with them during&nbsp;&nbsp;the activity; otherwise, I
+                          will endorse&nbsp;&nbsp;another&nbsp;&nbsp;faculty who
+                          will be with them during&nbsp;&nbsp;the
+                          conduct&nbsp;&nbsp; of the project.
+                        </i>
+                      </b>
+                    </small></small
+                  ></small
+                >
+              </div>
+            </div>
+            <!-- row I hereby ... -->
+
+            <div class="row my-2 mx-3 text-black">
+              <div class="col-md-4">
+                <small
+                  ><small
+                    ><small
+                      class="text-decoration-underline"
+                      contenteditable="true"
+                      >{{ adviser_name }}</small
+                    ></small
+                  ></small
+                ><br />
+                <small
+                  ><small><small>Adviser Name</small></small></small
+                >
+              </div>
+
+              <div class="col-md-4">
+                <small
+                  ><small
+                    ><small
+                      class="text-decoration-underline"
+                      contenteditable="true"
+                      >{{
+                        adviser_date_signature | date : "MMM dd, yyyy"
+                      }}</small
+                    ></small
+                  ></small
+                ><br />
+                <small
+                  ><small><small>Date</small></small></small
+                >
+              </div>
+
+              <div class="col-md-4">
+                <small
+                  ><small
+                    ><small
+                      class="text-decoration-underline"
+                      contenteditable="true"
+                      >{{ adviser_contact_number }}</small
+                    ></small
+                  ></small
+                ><br />
+                <small
+                  ><small><small>Contact Number</small></small></small
+                >
+              </div>
+            </div>
+            <!-- row Adviser Signature Details -->
+
+            <div class="row my-2 mx-3 text-black">
+              <div class="col-md-12 text-center">
+                <small
+                  ><small
+                    ><small>
+                      <b> For College-Based Student Organizations: </b>
+                    </small></small
+                  ></small
+                >
+              </div>
+            </div>
+            <!-- row for college based ... -->
+
+            <div class="row my-2 mx-3 text-black">
+              <div class="col-md-6">
+                <small
+                  ><small
+                    ><small
+                      class="text-decoration-underline py-1"
+                      contenteditable="true"
+                      >Dr. Marlon L. Tayag</small
+                    ></small
+                  ></small
+                ><br />
+                <small
+                  ><small
+                    ><small>Signature over printed name of Dean</small></small
+                  ></small
+                >
+              </div>
+
+              <div class="col-md-6">
+                <small
+                  ><small
+                    ><small
+                      class="text-decoration-underline"
+                      contenteditable="true"
+                      >_______________________</small
+                    ></small
+                  ></small
+                ><br />
+                <small
+                  ><small><small>Date</small></small></small
+                >
+              </div>
+            </div>
+            <!-- row Dean Signature and Date -->
+
+            <div class="border-box mx-4 mt-4">
+              <div class="row my-2 mx-3 text-black">
+                <div class="col-md-12 text-center">
+                  <small
+                    ><small>
+                      <b class="text-decoration-underline"> APPROVAL </b>
+                    </small></small
+                  >
+                </div>
+              </div>
+              <!-- row for approval label -->
+
+              <div class="row my-2 mx-3 text-black">
+                <div class="col-md-6">
+                  <small
+                    ><small class="my-3">
+                      <b> FROM OCES&nbsp;&nbsp;: </b>
+                    </small></small
+                  >
+                </div>
+                <!-- FROM OCES -->
+
+                <div class="col-md-6">
+                  <small
+                    ><small>
+                      <b> FROM OSA&nbsp;&nbsp;: </b>
+                    </small></small
+                  >
+                </div>
+                <!-- FROM OSA -->
+
+                <div class="col-md-6 text-center my-4">
+                  <small
+                    ><small
+                      ><small
+                        ><small>
+                          <b class="text-center top-line">
+                            Signature over printed name of OCES Personnel
+                          </b>
+                        </small></small
+                      ></small
+                    ></small
+                  >
+                </div>
+                <!-- FROM OCES Signature Content -->
+
+                <div class="col-md-6 text-center my-4">
+                  <small
+                    ><small
+                      ><small
+                        ><small>
+                          <b class="text-center top-line">
+                            Signature over printed name of OSA Personnel
+                          </b>
+                        </small></small
+                      ></small
+                    ></small
+                  >
+                </div>
+                <!-- FROM OSA Signature Content -->
+
+                <div class="col-md-6 text-center">
+                  <small
+                    ><small
+                      ><small
+                        ><small>
+                          <b class="text-center top-line"> Date </b>
+                        </small></small
+                      ></small
+                    ></small
+                  >
+                </div>
+                <!-- FROM OCES Signature Date Content -->
+
+                <div class="col-md-6 text-center">
+                  <small
+                    ><small
+                      ><small
+                        ><small>
+                          <b class="text-center top-line"> Date </b>
+                        </small></small
+                      ></small
+                    ></small
+                  >
+                </div>
+                <!-- FROM OSA Signature Date Content -->
+              </div>
+              <!-- row for OCES and OSA  -->
+            </div>
+            <!-- border-box APPROVAL -->
+
+            <div class="row my-2 mx-3 text-black">
+              <div class="col-md-12">
+                <ul>
+                  <li>
+                    <i
+                      ><small
+                        ><small
+                          ><small
+                            ><small
+                              >The accomplished form must be submitted to (OCES)
+                              <span class="text-decoration-underline"
+                                >one week before the activity.</span
+                              ></small
+                            ></small
+                          ></small
+                        ></small
+                      ></i
+                    >
+                  </li>
+                  <li>
+                    <i
+                      ><small
+                        ><small
+                          ><small
+                            ><small
+                              >For outside community outreach, please see
+                              attached copy of the approval
+                              <span class="text-decoration-underline"
+                                >Outside Activity Form</span
+                              >
+                              from OSA.</small
+                            ></small
+                          ></small
+                        ></small
+                      ></i
+                    >
+                  </li>
+                </ul>
+              </div>
+              <!-- FROM OCES -->
+            </div>
+            <!-- row accomplished reports ... note  -->
+
+            <div class="row my-2 mx-3 text-black">
+              <div class="col-md-12">
+                <div class="border-box">
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <thead>
+                        <th>
+                          <small
+                            ><small
+                              ><small>Targets/Objectives</small></small
+                            ></small
+                          >
+                        </th>
+                        <th>
+                          <small
+                            ><small><small>Activities</small></small></small
+                          >
+                        </th>
+                        <th>
+                          <small
+                            ><small><small>Time Frame</small></small></small
+                          >
+                        </th>
+                        <th>
+                          <small
+                            ><small><small>Beneficiaries</small></small></small
+                          >
+                        </th>
+                        <th>
+                          <small
+                            ><small><small>Budget</small></small></small
+                          >
+                        </th>
+                        <th>
+                          <small
+                            ><small
+                              ><small>Progress Indicator</small></small
+                            ></small
+                          >
+                        </th>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <small
+                              ><small
+                                ><small>{{ target_objectives }}</small></small
+                              ></small
+                            >
+                          </td>
+
+                          <td>
+                            <small
+                              ><small
+                                ><small>{{ target_activities }}</small></small
+                              ></small
+                            >
+                          </td>
+
+                          <td>
+                            <small
+                              ><small
+                                ><small
+                                  >{{
+                                    time_frame_start | date : "MMM dd, yyyy"
+                                  }}
+                                  to
+                                  {{
+                                    time_frame_end | date : "MMM dd, yyyy"
+                                  }}</small
+                                ></small
+                              ></small
+                            >
+                          </td>
+
+                          <td>
+                            <small
+                              ><small
+                                ><small>{{ beneficiaries }}</small></small
+                              ></small
+                            >
+                          </td>
+
+                          <td>
+                            <small
+                              ><small
+                                ><small>{{ budget }}</small></small
+                              ></small
+                            >
+                          </td>
+
+                          <td>
+                            <small
+                              ><small
+                                ><small>{{ progress_indicator }}</small></small
+                              ></small
+                            >
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <!--  table for community outreach proposal -->
+                  </div>
+                  <!-- table-responsive -->
+                </div>
+                <!-- border-box table for community outreach proposal -->
+              </div>
+              <!-- col-md-12 for Table - Community Outreach Proposal -->
+            </div>
+            <!-- row Community Outreach Proposal  -->
+
+            <div class="row my-2 mx-3 text-black">
+              <div class="col-md-12">
+                <ul>
+                  <li>
+                    <i
+                      ><small
+                        ><small
+                          ><small
+                            ><small
+                              >This form should be accomplished and attached to
+                              the Student Organization Intake Form.</small
+                            ></small
+                          ></small
+                        ></small
+                      ></i
+                    >
+                  </li>
+                </ul>
+              </div>
+              <!-- note -->
+            </div>
+            <!-- row community outreach proposal ... footnote  -->
+
+            <div class="row text-center text-black">
+              <div class="col-md-6">
+                <small
+                  ><small
+                    ><small
+                      ><small></small> <b>Submitted by:</b><br />
+                      <span class="text-decoration-underline">{{
+                        submitted_by_name
+                      }}</span
+                      ><br />
+                      (Signature over printed name)<br />
+                      <b>Designation/Position:</b>
+                      <span>{{ submitted_by_position }}</span>
+                    </small></small
+                  ></small
+                >
+              </div>
+              <!-- col-md-6 -->
+
+              <div class="col-md-6">
+                <small
+                  ><small
+                    ><small
+                      ><small></small> <b>Noted by:</b><br />
+                      <span class="text-decoration-underline">{{
+                        adviser_name
+                      }}</span
+                      ><br />
+                      (Signature over printed name)<br />
+                      <b>Adviser</b>
+                    </small></small
+                  ></small
+                >
+              </div>
+              <!-- col-md-6 -->
+            </div>
+            <!-- row submitted by, noted by and dean signature over printed name -->
+
+            <div class="row my-2 mx-3 text-black">
+              <div class="col-md-12 text-center">
+                <small
+                  ><small
+                    ><small>
+                      <i>For College-Based Student Organizations</i>
+                    </small></small
+                  ></small
+                >
+              </div>
+            </div>
+            <!-- row for college based ... -->
+
+            <div class="row my-2 mx-3 text-center text-black">
+              <div class="col-md-12">
+                <small
+                  ><small
+                    ><small
+                      class="text-decoration-underline py-1"
+                      contenteditable="true"
+                      >Dr. Marlon L. Tayag</small
+                    ></small
+                  ></small
+                ><br />
+                <small
+                  ><small
+                    ><small>(Signature over printed name of Dean)</small></small
+                  ></small
+                >
+              </div>
+            </div>
+            <!-- row Dean Signature and Date - END -->
+          </div>
+          <!-- container-fluid -->
+        </div>
+        <!--#content_output-->
+      </div>
+      <!-- document-viewer class -->
+    </div>
+    <!-- #body-wrapper -->
+
+    <h6>Revision(s):</h6>
+
+    <button
+      class="btn btn-secondary mx-1"
+      (click)="onViewRevisionIntakeReport(revision_items._id)"
+      href=""
+      *ngFor="let revision_items of intakeProposalRevisionVersions; index as i"
+    >
+      {{ revision_items.project_title }}
+      <span
+        *ngIf="revision_items.status === '1' || revision_items.status === '2'"
+        >({{ getProposalStatus(revision_items.status) }})</span
+      >
+    </button>
+    <h6 *ngIf="intakeProposalRevisionVersions.length < 1">N/A</h6>
+
+    <h6 class="row" *ngFor="let item of proposalIntakes; index as i">
+      <div class="col-md-12 my-3">
+        <div class="my-2">
+          <h5
+            class="my-3 mx-1 alert alert-warning"
+            *ngIf="item.revision_remarks !== ''"
+          >
+            Revision Notes:<br /><small>{{ item.revision_remarks }}</small>
+            <br />
+            <small
+              ><small
+                ><small>
+                  FROM:
+                  <span *ngIf="item.revision_by_user_id === userId">(You)</span>
+                  {{ getUserDetails(item.revision_by_user_id) }} ON
+                  {{ item.revision_remarks_date_time | date : "medium" }}
+                </small></small
+              ></small
+            >
+          </h5>
+          <h5
+            class="my-3 mx-1 alert alert-warning"
+            *ngIf="
+              administrativeRole == true && item.proposal_root_id !== ' -- '
+            "
+          >
+            This is a Revision for Proposal:<br /><small
+              (click)="onViewDocumentReport(item.proposal_root_id)"
+              >{{ getProposalDetails(item.proposal_root_id) }}</small
+            >
+            <br />
+            <small
+              ><small><small> </small></small
+            ></small>
+          </h5>
+
+          <button
+            type="button"
+            *ngIf="item.status == '4'"
+            (click)="onReviseIntakeProposal(item._id)"
+            class="btn d-none btn-success text-white mx-1 px-4"
+          >
+            Make Revision
+          </button>
+          <button
+            type="button"
+            *ngIf="item.status == '4' && item.user_id == userId"
+            (click)="onReviseIntakeProposal(item._id)"
+            class="btn btn-success text-white mx-1 px-4"
+          >
+            <i class="fa fa-recycle"></i> Make Revision
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary text-white mx-1 px-5"
+            (click)="makePDF()"
+          >
+            <i class="fa fa-print"></i> Export PDF
+          </button>
+        </div>
+
+        <div *ngIf="role_name === 'Super Admin' && item.status == '3'">
+          <button
+            type="button"
+            (click)="
+              onPromptDisapprove(
+                notifID,
+                item.user_id,
+                item._id,
+                item.project_title
+              )
+            "
+            class="btn btn-danger text-white mx-1 px-5"
+          >
+            Disapprove
+          </button>
+          <button
+            type="button"
+            (click)="
+              onPromptRevise(
+                notifID,
+                item.user_id,
+                item._id,
+                item.project_title
+              )
+            "
+            class="btn btn-warning text-white mx-1 px-5"
+          >
+            Revise
+          </button>
+          <button
+            type="button"
+            (click)="
+              onPromptApprove(
+                notifID,
+                item.user_id,
+                item._id,
+                item.project_title
+              )
+            "
+            class="btn btn-success text-white mx-1 px-5"
+          >
+            Approve
+          </button>
+        </div>
+
+        <div *ngIf="role_name === 'Admin' && item.status == '3'">
+          <button
+            type="button"
+            (click)="
+              onPromptDisapprove(
+                notifID,
+                item.user_id,
+                item._id,
+                item.project_title
+              )
+            "
+            class="btn btn-danger text-white mx-1 px-5"
+          >
+            Disapprove
+          </button>
+          <button
+            type="button"
+            (click)="
+              onPromptRevise(
+                notifID,
+                item.user_id,
+                item._id,
+                item.project_title
+              )
+            "
+            class="btn btn-warning text-white mx-1 px-5"
+          >
+            Revise
+          </button>
+          <button
+            type="button"
+            (click)="
+              onPromptApprove(
+                notifID,
+                item.user_id,
+                item._id,
+                item.project_title
+              )
+            "
+            class="btn btn-success text-white mx-1 px-5"
+          >
+            Approve
+          </button>
+        </div>
+      </div>
+    </h6>
+    <!-- row details -->
+  </div>
+</div>

@@ -1,0 +1,124 @@
+<!-- your-component.component.html -->
+
+<form [formGroup]="EditProposalForm" (ngSubmit)="onEditPropose()">
+  <div class="mb-3">
+    <label for="sponsorDepartment" class="form-label">Sponsor Department</label>
+    <select
+      id="sponsorDepartment"
+      class="form-select"
+      formControlName="sponsor_department"
+      required
+    >
+      <option *ngFor="let department of departments" [value]="department">
+        {{ department }}
+      </option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="projectTitle" class="form-label">Project Title</label>
+    <input
+      type="text"
+      class="form-control"
+      id="projectTitle"
+      formControlName="project_title"
+      required
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="targetBeneficiary" class="form-label">Target Beneficiary</label>
+    <input
+      type="text"
+      class="form-control"
+      id="targetBeneficiary"
+      formControlName="target_beneficiary"
+      required
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="venue" class="form-label">Venue</label>
+    <input
+      type="text"
+      class="form-control"
+      id="venue"
+      formControlName="venue"
+      required
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="proposedObjective" class="form-label">Proposed Objective</label>
+    <input
+      type="text"
+      class="form-control"
+      id="proposedObjective"
+      formControlName="proposed_objective"
+      required
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="proposedActivity" class="form-label">Proposed Activity</label>
+    <input
+      type="text"
+      class="form-control"
+      id="proposedActivity"
+      formControlName="proposed_activity"
+      required
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="personInCharged" class="form-label">Person in Charged</label>
+    <input
+      type="text"
+      class="form-control"
+      id="personInCharged"
+      formControlName="person_in_charged"
+      required
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="budgetRequirement" class="form-label">Budget Requirement</label>
+    <input
+      type="number"
+      class="form-control"
+      id="budgetRequirement"
+      formControlName="budget_requirement"
+      required
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="timeframe" class="form-label">Timeframe</label>
+    <input
+      type="date"
+      class="form-control"
+      id="timeframe"
+      formControlName="timeframe"
+      required
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="proposedOutput" class="form-label">Proposed Output</label>
+    <input
+      type="text"
+      class="form-control"
+      id="proposedOutput"
+      formControlName="proposed_output"
+      required
+    />
+  </div>
+
+  <button
+    type="submit"
+    class="btn btn-primary"
+    [disabled]="EditProposalForm.invalid"
+  >
+    Submit
+  </button>
+</form>

@@ -1,0 +1,130 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+
+          
+
+                <div class="app-card app-card-chart my-2 h-100 shadow-sm">
+                    <div class="app-card-header p-3 border-0">
+                      <h4 class = "app-card-title">Edit Account Details<br/>
+                        <small><small><small>Account Created at {{ createdAt | date: 'medium' }}, Last Updated {{ updatedAt | date: 'medium' }}</small></small></small>
+                        </h4>
+                    </div><!--//app-card-header-->
+
+                    <h6 *ngIf = "is_restricted" class = "alert alert-warning">
+                        This User is Deactivated
+                    </h6>
+
+                    <h6 *ngIf = "userID ===  userId" class = "alert alert-success">This is your Account</h6>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="app-card-body p-4">				   
+                            
+                                <img
+                                    src="/assets/img/defaultpic1.jpg"
+                                    alt="user profile"
+                                    height="150px"
+                                    style="border-radius: 100%"
+                                />
+                            
+                            </div><!--//app-card-body Profile Image -->
+                            
+                            <h6 class = "alert alert-danger" *ngFor = "let error_item of error_message_display"><small>{{ error_item }}</small></h6>
+                           
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                                 
+                            <div class="app-card-body p-4">				   
+                              
+                                <h6><small class = "text-muted">FULLNAME<br/><small>(User ID: {{ userID }})</small></small></h6>                             
+                                
+                                <input type = "text" class = "form-control my-1" [(ngModel)] = "fname" (keyup) = "clearErrorSession()" placeholder = "First Name"/>
+                                <input type = "text" class = "form-control my-1" [(ngModel)] = "mname" (keyup) = "clearErrorSession()" placeholder = "Middle Name"/>
+                                <input type = "text" class = "form-control my-1" [(ngModel)] = "lname" (keyup) = "clearErrorSession()" placeholder = "Last Name"/>
+                            
+                            </div><!--//app-card-body FULLNAME -->
+        
+                            <div class="app-card-body p-4">			
+        
+                                <h6><small class = "text-muted">E-mail Address</small></h6>             
+                                <input type = "email" class = "form-control" [(ngModel)] = "email" placeholder = "E-mail Address"/>
+        
+                            </div><!--//app-card-body E-mail Address -->
+        
+                           
+
+                        </div> <!-- col-md-6 User Profile -->
+                        <div class="col-md-6">
+
+                            <div class="app-card-body p-4">			
+
+                                <h6><small class = "text-muted">Role</small></h6>
+
+                                <select [(ngModel)] = "role_name" class = "form-control">
+                                 
+                                        <option [value] = "role_item" *ngFor = "let role_item of role_values;index as i">{{ role_item }}</option>
+                                                                     
+                                </select>
+                               
+                                
+                               
+        
+                            </div><!--//app-card-body Department -->
+        
+
+                            <div class="app-card-body p-4">			
+
+                                <h6><small class = "text-muted">Department</small></h6>
+                                
+                                <select [(ngModel)] = "department" class = "form-control">
+                                 
+                                    <option [value] = "dept_item" *ngFor = "let dept_item of dept;index as i">{{ dept_item }}</option>
+                                                                 
+                                 </select>
+                           
+        
+                            </div><!--//app-card-body Department -->
+        
+                            <div class="app-card-body p-4">			
+        
+                                <h6><small class = "text-muted">Tenure</small></h6>
+                                <select [(ngModel)] = "tenure" class = "form-control">
+                                 
+                                    <option [value] = "tenure_item " *ngFor = "let tenure_item of tenure_collections;index as i">{{ tenure_item  }}</option>
+                                                                 
+                                 </select>
+        
+                            </div><!--//app-card-body Tenure -->
+
+                        </div> <!-- Department and Tenure -->
+                    </div>
+                 
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <span *ngIf = "userID !== userId">
+                                <button *ngIf = "!is_restricted" class = "btn btn-secondary px-3 text-white mx-4" (click) = "onPromptRestrictAccount()">Deactivate Access</button>
+                                <button *ngIf = "is_restricted" class = "btn btn-secondary px-3 text-white mx-4" (click) = "onPromptUnrestrictAccount()">Reactivate Access</button>
+                            </span>    
+                        </div> <!--  -->
+                        <div class="col-md-6"></div>
+                        <div class="col-md-3">
+                            <button class = "btn btn-primary px-4 text-white mx-4" (click) = "onPromptUpdateAccount()">Update Profile</button>
+                        </div> <!-- Update Information Button -->
+                    </div> <!-- row user account operation -->
+                  
+
+                  
+
+                  </div><!--//app-card-->
+
+          
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,331 @@
+<div class="app-content p-md-3 p-lg-4">
+  <div class="container-xl">
+    <!-- organization-form.component.html -->
+    <h1 class="app-page-title">Project Proposal</h1>
+
+    <div class="row">
+      <div class="col-10">
+        <div class="app-card app-card-chart h-100 shadow-sm">
+          <div class="app-card-body p-4">
+            <!-- Proposed By -->
+            <div class="mb-3">
+              <label for="fullname" class="form-label text-black"
+                >Proposed by:
+              </label>
+              <h4>{{ proposed_by_fullname }}</h4>
+            </div>
+
+            <!-- Sponsoring Department -->
+            <div class="mb-3">
+              <label for="sponsor_department" class="form-label text-black"
+                >Sponsoring Department (Select to Choose Multiple Departments)
+                *</label
+              >
+              <select
+                (click)="onChangeSponsoringDepartment()"
+                [(ngModel)]="s_dept"
+                class="form-select"
+                id="sponsor_department"
+                required
+                name="sponsor_department"
+                #sd="ngModel"
+              >
+                <option *ngFor="let dept of departmentNames" [value]="dept">
+                  {{ dept }}
+                </option>
+              </select>
+
+              <div class="d-flex justify-content-start">
+                <h6
+                  class="my-3 mx-1"
+                  *ngFor="
+                    let dept_selected_item of sponsoring_department_collections
+                  "
+                >
+                  <span
+                    class="btn btn-xs btn-secondary float-right btn-right"
+                    (click)="removeSelectedDepartment(dept_selected_item.item)"
+                    ><i class="fa fa-close mx-1"></i>
+                    {{ dept_selected_item.item }}</span
+                  >
+                </h6>
+              </div>
+
+              <span></span>
+            </div>
+
+            <!-- For School Year -->
+            <div class="mb-3">
+              <label for="for_schoolyear" class="form-label text-black"
+                >For School Year *</label
+              >
+              <select
+                type="text"
+                class="form-control"
+                id="for_schoolyear"
+                [(ngModel)]="for_schoolyear"
+                required
+                name="for_schoolyear"
+                #sy="ngModel"
+              >
+                <option
+                  *ngFor="let semtype of for_schoolyear"
+                  [value]="semtype"
+                >
+                  {{ semtype }}
+                </option>
+              </select>
+              <div
+                *ngIf="sy.invalid && (sy.dirty || sy.touched)"
+                class="text-danger"
+              >
+                <div *ngIf="sy.errors && sy.errors['required']">
+                  School Year is required.
+                </div>
+              </div>
+            </div>
+
+            <!-- For Semester -->
+            <div class="mb-3">
+              <label for="for_semester" class="form-label text-black"
+                >For Semester *</label
+              >
+              <select
+                class="form-select"
+                id="for_semester"
+                [(ngModel)]="for_semester"
+                required
+                name="for_semester"
+                #fm="ngModel"
+              >
+                <option *ngFor="let sem of semesterData" [value]="sem">
+                  {{ semesterTranslate(sem) }}
+                </option>
+              </select>
+              <div
+                *ngIf="fm.invalid && (fm.dirty || fm.touched)"
+                class="text-danger"
+              >
+                <div *ngIf="fm.errors && fm.errors['required']">
+                  Semester is required.
+                </div>
+              </div>
+            </div>
+
+            <!-- Project Title -->
+            <div class="mb-3">
+              <label for="projectTitle" class="form-label text-black"
+                >Project Title *</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="projectTitle"
+                [(ngModel)]="project_title"
+                required
+                name="projectTitle"
+                #pt="ngModel"
+              />
+              <div
+                *ngIf="pt.invalid && (pt.dirty || pt.touched)"
+                class="text-danger"
+              >
+                <div *ngIf="pt.errors && pt.errors['required']">
+                  Project Title is required.
+                </div>
+              </div>
+            </div>
+
+            <!-- Venue -->
+            <div class="mb-3">
+              <label for="venue" class="form-label text-black">Venue *</label>
+              <input
+                type="text"
+                class="form-control"
+                id="venue"
+                [(ngModel)]="venue"
+                required
+                name="venue"
+                #v="ngModel"
+              />
+              <div
+                *ngIf="v.invalid && (v.dirty || v.touched)"
+                class="text-danger"
+              >
+                <div *ngIf="v.errors && v.errors['required']">
+                  Venue is required.
+                </div>
+              </div>
+            </div>
+
+            <!-- Target Beneficiary -->
+            <div class="mb-3">
+              <label for="target_beneficiary" class="form-label text-black"
+                >Target Beneficiary *</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="target_beneficiary"
+                [(ngModel)]="target_beneficiary"
+                required
+                name="target_beneficiary"
+                #tb="ngModel"
+              />
+              <div
+                *ngIf="tb.invalid && (tb.dirty || tb.touched)"
+                class="text-danger"
+              >
+                <div *ngIf="tb.errors && tb.errors['required']">
+                  Target Beneficiary is required.
+                </div>
+              </div>
+            </div>
+
+            <!-- Status -->
+            <!-- <div class="mb-3">
+    <label for="status" class="form-label text-black">Status: Pending</label>
+  </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <br /><br />
+    <div class="row">
+      <div class="col-10">
+        <div class="app-card app-card-chart h-100 shadow-sm">
+          <div class="app-card-body p-4">
+            <div><h5>Proposed Action Plan</h5></div>
+
+            <table class="my-5">
+              <tr *ngFor="let item of proposedActionPlanItems; let j = index">
+                <td>
+                  <label><small class="text-black">Objective *</small></label>
+                  <textarea
+                    class="form-control h-100 py-2"
+                    (keyup)="onSetObjectives(j, $event)"
+                    placeholder="Objective"
+                  ></textarea>
+                </td>
+
+                <td>
+                  <label
+                    ><small class="text-black">Activity Title *</small></label
+                  >
+                  <input
+                    class="form-control"
+                    type="text"
+                    (keyup)="onSetActivityTitle(j, $event)"
+                    placeholder="Activity Title"
+                  />
+                  <label
+                    ><small class="text-black">Activity Details *</small></label
+                  >
+                  <input
+                    class="form-control"
+                    type="text"
+                    (keyup)="onSetActivityDetails(j, $event)"
+                    placeholder="Activity Details"
+                  />
+                </td>
+
+                <td>
+                  <label
+                    ><small class="text-black"
+                      >Responsible Persons *</small
+                    ></label
+                  >
+                  <input
+                    class="form-control"
+                    type="text"
+                    (keyup)="onSetResponsiblePersons(j, $event)"
+                    placeholder="Responsible Persons"
+                  />
+                </td>
+
+                <td>
+                  <label
+                    ><small class="text-black">Time Frame Start *</small></label
+                  >
+                  <input
+                    class="form-control"
+                    min="{{ minDate }}"
+                    max="{{ maxDate }}"
+                    type="date"
+                    (change)="onSetTimeFrameStart(j, $event)"
+                    placeholder="Start"
+                  />
+                  <label
+                    ><small class="text-black">Time Frame End *</small></label
+                  >
+                  <input
+                    class="form-control"
+                    min="{{ minDate }}"
+                    max="{{ maxDate }}"
+                    type="date"
+                    (change)="onSetTimeFrameEnd(j, $event)"
+                    placeholder="End"
+                  />
+                </td>
+
+                <td>
+                  <label
+                    ><small class="text-black"
+                      >Budget Requirements *</small
+                    ></label
+                  >
+                  <input
+                    class="form-control"
+                    type="number"
+                    (keyup)="onSetBudgetRequirements(j, $event)"
+                    placeholder="Budget Requirements"
+                  />
+                </td>
+
+                <td>
+                  <label
+                    ><small class="text-black">Proposed Output *</small></label
+                  >
+                  <input
+                    class="form-control"
+                    type="text"
+                    (keyup)="onSetProposedOutput(j, $event)"
+                    placeholder="Proposed Output"
+                  />
+                </td>
+              </tr>
+
+              <tr></tr>
+            </table>
+
+            <!-- input fields -->
+
+            <div class="row my-2">
+              <div class="col-md-4">
+                <button
+                  type="button"
+                  class="btn btn-secondary text-white p-2"
+                  style="width: 100%"
+                  (click)="onAddInput()"
+                >
+                  Add Proposed Action Plan Input
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- container-fluid -->
+        </div>
+      </div>
+    </div>
+    <div class="mb-3 py-4">
+      <!-- Submit Button -->
+      <button
+        type="button"
+        class="btn btn-primary text-white px-5"
+        (click)="onCheck()"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+</div>

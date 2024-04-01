@@ -1,0 +1,184 @@
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <div class="lg:w-3/12 mt-3 p-10 shadow-lg mx-auto p-5">
+      <h3 class="text-3xl text-center font-semibold py-2">Add New Account</h3>
+
+      <form [formGroup]="registerForm" class="flex flex-col">
+        <div class="flex flex-col mt-4 mb-1">
+          <input
+            formControlName="fname"
+            class="p-2 border border-gray-300 rounded form-control"
+            type="text"
+            placeholder="First Name"
+          />
+          <span
+            *ngIf="
+              registerForm.hasError('required', 'fname') &&
+              registerForm.controls['fname'].dirty
+            "
+            class="text-red-500"
+            >*First name is required</span
+          >
+        </div>
+        <div class="flex flex-col mt-4 mb-1">
+          <input
+            formControlName="mname"
+            class="p-2 border border-gray-300 rounded form-control"
+            type="text"
+            placeholder="Middle Name"
+          />
+          <!--<span *ngIf="registerForm.hasError('required', 'mname') && registerForm.controls['mname'].dirty" class="text-red-500">*Middle name is required</span>-->
+        </div>
+        <div class="flex flex-col mt-4 mb-1">
+          <input
+            formControlName="lname"
+            class="p-2 border border-gray-300 rounded form-control"
+            type="text"
+            placeholder="Last Name"
+          />
+          <span
+            *ngIf="
+              registerForm.hasError('required', 'lname') &&
+              registerForm.controls['lname'].dirty
+            "
+            class="text-red-500"
+            >*Last name is required</span
+          >
+        </div>
+        <div class="flex flex-col mt-4 mb-1">
+          <input
+            formControlName="email"
+            type="text"
+            placeholder="HAU Email"
+            class="p-2 border border-gray-300 rounded form-control"
+          />
+          <span
+            *ngIf="
+              registerForm.hasError('required', 'email') &&
+              registerForm.controls['email'].dirty
+            "
+            class="text-danger"
+            >*email is required, must end with hau.edu.ph or student.hau.edu.ph
+            only</span
+          >
+
+          >
+          <span
+            *ngIf="registerForm.hasError('email', 'email')"
+            class="text-danger"
+            >Email is invalid</span
+          >
+        </div>
+        <div class="flex flex-col mt-4 mb-1">
+          <input
+            formControlName="password"
+            type="password"
+            placeholder="Password"
+            class="p-2 border border-gray-300 rounded form-control"
+          />
+          <span
+            *ngIf="
+              registerForm.hasError('required', 'password') &&
+              registerForm.controls['password'].dirty
+            "
+            class="text-danger"
+            >*password is required</span
+          >
+        </div>
+        <div class="flex flex-col mt-4 mb-1">
+          <input
+            formControlName="confirmPassword"
+            type="password"
+            placeholder="Retry Password"
+            class="p-2 border border-gray-300 rounded form-control"
+          />
+          <span
+            *ngIf="
+              registerForm.hasError('required', 'confirmPassword') &&
+              registerForm.controls['confirmPassword'].dirty
+            "
+            class="text-red-500"
+            >*Confirm is required</span
+          >
+          <span
+            *ngIf="
+              registerForm.hasError(
+                'confirmPasswordValidator',
+                'confirmPassword'
+              ) && registerForm.controls['confirmPassword'].dirty
+            "
+            class="text-danger"
+            >*Password doesn't match</span
+          >
+        </div>
+
+        <div class="flex flex-col mt-4 mb-1">
+          <label for="department" class="text-black"
+            ><small>Select Department</small></label
+          >
+          <select
+            id="department"
+            name="department"
+            class="form-control"
+            formControlName="department"
+          >
+            <option value="SBA">SBA</option>
+            <option value="SEA">SEA</option>
+            <option value="SAS">SAS</option>
+            <option value="SHTM">SHTM</option>
+            <option value="SED">SEd</option>
+            <option value="SNAMS">SNAMS</option>
+            <option value="SoC">SoC</option>
+            <option value="SHTM">CCJEF</option>
+            <option value="SHTM">BEd</option>
+            <option value="SHTM">ICSFI</option>
+          </select>
+        </div>
+        <div class="flex flex-col mt-4 mb-1">
+          <label for="tenure"
+            ><small class="text-black">Select User Tenure</small></label
+          >
+          <select
+            id="tenure"
+            name="tenure"
+            class="form-control"
+            formControlName="tenure"
+          >
+            <option value="Part Time">Part Time</option>
+            <option value="Full Time">Full Time</option>
+            <option value="Student">Student</option>
+          </select>
+        </div>
+        <div class="flex flex-col mt-4 mb-1">
+          <label for="role"
+            ><small class="text-black">Select User Role</small></label
+          >
+          <select
+            id="role"
+            name="role"
+            class="form-control"
+            formControlName="role"
+          >
+            <option value="Admin">Admin</option>
+            <option value="Super Admin">Super Admin</option>
+            <option value="Student">Student</option>
+            <option value="CSCB">CSCB</option>
+            <option value="Employee">Employee</option>
+          </select>
+        </div>
+        <button
+          [disabled]="registerForm.invalid"
+          [class.disabled]="registerForm.invalid"
+          (click)="onRegister()"
+          class="bg-indigo-500 p-2 rounded mt-3 text-white btn btn-primary text-white p-3"
+          style="width: 100%"
+          type="submit"
+        >
+          Register
+        </button>
+      </form>
+    </div>
+  </div>
+  <!-- col-md-4 -->
+</div>

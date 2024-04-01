@@ -1,0 +1,426 @@
+<div class="app-content p-md-3 p-lg-4">
+  <div class="container-xl">
+    <div class="row justify-content-between align-items-center">
+      <div class="col-auto">
+        <h1 class="app-page-title">View Implementation Report</h1>
+      </div>
+    </div>
+    <div id="body-wrapper" class="overflow-auto p-5 my-3">
+      <div class="document-viewer">
+        <div class="document-body p-3" #content>
+          <br /><br /><br /><br /><br />
+
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-2 text-center">
+                <img src="/assets/img/HAU.png" style="height: 75px" />
+              </div>
+              <div class="col-md-8 text-center">
+                <p>
+                  <small
+                    ><small class="text-black"
+                      >OFFICE OF THE COMMUNITY EXTENSION SERVICES</small
+                    ></small
+                  ><br />
+                  <small
+                    ><small class="text-black"
+                      >Institute for Christian Formation and Social
+                      Integration</small
+                    ></small
+                  ><br />
+                  <small
+                    ><small class="text-black"
+                      >HOLY&nbsp;&nbsp;&nbsp;&nbsp;ANGEL&nbsp;&nbsp;&nbsp;&nbsp;UNIVERSITY</small
+                    ></small
+                  ><br />
+                  <small
+                    ><small class="text-black"
+                      >Sto. Rosario, Angeles City</small
+                    ></small
+                  ><br />
+                </p>
+              </div>
+              <div class="col-md-2">
+                <small style="color: #000" [contentEditable]="true"
+                  ><div>
+                    FM-CES 4010<br />
+                    Rev. 1<br />
+                    Effectivity Date: September 7, 2021
+                  </div></small
+                >
+              </div>
+            </div>
+            <!-- row header -->
+
+            <div class="row">
+              <div class="col-md-2 text-center"></div>
+              <div class="col-md-8 text-center">
+                <h6>
+                  <small
+                    ><b
+                      >IMPLEMENTATION&nbsp;&nbsp;&nbsp;&nbsp;REPORT&nbsp;&nbsp;&nbsp;&nbsp;FORM</b
+                    ></small
+                  >
+                </h6>
+                <h6>
+                  <i
+                    >COMMUNITY&nbsp;&nbsp;&nbsp;&nbsp;EXTENSION&nbsp;&nbsp;&nbsp;&nbsp;SERVICE&nbsp;&nbsp;&nbsp;&nbsp;PROJECT</i
+                  >
+                </h6>
+              </div>
+            </div>
+            <!-- row title -->
+
+            <div class="row">
+              <div class="col-md-12 my-3">
+                <table class="table table-responsive mx-2">
+                  <tr class="my-2">
+                    <td class="mx-5">
+                      Sponsoring Department(s)/Proponent(s) :
+                    </td>
+                    <td
+                      colspan="2"
+                      style="border: solid 1px #000"
+                      width="65%"
+                      class="p-2"
+                      contenteditable="true"
+                    >
+                      {{ sponsor_department }}
+                    </td>
+                  </tr>
+                  <br />
+                  <tr>
+                    <td>Project Title :</td>
+                    <td
+                      colspan="2"
+                      style="border: solid 1px #000"
+                      width="65%"
+                      class="p-2"
+                      contenteditable="true"
+                    >
+                      {{ project_title }}
+                    </td>
+                  </tr>
+                  <br />
+                  <tr>
+                    <td>Beneficiaries :</td>
+                    <td
+                      colspan="2"
+                      style="border: solid 1px #000"
+                      width="65%"
+                      class="p-2"
+                      contenteditable="true"
+                    >
+                      {{ target_beneficiary }}
+                    </td>
+                  </tr>
+                  <br />
+                  <tr>
+                    <td>Accomplished Objectives :</td>
+                    <td
+                      colspan="2"
+                      style="border: solid 1px #000"
+                      width="65%"
+                      class="p-2"
+                      contenteditable="true"
+                    >
+                      {{ accomplished_objective }}
+                    </td>
+                  </tr>
+                  <br />
+                  <tr>
+                    <td>Venue of CES Activity :</td>
+                    <td
+                      colspan="2"
+                      style="border: solid 1px #000"
+                      width="50%"
+                      class="p-2"
+                      contenteditable="true"
+                    >
+                      {{ venue }}
+                    </td>
+                  </tr>
+                  <br />
+                  <tr>
+                    <td>Brief Narrative :</td>
+                    <td
+                      colspan="2"
+                      style="border: solid 1px #000"
+                      width="65%"
+                      class="p-2"
+                      contenteditable="true"
+                    >
+                      {{ brief_narrative }}
+                    </td>
+                  </tr>
+                  <br />
+                  <tr>
+                    <td class="text-xs">
+                      Topic(s) Discussed and Resource Speaker(s)/Facilitator(s),
+                      (if applicable)
+                    </td>
+                    <td
+                      style="border: solid 1px #000"
+                      width="50%"
+                      class="p-2"
+                      contenteditable="true"
+                    >
+                      {{ project_topic }}
+                    </td>
+                    <td
+                      style="border: solid 1px #000"
+                      width="50%"
+                      class="p-2"
+                      contenteditable="true"
+                    >
+                      {{ activity_speakers }}
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <!-- row details after header -->
+
+            <div class="row">
+              <div class="col-md-12 mx-2 my-1">
+                <small class="text-black"
+                  ><b contenteditable="true"
+                    >Please attach the following</b
+                  ></small
+                >
+                <ul class="text-black">
+                  <li class="text-black" contenteditable="true">
+                    Signed Attendance Sheet(s)
+                    <i>(for face-to-face activities)</i> or Screenshot of
+                    Attendees <i>(for online activities)</i>
+                  </li>
+                  <li class="text-black" contenteditable="true">
+                    Program of Activities
+                  </li>
+                  <li class="text-black" contenteditable="true">
+                    Certificate(s) <i>(for webinars or trainings)</i>
+                  </li>
+                  <li class="text-black" contenteditable="true">
+                    Evaluation Report
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- row please attach the following -->
+
+            <div class="row">
+              <div class="col-md-12 mx-2 my-1">
+                <small class="text-black my-2"
+                  ><b contenteditable="true"
+                    >List&nbsp;&nbsp;of&nbsp;&nbsp;Actual&nbsp;&nbsp;Volunteers&nbsp;&nbsp;and&nbsp;&nbsp;Type&nbsp;&nbsp;of&nbsp;&nbsp;Participation:</b
+                  ></small
+                ><br />
+                <small class="text-black my-1"
+                  ><b contenteditable="true"
+                    >Preparatory&nbsp;&nbsp;&nbsp;Phase</b
+                  ></small
+                >
+
+                <table class="table table-bordered">
+                  <thead>
+                    <th class="p-2">
+                      <small><small>Name of Volunteer</small></small>
+                    </th>
+                    <th class="p-2">
+                      <small><small>Position/Designation</small></small>
+                    </th>
+                    <th class="p-2">
+                      <small><small>Type of Participation</small></small>
+                    </th>
+                    <th class="p-2">
+                      <small><small>Start Time</small></small>
+                    </th>
+                    <th class="p-2">
+                      <small><small>End Time</small></small>
+                    </th>
+                  </thead>
+                  <tr>
+                    <td contenteditable="true">
+                      {{ project_volunteers }}
+                    </td>
+                    <td contenteditable="true">
+                      {{ designation }}
+                    </td>
+                    <td contenteditable="true">
+                      {{ participation_type }}
+                    </td>
+                    <td contenteditable="true">
+                      {{ prep_start_time }}
+                    </td>
+                    <td contenteditable="true">
+                      {{ prep_end_time }}
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <!-- row details -->
+
+            <div class="row">
+              <div class="col-md-12 mx-2 my-1">
+                <small class="text-black my-2"
+                  ><b contenteditable="true"
+                    >Learnings&nbsp;/&nbsp;Insights:</b
+                  ></small
+                ><br />
+
+                <table class="table table-bordered">
+                  <thead>
+                    <th></th>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <ul class="text-black">
+                          <li contenteditable="true">
+                            {{ learnings }}
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- row details Learnings/Insights-->
+
+            <div class="row text-center">
+              <div class="col-md-12 mx-2 my-1">
+                <small class="text-black my-2"
+                  ><b contenteditable="true"
+                    >Strengths&nbsp;/&nbsp;Weaknesses/Areas for Improvement:</b
+                  ></small
+                ><br />
+
+                <table class="table table-bordered">
+                  <thead>
+                    <th>
+                      <small><small>Strengths</small></small>
+                    </th>
+                    <th>
+                      <small><small>Weaknesses</small></small>
+                    </th>
+                    <th>
+                      <small><small>Areas for Improvement</small></small>
+                    </th>
+                  </thead>
+
+                  <tbody>
+                    <td contenteditable="true">
+                      {{ project_strengths }}
+                    </td>
+                    <td contenteditable="true">
+                      {{ project_weakness }}
+                    </td>
+                    <td contenteditable="true">
+                      {{ project_improvement }}
+                    </td>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- row details Strenghts/Weaknesses/Areas for Improvement -->
+
+            <div class="row">
+              <div class="col-md-12 mx-2 my-1">
+                <small class="text-black my-2"
+                  ><b contenteditable="true"
+                    >Actual Participation/Counterpart of the Partner Community
+                    Served</b
+                  ></small
+                ><br />
+
+                <table class="table table-bordered">
+                  <thead>
+                    <th></th>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <ul class="text-black">
+                          <li contenteditable="true">
+                            {{ project_counterpart }}<br />
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- row details Actual Counterpart and Participation-->
+
+            <div class="row text-center">
+              <div class="col-md-12 mx-2 my-1">
+                <small class="text-black my-2"
+                  ><b contenteditable="true">Financial Report:</b></small
+                ><br />
+
+                <table class="table table-bordered">
+                  <thead>
+                    <th>
+                      <small><small>Particulars</small></small>
+                    </th>
+                    <th>
+                      <small><small>Amount</small></small>
+                    </th>
+                  </thead>
+
+                  <tbody>
+                    <td contenteditable="true">
+                      {{ project_particulars }}
+                    </td>
+                    <td contenteditable="true">
+                      {{ project_amount }}
+                    </td>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- row details Financial Report -->
+          </div>
+          <!-- container-fluid -->
+        </div>
+        <!--#content_output-->
+      </div>
+      <!-- document-viewer class -->
+    </div>
+    <!-- #body-wrapper -->
+
+    <div class="container-fluid my-5">
+      <div class="row">
+        <div class="col-md-7">
+          <button
+            class="btn btn-secondary px-4 text-white mx-1"
+            (click)="viewUploadedImages()"
+          >
+            <i class="fa fa-image px-2"></i>View Uploaded Images
+          </button>
+          <button
+            class="btn btn-secondary px-4 text-white mx-1"
+            (click)="viewFileUpload()"
+          >
+            <i class="fa fa-file px-2"></i> View Uploaded PDF
+          </button>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-4">
+          <button class="btn btn-success px-5 text-white mx-1">Save</button>
+          <button
+            class="btn btn-warning px-5 text-white mx-1"
+            (click)="makePDF()"
+          >
+            Export
+          </button>
+        </div>
+      </div>
+      <!-- row -->
+    </div>
+    <!-- container-fluid -->
+  </div>
+</div>

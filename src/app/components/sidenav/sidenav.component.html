@@ -1,0 +1,556 @@
+
+<div class = "d-xl-none">
+
+  <div class="accordion px-4" id="accordionMenu" style = "position:absolute;top:20px;">
+    <div class="accordion-item">
+      
+      <h2 class="accordion-header" id="heading_nav" >
+      
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-expanded="true" aria-controls="nav">
+     
+        </button>
+      </h2>
+      
+      <div id="nav" class="accordion-collapse collapse show" aria-labelledby="nav" data-bs-parent="#accordionMenu" style = "height:100vh;overflow-y:scroll;">
+        <div class="accordion-body">
+        
+        <div class = "row">
+        
+        
+            <div class="col-md-12">
+
+           
+              <div class="sidepanel-inner d-flex flex-column">
+               
+                <div class="app-branding">
+                  <a class="app-logo mx-4 mt-5" routerLink="/dashboard"
+                    ><img
+                      class="img img-responsive mx-2"
+                      height="55px"
+                      src="assets/img/OCES-Logo.png"
+                      alt="logo"
+                    /><span class="logo-text">OCES</span></a
+                  >
+                </div>
+          
+          
+          
+                <ul class = "my-3 ul-class">
+          
+                  
+                  <li
+                    *ngFor="let menu of filterMenu"
+                    class="text-xl cursor-pointer text-gray-200 font-bold my-3 hover:underline hover:text-indigo-200 bg-red-600"
+                  >
+          
+                 
+          
+                  <div *ngIf = "sidenavIsActive(menu.path); else elseNotActive">
+          
+                    <a [routerLink]="menu.path" *ngIf = "menu.text === 'Dashboard'">
+          
+                      <div class = "alert alert-danger mx-1 py-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#700F1D"  fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg> 
+                        <span class = "mx-2"><b> {{ menu.text }} </b></span>
+                      </div> 
+                    
+                    </a> 
+          
+                    <a [routerLink]="menu.path" *ngIf = "menu.text === 'Student Reports'">
+          
+                      <div class = "alert alert-danger mx-1 py-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-notebook" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#700F1D" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-11a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1m3 0v18" /><path d="M13 8l2 0" /><path d="M13 12l2 0" /></svg>  <span class = "mx-2"><b> {{ menu.text }} </b></span>
+                      </div> 
+                   
+                     </a> 
+          
+                     <a [routerLink]="menu.path" *ngIf = "menu.text === 'Document Reports'">
+          
+                      <div class = "alert alert-danger mx-1 py-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clipboard-data" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#700F1D" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" /><path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /><path d="M9 17v-4" /><path d="M12 17v-1" /><path d="M15 17v-2" /><path d="M12 17v-1" /></svg> 
+                        <span class = "mx-2"><b> {{ menu.text }} </b></span>
+                      </div> 
+                   
+                     </a> 
+          
+                     <a [routerLink]="menu.path" *ngIf = "menu.text === 'Document Approval'">
+          
+                      <div class = "alert alert-danger mx-1 py-2">
+          
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-checklist" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9.615 20h-2.615a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8" /><path d="M14 19l2 2l4 -4" /><path d="M9 8h4" /><path d="M9 12h2" /></svg>
+                    
+                        <span class = "mx-2"><b> {{ menu.text }} </b></span>
+          
+                      </div> 
+                   
+          
+          
+                     </a> 
+          
+                     <a [routerLink]="menu.path" *ngIf = "menu.text === 'Visual Reports'">
+          
+                      <div class = "alert alert-danger mx-1 py-2">
+          
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-graph" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 18v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" /><path d="M7 14l3 -3l2 2l3 -3l2 2" /></svg>
+          
+                        <span class = "mx-2"><b> {{ menu.text }} </b></span>
+          
+                      </div> 
+                   
+                     </a> 
+          
+                     <a [routerLink]="menu.path" *ngIf = "menu.text === 'Archive'">
+          
+                      <div class = "alert alert-danger mx-1 py-2">
+          
+                          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /><path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" /><path d="M10 12l4 0" /></svg>
+                    
+                          <span class = "mx-2"><b> {{ menu.text }} </b></span>
+          
+                      </div> 
+                   
+                     </a> 
+          
+                     <a [routerLink]="menu.path" *ngIf = "menu.text === 'User Management'" style = "height:75px;">
+          
+                        <div class = "alert alert-danger mx-1 py-2">
+          
+                          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users-group" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1" /><path d="M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M17 10h2a2 2 0 0 1 2 2v1" /><path d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M3 13v-1a2 2 0 0 1 2 -2h2" /></svg> 
+                  
+                          <span class = "mx-2"><b> {{ menu.text }} </b></span>
+          
+                        </div> 
+                   
+                     </a> 
+          
+                     <a [routerLink]="menu.path" *ngIf = "menu.text === 'Schedule Tracker'">
+          
+                      <div class = "alert alert-danger mx-1 py-2">
+          
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-month" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M7 14h.013" /><path d="M10.01 14h.005" /><path d="M13.01 14h.005" /><path d="M16.015 14h.005" /><path d="M13.015 17h.005" /><path d="M7.01 17h.005" /><path d="M10.01 17h.005" /></svg>
+                    
+                        <span class = "mx-2"><b> {{ menu.text }} </b></span>
+          
+                      </div> 
+                 
+                   </a> 
+          
+                     
+                 
+                  
+                  </div>
+          
+                 <ng-template #elseNotActive>
+          
+                   <a [routerLink]="menu.path" *ngIf = "menu.text === 'Dashboard'">
+          
+                    <div class = "alert mx-1 py-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#700F1D"  fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>  <span class = "mx-2">{{ menu.text }} </span>
+                    </div> 
+                  
+                   </a> 
+          
+                   <a [routerLink]="menu.path" *ngIf = "menu.text === 'Student Reports'">
+          
+                    <div class = "alert mx-1 py-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-notebook" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#700F1D" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-11a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1m3 0v18" /><path d="M13 8l2 0" /><path d="M13 12l2 0" /></svg>  <span class = "mx-2"> {{ menu.text }} </span>
+                    </div> 
+                   
+                   </a> 
+          
+                   <a [routerLink]="menu.path" *ngIf = "menu.text === 'Document Reports'">
+          
+                    <div class = "alert  mx-1 py-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clipboard-data" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#700F1D" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" /><path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /><path d="M9 17v-4" /><path d="M12 17v-1" /><path d="M15 17v-2" /><path d="M12 17v-1" /></svg>  <span class = "mx-2"> {{ menu.text }} </span>
+                    </div> 
+                  
+                  </a>
+          
+          
+                  <a [routerLink]="menu.path" *ngIf = "menu.text === 'Document Approval'">
+          
+                    <div class = "alert mx-1 py-2">
+                    
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-checklist" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9.615 20h-2.615a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8" /><path d="M14 19l2 2l4 -4" /><path d="M9 8h4" /><path d="M9 12h2" /></svg>
+                    
+                      <span class = "mx-2"> {{ menu.text }} </span>
+                  
+                    </div> 
+                   
+                  </a>
+          
+                  <a [routerLink]="menu.path" *ngIf = "menu.text === 'Visual Reports'">
+          
+                    <div class = "alert mx-1 py-2">
+                    
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-graph" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 18v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" /><path d="M7 14l3 -3l2 2l3 -3l2 2" /></svg>
+          
+                      <span class = "mx-2"> {{ menu.text }} </span>
+                  
+                    </div> 
+                   
+                  </a>
+          
+          
+                  <a [routerLink]="menu.path" *ngIf = "menu.text === 'Archive'">
+          
+                    <div class = "alert mx-1 py-2">
+                    
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /><path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" /><path d="M10 12l4 0" /></svg>
+                  
+                      <span class = "mx-2"> {{ menu.text }} </span>
+                  
+                    </div> 
+                   
+                  </a>
+          
+                  <a [routerLink]="menu.path" *ngIf = "menu.text === 'User Management'">
+          
+                    <div class = "alert mx-1 py-2">
+                    
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users-group" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1" /><path d="M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M17 10h2a2 2 0 0 1 2 2v1" /><path d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M3 13v-1a2 2 0 0 1 2 -2h2" /></svg> 
+                 
+                      <span class = "mx-2"> {{ menu.text }} </span>
+                  
+                    </div> 
+                   
+                  </a>
+          
+                  <a [routerLink]="menu.path" *ngIf = "menu.text === 'Schedule Tracker'">
+          
+                    <div class = "alert mx-1 py-2">
+                    
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-month" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M7 14h.013" /><path d="M10.01 14h.005" /><path d="M13.01 14h.005" /><path d="M16.015 14h.005" /><path d="M13.015 17h.005" /><path d="M7.01 17h.005" /><path d="M10.01 17h.005" /></svg>
+                    
+                      <span class = "mx-2"> {{ menu.text }} </span>
+                  
+                    </div> 
+                   
+                  </a>
+          
+                  
+                  
+                 </ng-template>
+          
+                  
+          
+                  </li>
+                </ul>
+
+                </div>
+              
+            </div> <!-- col-md-6 -->
+            
+          </div> <!-- row  -->
+      
+      
+        </div>
+      </div>
+    </div>  <!-- accordion-item-->
+      
+  </div>
+        
+
+</div>
+        
+
+<div id="app-sidepanel" class="app-sidepanel">
+  <div id="sidepanel-drop" class="sidepanel-drop">
+    
+    <div class="sidepanel-inner d-flex flex-column" style = "height:1000px;">
+      <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none"
+        >&times;</a
+      >
+      <div class="app-branding">
+        <a class="app-logo mx-4 mt-5" routerLink="/dashboard"
+          ><img
+            class="img img-responsive mx-2"
+            height="55px"
+            src="assets/img/OCES-Logo.png"
+            alt="logo"
+          /><span class="logo-text">OCES</span></a
+        >
+      </div>
+
+
+
+      <ul class = "my-3">
+
+        
+        <li
+          *ngFor="let menu of filterMenu"
+          class="text-xl cursor-pointer text-gray-200 font-bold my-3 hover:underline hover:text-indigo-200 bg-red-600"
+        >
+
+       
+
+        <div *ngIf = "sidenavIsActive(menu.path); else elseNotActive">
+
+          <a [routerLink]="menu.path" *ngIf = "menu.text === 'Dashboard'">
+
+            <div class = "alert alert-danger mx-1 py-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#700F1D"  fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg> 
+              <span class = "mx-2"><b> {{ menu.text }} </b></span>
+            </div> 
+          
+          </a> 
+
+          <a [routerLink]="menu.path" *ngIf = "menu.text === 'Student Reports'">
+
+            <div class = "alert alert-danger mx-1 py-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-notebook" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#700F1D" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-11a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1m3 0v18" /><path d="M13 8l2 0" /><path d="M13 12l2 0" /></svg>  <span class = "mx-2"><b> {{ menu.text }} </b></span>
+            </div> 
+         
+           </a> 
+
+           <a [routerLink]="menu.path" *ngIf = "menu.text === 'Document Reports'">
+
+            <div class = "alert alert-danger mx-1 py-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clipboard-data" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#700F1D" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" /><path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /><path d="M9 17v-4" /><path d="M12 17v-1" /><path d="M15 17v-2" /><path d="M12 17v-1" /></svg> 
+              <span class = "mx-2"><b> {{ menu.text }} </b></span>
+            </div> 
+         
+           </a> 
+
+           <a [routerLink]="menu.path" *ngIf = "menu.text === 'Document Approval'">
+
+            <div class = "alert alert-danger mx-1 py-2">
+
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-checklist" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9.615 20h-2.615a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8" /><path d="M14 19l2 2l4 -4" /><path d="M9 8h4" /><path d="M9 12h2" /></svg>
+          
+              <span class = "mx-2"><b> {{ menu.text }} </b></span>
+
+            </div> 
+         
+
+
+           </a> 
+
+           <a [routerLink]="menu.path" *ngIf = "menu.text === 'Visual Reports'">
+
+            <div class = "alert alert-danger mx-1 py-2">
+
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-graph" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 18v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" /><path d="M7 14l3 -3l2 2l3 -3l2 2" /></svg>
+
+              <span class = "mx-2"><b> {{ menu.text }} </b></span>
+
+            </div> 
+         
+           </a> 
+
+           <a [routerLink]="menu.path" *ngIf = "menu.text === 'Archive'">
+
+            <div class = "alert alert-danger mx-1 py-2">
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /><path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" /><path d="M10 12l4 0" /></svg>
+          
+                <span class = "mx-2"><b> {{ menu.text }} </b></span>
+
+            </div> 
+         
+           </a> 
+
+           <a [routerLink]="menu.path" *ngIf = "menu.text === 'User Management'" style = "height:75px;">
+
+              <div class = "alert alert-danger mx-1 py-2">
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users-group" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1" /><path d="M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M17 10h2a2 2 0 0 1 2 2v1" /><path d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M3 13v-1a2 2 0 0 1 2 -2h2" /></svg> 
+        
+                <span class = "mx-2"><b> {{ menu.text }} </b></span>
+
+              </div> 
+         
+           </a> 
+
+           <a [routerLink]="menu.path" *ngIf = "menu.text === 'Schedule Tracker'">
+
+            <div class = "alert alert-danger mx-1 py-2">
+
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-month" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M7 14h.013" /><path d="M10.01 14h.005" /><path d="M13.01 14h.005" /><path d="M16.015 14h.005" /><path d="M13.015 17h.005" /><path d="M7.01 17h.005" /><path d="M10.01 17h.005" /></svg>
+          
+              <span class = "mx-2"><b> {{ menu.text }} </b></span>
+
+            </div> 
+       
+         </a> 
+
+           
+       
+        
+        </div>
+
+       <ng-template #elseNotActive>
+
+         <a [routerLink]="menu.path" *ngIf = "menu.text === 'Dashboard'">
+
+          <div class = "alert mx-1 py-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#700F1D"  fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>  <span class = "mx-2">{{ menu.text }} </span>
+          </div> 
+        
+         </a> 
+
+         <a [routerLink]="menu.path" *ngIf = "menu.text === 'Student Reports'">
+
+          <div class = "alert mx-1 py-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-notebook" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#700F1D" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-11a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1m3 0v18" /><path d="M13 8l2 0" /><path d="M13 12l2 0" /></svg>  <span class = "mx-2"> {{ menu.text }} </span>
+          </div> 
+         
+         </a> 
+
+         <a [routerLink]="menu.path" *ngIf = "menu.text === 'Document Reports'">
+
+          <div class = "alert  mx-1 py-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clipboard-data" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#700F1D" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" /><path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /><path d="M9 17v-4" /><path d="M12 17v-1" /><path d="M15 17v-2" /><path d="M12 17v-1" /></svg>  <span class = "mx-2"> {{ menu.text }} </span>
+          </div> 
+        
+        </a>
+
+
+        <a [routerLink]="menu.path" *ngIf = "menu.text === 'Document Approval'">
+
+          <div class = "alert mx-1 py-2">
+          
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-checklist" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9.615 20h-2.615a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8" /><path d="M14 19l2 2l4 -4" /><path d="M9 8h4" /><path d="M9 12h2" /></svg>
+          
+            <span class = "mx-2"> {{ menu.text }} </span>
+        
+          </div> 
+         
+        </a>
+
+        <a [routerLink]="menu.path" *ngIf = "menu.text === 'Visual Reports'">
+
+          <div class = "alert mx-1 py-2">
+          
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-graph" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 18v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" /><path d="M7 14l3 -3l2 2l3 -3l2 2" /></svg>
+
+            <span class = "mx-2"> {{ menu.text }} </span>
+        
+          </div> 
+         
+        </a>
+
+
+        <a [routerLink]="menu.path" *ngIf = "menu.text === 'Archive'">
+
+          <div class = "alert mx-1 py-2">
+          
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /><path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" /><path d="M10 12l4 0" /></svg>
+        
+            <span class = "mx-2"> {{ menu.text }} </span>
+        
+          </div> 
+         
+        </a>
+
+        <a [routerLink]="menu.path" *ngIf = "menu.text === 'User Management'">
+
+          <div class = "alert mx-1 py-2">
+          
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users-group" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1" /><path d="M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M17 10h2a2 2 0 0 1 2 2v1" /><path d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M3 13v-1a2 2 0 0 1 2 -2h2" /></svg> 
+       
+            <span class = "mx-2"> {{ menu.text }} </span>
+        
+          </div> 
+         
+        </a>
+
+        <a [routerLink]="menu.path" *ngIf = "menu.text === 'Schedule Tracker'">
+
+          <div class = "alert mx-1 py-2">
+          
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-month" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M7 14h.013" /><path d="M10.01 14h.005" /><path d="M13.01 14h.005" /><path d="M16.015 14h.005" /><path d="M13.015 17h.005" /><path d="M7.01 17h.005" /><path d="M10.01 17h.005" /></svg>
+          
+            <span class = "mx-2"> {{ menu.text }} </span>
+        
+          </div> 
+         
+        </a>
+
+        
+        
+       </ng-template>
+
+        
+
+        </li>
+      </ul>
+
+    
+      
+      <!--//app-branding-->
+      <!-- <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
+        <li *ngFor="let menu of filterMenu">
+          <a [routerLink]="menu.path"> {{ menu.text }}</a>
+        </li>
+      </nav> -->
+
+      <!-- </div> -->
+      <!--//sidepanel-inner-->
+      <!-- </div> -->
+      <!--//app-sidepanel-->
+
+      <!-- <nav class="w-full p-5 bg-red-900 shadow-lg flex justify-between items-center">
+  <div class="logo">
+    <span class="text-gray-200 text-4xl flex justify-start items-center"
+      >OCES</span
+    >
+  </div>
+  <ng-container *ngIf="!isLoggedIn">
+    <span
+      routerLink="/login"
+      class="text-xl cursor-pointer text-gray-200 font-bold m-3 hover:underline hover:text-indigo-200"
+      >Login</span
+    >
+    <span
+      routerLink="/register"
+      class="text-xl cursor-pointer text-gray-200 font-bold m-3 hover:underline hover:text-indigo-200"
+      >Register</span
+    >
+  </ng-container>
+  <ng-container>
+    <ul>
+      <li
+        *ngFor="let menu of filterMenu"
+        class="text-xl cursor-pointer text-gray-200 font-bold m-3 hover:underline hover:text-indigo-200"
+      >
+        <a [routerLink]="menu.path">{{ menu.text }}</a>
+      </li>
+      <span
+        routerLink="/login"
+        (click)="onLogout()"
+        class="text-xl cursor-pointer text-gray-200 font-bold m-3 hover:underline hover:text-indigo-200"
+        >Logout</span
+      >
+    </ul>
+  </ng-container>
+</nav>
+<aside class="flex-shrink-0 p-5 bg-red-900 shadow-lg h-screen flex flex-col">
+  <div class="logo">
+    <span class="text-gray-200 text-4xl flex justify-start items-center"
+      >OCES</span
+    >
+  </div>
+
+  <ng-container>
+    <ul>
+      <li
+        *ngFor="let menu of filterMenu"
+        class="text-xl cursor-pointer text-gray-200 font-bold my-3 hover:underline hover:text-indigo-200 bg-red-600"
+      >
+        <a [routerLink]="menu.path">{{ menu.text }}</a>
+      </li>
+      <li
+        (click)="onLogout()"
+        class="text-xl cursor-pointer text-gray-200 font-bold my-3 hover:underline hover:text-indigo-200"
+      >
+        <a routerLink="/login">Logout</a>
+      </li>
+    </ul>
+  </ng-container>
+</aside> -->
+
+
+    </div>
+  </div>
+</div>

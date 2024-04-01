@@ -1,0 +1,432 @@
+<div class="app-content p-md-3 p-lg-4">
+  <div class="container-xl">
+    <!-- organization-form.component.html -->
+    <h1 class="app-page-title">Revise Intake Proposal</h1>
+
+  <div class="row">
+    <div class="col-10">
+      <div class="app-card app-card-chart h-100 shadow-sm">
+        <div class="app-card-body p-4">
+  
+        <!-- Proposed By -->
+        <div class="mb-3">
+          <label for="fullname" class="form-label text-black">Proposed by:</label>
+          <h4>{{ proposed_by_fullname }}</h4>
+        </div>
+  
+        <!-- Project Title -->
+        <div class="mb-3">
+          <label for="project_title" class="form-label text-black">Project Title</label>
+          <input
+            type="text"
+            placeholder = "Project Title"
+            class="form-control"
+            id="project_title"
+            [(ngModel)] = "project_title"         
+            required
+          />
+        </div>
+  
+           <!-- Org. Date Established -->
+           <div class="mb-3">
+            <label for="organization_name" class="form-label text-black">Organization Names</label>
+            <input
+              type="text"
+              placeholder = "Organization Names"
+              class="form-control"
+              id="organization_name"
+              [(ngModel)] = "organization_name"         
+              required
+            />
+          </div>
+  
+          <!-- Org. Types -->
+          <div class="mb-3">
+            <label for="org_types"  class="form-label text-black">Organization Types</label>
+            <select
+              [(ngModel)] = "organization_type"
+              class="form-select"
+              id="organization_type"          
+              required
+            >
+              <option *ngFor="let o_type of organizationTypes" [value]="o_type">
+                {{ o_type }}
+              </option>
+            </select>
+    
+    
+          </div>
+      
+           <!-- Org. Date Established -->
+        <div class="mb-3">
+          <label for="organization_date_established" class="form-label text-black">Organization Date Established</label>
+          <input
+            type="date"
+            class="form-control"
+            id="organization_date_established"
+            [(ngModel)] = "organization_date_established"        
+            max = "{{ minDate }}" 
+            required
+          />
+        </div>
+  
+  
+        <!-- Sponsoring Department -->
+        <div class="mb-3">
+          <label for="sponsor_department"  class="form-label text-black">Departments</label>
+          <select
+            (change) = "onChangeSponsoringDepartment()" 
+            [(ngModel)] = "departments"
+            class="form-select"
+            id="sponsor_department"
+           
+            required
+          >
+            <option *ngFor="let o_dept of departmentNames" [value]="o_dept">
+              {{ o_dept }}
+            </option>
+          </select>
+  
+  
+        </div>
+  
+  
+        <!-- For School Year -->
+        <div class="mb-3">
+          <label for="for_schoolyear" class="form-label text-black">For School Year</label>
+          <input
+            type="text"
+            class="form-control"
+            id="for_schoolyear"
+            [(ngModel)] = "for_schoolyear"     
+            required
+          />
+        </div>
+  
+        <!-- For Semester -->
+        <div class="mb-3">
+          <label for="for_semester" class="form-label text-black">For Semester</label>
+          <select
+            class="form-select"
+            id="for_semester"
+            [(ngModel)] = "for_semester"  
+            required
+          >
+            <option *ngFor="let sem of semesterData" [value]="sem">
+              {{ semesterTranslate(sem) }}
+            </option>
+          </select>
+        </div>
+  
+         
+          <div class="mb-3">
+          <label for="contact_person" class="form-label text-black">Contact Person</label>
+          <input
+            type="text"
+            class="form-control"
+            id="contact_person"
+            placeholder = "Contact Person"
+            [(ngModel)] = "contact_person"
+            required
+          />
+        </div>
+  
+             
+        <div class="mb-3">
+          <label for="for_schoolyear" class="form-label text-black">Contact Person Position</label>
+          <input
+            type="text"
+            class="form-control"
+            id="for_schoolyear"
+            placeholder = "Contact Person Position"
+            [(ngModel)] = "contact_person_position"
+            required
+          />
+        </div>
+  
+          <!-- For Contact Number -->
+          <div class="mb-3">
+          <label for="contact_number" class="form-label text-black">Contact Number (+63)</label>
+          <input
+            type="text"
+            class="form-control"
+            id="contact_number"
+            maxLength = "10"
+            placeholder = "Enter (10-Digit) of Contact Number"
+            (keypress) = "onKeyPress($event)"
+            [(ngModel)] = "contact_number"
+            required
+          />
+        </div>
+  
+        
+          <div class="mb-3">
+            <label for="num_members" class="form-label text-black">No. of Members</label>
+            <input
+              type="number"
+              class="form-control"
+              placeholder = "No. of Members"
+              id="num_members"
+              [(ngModel)] = "num_members"
+              required
+            />
+          </div>
+  
+            <div class="mb-3">
+              <label for="organizational_expertise" class="form-label text-black">Organization Expertise</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder = "Organization Expertise"
+                id="organizational_expertise"
+                [(ngModel)] = "organizational_expertise"
+                required
+              />
+            </div>
+  
+            
+          <div class="mb-3">
+            <label for="activity_purpose" class="form-label text-black">Activity Purpose</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder = "Activity Purpose"
+              id="activity_purpose"
+              [(ngModel)] = "activity_purpose"
+              required
+            />
+          </div>
+  
+          
+            <div class="mb-3">
+              <label for=" reason_for_choosing_community_sector" class="form-label text-black">Reason for Choosing Community Sector</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder = "Reason for Choosing Community Sector"
+                id=" reason_for_choosing_community_sector"
+                [(ngModel)] = " reason_for_choosing_community_sector"
+                required
+              />
+            </div>
+  
+              
+          <div class="mb-3">
+            <label for="target_area" class="form-label text-black">Target Area</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder = "Target Area"
+              id="target_area"
+              [(ngModel)] = "target_area"
+              required
+            />
+          </div>
+  
+           
+            <div class="mb-3">
+              <label for="target_date" class="form-label text-black">Target Date</label>
+              <input
+                type="date"
+                class="form-control"
+                placeholder = "Target Date"
+                id="target_date"
+                [(ngModel)] = "target_date"
+                min = "{{ minDate }}"
+                max = "{{ maxDate }}"
+                required
+              />
+            </div>
+  
+            
+          <div class="mb-3">
+            <label for="target_beneficiary" class="form-label text-black">Target Beneficiary</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder = "Target Beneficiary"
+              id="target_beneficiary"
+              [(ngModel)] = "target_beneficiary"
+              required
+            />
+          </div>
+  
+        <!-- No. of Beneficiaries -->
+        <div class="mb-3">
+          <label for="num_beneficiary" class="form-label text-black">No. of Beneficiaries</label>
+          <input
+            type="number"
+            class="form-control"
+            placeholder = "No. of Beneficiaries"
+            id="num_beneficiary"
+            [(ngModel)] = "num_beneficiary"
+            required
+          />
+        </div>
+  
+       
+         <!-- Classification of Community Extension Project -->
+         <div class="mb-3">
+          <label for="classification_community_extension_project"  class="form-label text-black">Classification of Community Extension Project</label>
+          <select          
+            [(ngModel)] = "classification_community_extension_project"
+            class="form-select"
+            id="classification_community_extension_project"
+           
+            required
+          >
+            <option *ngFor="let cc_type of communityClassificationTypes" [value]="cc_type">
+              {{ cc_type }}
+            </option>
+          </select>
+        </div>
+  
+        
+        <div class="mb-3">
+          <label for="adviser_name" class="form-label text-black">Adviser Name</label>
+          <input
+            type="text"
+            placeholder = "Adviser Name"
+            class="form-control"
+            id="adviser_name"
+            [(ngModel)] = "adviser_name"
+            required
+          />
+        </div>
+  
+        <div class="mb-3">
+          <label for="adviser_date_signature" class="form-label text-black">Adviser Signature Date</label>
+          <input
+            type="date"
+            class="form-control"
+            placeholder = "Signature Date"
+            id="adviser_date_signature"
+            [(ngModel)] = "adviser_date_signature"
+            max = "{{ minDate }}"
+            required
+          />
+        </div>
+  
+        <div class="mb-3">
+          <label for="adviser_contact_number" class="form-label text-black">Adviser Contact Number (+63)</label>
+          <input
+            type="text"
+            class="form-control"
+            maxLength = "10"
+            (keypress) = "onKeyPress($event)"
+            placeholder = "Adviser Contact Number (Enter 10-Digit Mobile Number)"
+            id="adviser_contact_number"
+            [(ngModel)] = "adviser_contact_number"
+            required
+          />
+        </div>
+  
+        <div class="mb-3">
+          <label for="target_objectives" class="form-label text-black">Target Objectives</label>
+          <input
+            type="text"
+            placeholder = "Target Objectives"
+            class="form-control"
+            id="target_objectives"
+            [(ngModel)] = "target_objectives"
+            required
+          />
+        </div>
+  
+        <div class="mb-3">
+          <label for="target_activities" class="form-label text-black">Activities</label>
+          <input
+            type="text"
+            placeholder = "Activities"
+            class="form-control"
+            id="target_activities"
+            [(ngModel)] = "target_activities"
+            required
+          />
+        </div>
+  
+        <div class="mb-3">
+          <label for="time_frame_start" class="form-label text-black">Time Frame Start</label>
+          <input
+            type="date"
+            class="form-control"
+            placeholder = "Time Frame Start"
+            id="time_frame_start"
+            [(ngModel)] = "time_frame_start"
+            min = "{{ minDate }}" 
+            required
+          />
+        </div>
+  
+        <div class="mb-3">
+          <label for="time_frame_end" class="form-label text-black">Time Frame End</label>
+          <input
+            type="date"
+            class="form-control"
+            placeholder = "Time Frame End"
+            id="time_frame_end"
+            [(ngModel)] = "time_frame_end"
+            max = "{{ maxDate }}"
+            required
+          />
+        </div>
+  
+        <div class="mb-3">
+          <label for="beneficiaries" class="form-label text-black">Beneficiaries</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder = "Beneficiaries"
+            id="beneficiaries"
+            [(ngModel)] = "beneficiaries"
+            required
+          />
+        </div>
+  
+        <div class="mb-3">
+          <label for="budget" class="form-label text-black">Budget</label>
+          <input
+            type="number"
+            placeholder = "Budget"
+            class="form-control"
+            id="budget"
+            [(ngModel)] = "budget"
+            required
+          />
+        </div>
+  
+        <div class="mb-3">
+          <label for="progress_indicator" class="form-label text-black">Progress Indicator</label>
+          <input
+            type="text"
+            placeholder = "Progress Indicator"
+            class="form-control"
+            id="progress_indicator"
+            [(ngModel)] = "progress_indicator"
+            required
+          />
+        </div>
+  
+  
+        <!-- Status -->
+        <div class="mb-3">
+          <label for="status" class="form-label text-black">Status: For Revision</label>   
+        </div>
+  
+  
+          
+  
+        <!-- Submit Button -->
+        <button type="button" (click)= "onSubmitRevisionIntake()" class="btn btn-primary text-white px-5">
+          Submit
+        </button>
+  
+  
+  
+    </div> <!-- app-card-body -->
+  </div> <!-- app-card -->
+  </div>
+  </div>
+  </div>
+  </div>
+  

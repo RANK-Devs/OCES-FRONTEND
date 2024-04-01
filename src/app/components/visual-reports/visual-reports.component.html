@@ -1,0 +1,124 @@
+<div class="app-content pt-3 p-md-3 p-lg-4">
+  <div class="container-xl">
+    <h1 class="app-page-title">Visual Reports</h1>
+    <span class="app-page-subtitle"
+      >As of {{ currentDate | date : "medium" }}</span
+    >
+    <br /><br />
+
+    <div class="row g-4 mb-4">
+      <div class="col-12 col-lg-6">
+        <div class="app-card app-card-chart h-100 shadow-sm">
+          <div class="app-card-header p-3 border-0">
+            <h4 class="app-card-title">Point System</h4>
+          </div>
+          <!--//app-card-header-->
+          <div class="app-card-body p-4">
+            <div class="chart-container">
+              <canvas id="pieChart-department-point-system"></canvas>
+            </div>
+          </div>
+          <!--//app-card-body-->
+        </div>
+        <!--//app-card-->
+      </div>
+      <!--//col-->
+
+      <div class="col-12 col-lg-6">
+        <div class="app-card app-card-chart h-100 shadow-sm">
+          <div class="app-card-header p-3 border-0">
+            <h4 class="app-card-title">Overall Report</h4>
+          </div>
+          <!--//app-card-header-->
+          <div class="app-card-body p-4">
+            <div class="chart-container">
+              <canvas id="pieChart-overall-report"></canvas>
+            </div>
+          </div>
+          <!--//app-card-body-->
+        </div>
+        <!--//app-card-->
+      </div>
+      <!--//col-->
+    </div>
+    <!--//row-->
+
+    <div class="row g-4 mb-4">
+      <div class="col-12 col-lg-6">
+        <div class="app-card app-card-chart h-100 shadow-sm">
+          <div class="app-card-header p-3 border-0">
+            <h4 class="app-card-title">Total Proposed</h4>
+          </div>
+          <!--//app-card-header-->
+          <div class="app-card-body p-4">
+            <div class="chart-container">
+              <canvas id="barChart"></canvas>
+            </div>
+          </div>
+          <!--//app-card-body-->
+        </div>
+        <!--//app-card-->
+      </div>
+      <!--//col-->
+
+      <div class="col-12 col-lg-6">
+        <div class="app-card app-card-chart h-100 shadow-sm">
+          <div class="app-card-header p-3 border-0">
+            <h4 class="app-card-title">Department Top List</h4>
+          </div>
+          <!--//app-card-header-->
+          <div class="app-card-body p-4 overflow-auto" style="height: 300px">
+            <div
+              class="card my-2"
+              *ngFor="let top_chart_dept of proposal_counts; index as i"
+            >
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-auto">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="50"
+                      height="50"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#700F1D"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="icon icon-tabler icons-tabler-outline icon-tabler-graph"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path
+                        d="M4 18v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"
+                      />
+                      <path d="M7 14l3 -3l2 2l3 -3l2 2" />
+                    </svg>
+                  </div>
+                  <div class="col-auto">
+                    <b> {{ top_chart_dept.departments }} </b>
+
+                    <p>
+                      <small> On-going: {{ top_chart_dept.on_going }} </small
+                      ><br />
+                      <small> Completed: {{ top_chart_dept.completed }} </small
+                      ><br />
+                      <small>
+                        Disapproved: {{ top_chart_dept.rejected }}
+                      </small>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--//app-card-body-->
+        </div>
+        <!--//app-card-->
+      </div>
+      <!--//col-->
+    </div>
+    <!--//row-->
+  </div>
+  <!--//container-fluid-->
+</div>
+<!--//app-content-->

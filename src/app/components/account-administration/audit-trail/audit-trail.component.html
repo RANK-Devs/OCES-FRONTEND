@@ -1,0 +1,470 @@
+<div class="app-content pt-3 p-md-3 p-lg-4">
+  <div class="container-xl">
+    <div class="row g-3 mb-4 align-items-center justify-content-between">
+      <div class="col-auto">
+        <h1 class="app-page-title">Account Administration</h1>
+        <span class="app-page-subtitle">Audit Trail</span>
+      </div>
+      <div class="col-auto">
+        <div class="page-utilities">
+          <div
+            class="row g-2 justify-content-start justify-content-md-end align-items-center"
+          >
+            <div class="col-auto"></div>
+            <!--//col-->
+            <div class="col-auto"></div>
+            <div class="col-auto"></div>
+          </div>
+          <!--//row-->
+        </div>
+        <!--//table-utilities-->
+      </div>
+      <!--//col-auto-->
+    </div>
+    <!--//row-->
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card p-2 mt-2">
+          <div class="row">
+            <div class="col-md-1">
+              <i class="fa fa-filter fa-2x mx-2 py-1"></i>
+            </div>
+            <!-- col-md-2 filter icon -->
+
+            <div class="col-md-5 py-1">
+              <span
+                class="tab_filter p-2 mt-5 mx-1"
+                (click)="onClickAccountAdministration()"
+                >User Accounts</span
+              >
+              <span class="tab_filter_active p-2 mt-5 mx-1"
+                ><b>Audit Trail</b></span
+              >
+            </div>
+
+            <div class="col-md-4"></div>
+            <!-- col-md-4 -->
+
+            <div class="col-md-2">
+              <button
+                class="btn btn-primary add-button text-white mx-1 float-right"
+              >
+                <i class="fa fa-search"></i> Search
+              </button>
+              <!-- btn-primary Add New -->
+            </div>
+            <!-- col-md-2 Add New -->
+          </div>
+          <!-- row -->
+        </div>
+        <!-- card -->
+      </div>
+      <!-- col-md-12 -->
+    </div>
+    <!-- row -->
+
+    <nav
+      id="orders-table-tab"
+      class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4"
+    >
+      <a
+        class="flex-sm-fill text-sm-center nav-link active"
+        id="all-tab"
+        data-bs-toggle="tab"
+        href="#all"
+        role="tab"
+        aria-controls="all"
+        aria-selected="true"
+        >All</a
+      >
+      <a
+        class="flex-sm-fill text-sm-center nav-link"
+        id="super_admin-tab"
+        data-bs-toggle="tab"
+        href="#super_admin"
+        role="tab"
+        aria-controls="super_admin"
+        aria-selected="false"
+        >Super Admin</a
+      >
+      <a
+        class="flex-sm-fill text-sm-center nav-link"
+        id="employee-tab"
+        data-bs-toggle="tab"
+        href="#employee"
+        role="tab"
+        aria-controls="employee"
+        aria-selected="false"
+        >Employee</a
+      >
+      <a
+        class="flex-sm-fill text-sm-center nav-link"
+        id="cscb-tab"
+        data-bs-toggle="tab"
+        href="#cscb"
+        role="tab"
+        aria-controls="cscb"
+        aria-selected="false"
+        >CSCB</a
+      >
+      <a
+        class="flex-sm-fill text-sm-center nav-link"
+        id="student-tab"
+        data-bs-toggle="tab"
+        href="#student"
+        role="tab"
+        aria-controls="student"
+        aria-selected="false"
+        >Student</a
+      >
+    </nav>
+
+    <div class="tab-content" id="orders-table-tab-content">
+      <div
+        class="tab-pane fade show active"
+        id="all"
+        role="tabpanel"
+        aria-labelledby="all-tab"
+      >
+        <div class="app-card app-card-orders-table shadow-sm mb-5">
+          <div class="app-card-body">
+            <div class="table-responsive">
+              <table class="table app-table-hover mb-0 text-left">
+                <thead>
+                  <tr>
+                    <th class="cell">ID</th>
+                    <th class="cell">User ID</th>
+                    <th class="cell">Full Name</th>
+                    <th class="cell">Role</th>
+                    <th class="cell">Date and Time</th>
+                    <th class="cell">Action Taken</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let audit_trail of auditTrailForm; index as i">
+                    <td class="cell">{{ audit_trail._id }}</td>
+
+                    <td class="cell">{{ audit_trail.user_id }}</td>
+                    <td class="cell">
+                      {{ getUserAccountFullName(audit_trail.user_id) }}
+                    </td>
+                    <td class="cell">
+                      <span class="truncate">{{ audit_trail.role }}</span>
+                    </td>
+
+                    <td class="cell">
+                      {{ audit_trail.action_date_time | date : "medium" }}
+                    </td>
+                    <td class="cell">{{ audit_trail.action_taken }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!--//table-responsive-->
+          </div>
+          <!--//app-card-body-->
+        </div>
+        <!--//app-card-->
+        <!-- <nav class="app-pagination">
+          <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+              </li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav> -->
+        <!--//app-pagination-->
+      </div>
+      <!--//tab-pane ALL AUDIT TRAIL -->
+
+      <div
+        class="tab-pane fade"
+        id="super_admin"
+        role="tabpanel"
+        aria-labelledby="super_admin-tab"
+      >
+        <div class="app-card app-card-orders-table shadow-sm mb-5">
+          <div class="app-card-body">
+            <div class="table-responsive">
+              <table class="table app-table-hover mb-0 text-left">
+                <thead>
+                  <tr>
+                    <th class="cell">ID</th>
+                    <th class="cell">User ID</th>
+                    <th class="cell">Full Name</th>
+                    <th class="cell">Role</th>
+                    <th class="cell">Date and Time</th>
+                    <th class="cell">Action Taken</th>
+                    <!-- <th class="cell"></th> -->
+                  </tr>
+                </thead>
+                <tbody *ngFor="let audit_trail of auditTrailForm; index as i">
+                  <tr *ngIf="audit_trail.role === 'Super Admin'">
+                    <td class="cell">{{ audit_trail._id }}</td>
+
+                    <td class="cell">{{ audit_trail.user_id }}</td>
+                    <td class="cell">
+                      {{ getUserAccountFullName(audit_trail.user_id) }}
+                    </td>
+                    <td class="cell">
+                      <span class="truncate">{{ audit_trail.role }}</span>
+                    </td>
+
+                    <td class="cell">
+                      {{ audit_trail.action_date_time | date : "medium" }}
+                    </td>
+                    <td class="cell">{{ audit_trail.action_taken }}</td>
+                    <!-- <td class="cell">
+                      <a class="btn-sm app-btn-secondary" href="#">View</a>
+                    </td> -->
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!--//table-responsive-->
+          </div>
+          <!--//app-card-body-->
+        </div>
+        <!--//app-card-->
+        <!-- <nav class="app-pagination">
+          <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1" aria-disabled="true"
+                >Previous</a
+              >
+            </li>
+            <li class="page-item active">
+              <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav> -->
+        <!--//app-pagination-->
+      </div>
+      <!--//tab-pane SUPER ADMIN -->
+
+      <div
+        class="tab-pane fade"
+        id="cscb"
+        role="tabpanel"
+        aria-labelledby="cscb-tab"
+      >
+        <div class="app-card app-card-orders-table shadow-sm mb-5">
+          <div class="app-card-body">
+            <div class="table-responsive">
+              <table class="table app-table-hover mb-0 text-left">
+                <thead>
+                  <tr>
+                    <th class="cell">ID</th>
+                    <th class="cell">User ID-CSCB</th>
+                    <th class="cell">Full Name</th>
+                    <th class="cell">Role</th>
+                    <th class="cell">Date and Time</th>
+                    <th class="cell">Action Taken</th>
+                    <!-- <th class="cell"></th> -->
+                  </tr>
+                </thead>
+                <tbody *ngFor="let audit_trail of auditTrailForm; index as i">
+                  <tr *ngIf="audit_trail.role === 'CSCB'">
+                    <td class="cell">{{ audit_trail._id }}</td>
+
+                    <td class="cell">{{ audit_trail.user_id }}</td>
+                    <td class="cell">
+                      {{ getUserAccountFullName(audit_trail.user_id) }}
+                    </td>
+                    <td class="cell">
+                      <span class="truncate">{{ audit_trail.role }}</span>
+                    </td>
+
+                    <td class="cell">
+                      {{ audit_trail.action_date_time | date : "medium" }}
+                    </td>
+                    <td class="cell">{{ audit_trail.action_taken }}</td>
+                    <!-- <td class="cell">
+                      <a class="btn-sm app-btn-secondary" href="#">View</a>
+                    </td> -->
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!--//table-responsive-->
+          </div>
+          <!--//app-card-body-->
+        </div>
+        <!--//app-card-->
+        <!-- <nav class="app-pagination">
+          <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1" aria-disabled="true"
+                >Previous</a
+              >
+            </li>
+            <li class="page-item active">
+              <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav> -->
+        <!--//app-pagination-->
+      </div>
+      <!--//tab-pane CSCB -->
+
+      <div
+        class="tab-pane fade"
+        id="employee"
+        role="tabpanel"
+        aria-labelledby="employee-tab"
+      >
+        <div class="app-card app-card-orders-table shadow-sm mb-5">
+          <div class="app-card-body">
+            <div class="table-responsive">
+              <table class="table app-table-hover mb-0 text-left">
+                <thead>
+                  <tr>
+                    <th class="cell">ID</th>
+                    <th class="cell">User ID</th>
+                    <th class="cell">Full Name</th>
+                    <th class="cell">Role</th>
+                    <th class="cell">Date and Time</th>
+                    <th class="cell">Action Taken</th>
+                    <!-- <th class="cell"></th> -->
+                  </tr>
+                </thead>
+                <tbody *ngFor="let audit_trail of auditTrailForm; index as i">
+                  <tr *ngIf="audit_trail.role === 'Employee'">
+                    <td class="cell">{{ audit_trail._id }}</td>
+
+                    <td class="cell">{{ audit_trail.user_id }}</td>
+                    <td class="cell">
+                      {{ getUserAccountFullName(audit_trail.user_id) }}
+                    </td>
+                    <td class="cell">
+                      <span class="truncate">{{ audit_trail.role }}</span>
+                    </td>
+
+                    <td class="cell">
+                      {{ audit_trail.action_date_time | date : "medium" }}
+                    </td>
+                    <td class="cell">{{ audit_trail.action_taken }}</td>
+                    <!-- <td class="cell">
+                      <a class="btn-sm app-btn-secondary" href="#">View</a>
+                    </td> -->
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!--//table-responsive-->
+          </div>
+          <!--//app-card-body-->
+        </div>
+        <!--//app-card-->
+        <!-- <nav class="app-pagination">
+          <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1" aria-disabled="true"
+                >Previous</a
+              >
+            </li>
+            <li class="page-item active">
+              <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav> -->
+        <!--//app-pagination-->
+      </div>
+      <!--//tab-pane EMPLOYEE -->
+
+      <div
+        class="tab-pane fade"
+        id="student"
+        role="tabpanel"
+        aria-labelledby="student-tab"
+      >
+        <div class="app-card app-card-orders-table shadow-sm mb-5">
+          <div class="app-card-body">
+            <div class="table-responsive">
+              <table class="table app-table-hover mb-0 text-left">
+                <thead>
+                  <tr>
+                    <th class="cell">ID</th>
+                    <th class="cell">User ID</th>
+                    <th class="cell">Full Name</th>
+                    <th class="cell">Role</th>
+                    <th class="cell">Date and Time</th>
+                    <th class="cell">Action Taken</th>
+                    <!-- <th class="cell"></th> -->
+                  </tr>
+                </thead>
+                <tbody *ngFor="let audit_trail of auditTrailForm; index as i">
+                  <tr *ngIf="audit_trail.role === 'Student'">
+                    <td class="cell">{{ audit_trail._id }}</td>
+
+                    <td class="cell">{{ audit_trail.user_id }}</td>
+                    <td class="cell">
+                      {{ getUserAccountFullName(audit_trail.user_id) }}
+                    </td>
+                    <td class="cell">
+                      <span class="truncate">{{ audit_trail.role }}</span>
+                    </td>
+
+                    <td class="cell">
+                      {{ audit_trail.action_date_time | date : "medium" }}
+                    </td>
+                    <td class="cell">{{ audit_trail.action_taken }}</td>
+                    <!-- <td class="cell">
+                      <a class="btn-sm app-btn-secondary" href="#">View</a>
+                    </td> -->
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!--//table-responsive-->
+          </div>
+          <!--//app-card-body-->
+        </div>
+        <!--//app-card-->
+        <!-- <nav class="app-pagination">
+          <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1" aria-disabled="true"
+                >Previous</a
+              >
+            </li>
+            <li class="page-item active">
+              <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav> -->
+        <!--//app-pagination-->
+      </div>
+      <!--//tab-pane STUDENT -->
+    </div>
+    <!--//tab-content-->
+  </div>
+  <!--//container-fluid-->
+</div>
+<!--//app-content-->

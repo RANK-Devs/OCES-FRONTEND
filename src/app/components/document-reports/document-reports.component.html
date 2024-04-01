@@ -1,0 +1,445 @@
+<div class="app-content p-md-3 p-lg-4">
+  <div class="container-xl">
+    <div class="row justify-content-between align-items-center">
+      <div class="col-auto">
+        <h1 class="app-page-title">Document Reports</h1>
+        <span class="app-page-subtitle"
+          >As of {{ currentDate | date : "medium" }}</span
+        >
+        <br /><br />
+      </div>
+    </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card p-2 mt-2">
+        <div class="row">
+          <div class="col-md-1">
+            <i class="fa fa-filter fa-2x mx-2"></i>
+          </div>
+          <!-- col-md-2 filter icon -->
+
+          <div class="col-md-5">
+            <!--
+            <span
+              class="btn btn-primary text-white"
+              (click)="onClickAllRecords()"
+              >ALL</span
+            >-->
+          </div>
+
+          <div class="col-md-3">
+            <input
+              type="text"
+              [(ngModel)]="searchInput"
+              (keyup)="onSearchChange()"
+              class="form-control"
+              placeholder="Search"
+            />
+          </div>
+          <!-- col-md-4 -->
+
+          <div class="col-md-3">
+            <button
+              class="btn btn-primary add-button text-white mx-1"
+              (click)="onClickSearch()"
+            >
+              <i class="fa fa-search"></i> Search
+            </button>
+            <!-- btn-primary Search -->
+
+            <button
+              class="btn btn-primary add-button text-white mx-1 float-right"
+              (click)="onAddClickEmployeeProposal()"
+            >
+              <i class="fa fa-plus"></i> Add New
+            </button>
+            <!-- btn-primary Add New Proposal (Employee Proposal)-->
+          </div>
+          <!-- col-md-2 Add New -->
+        </div>
+        <!-- row -->
+      </div>
+      <!-- card -->
+    </div>
+    <!-- col-md-12 -->
+  </div>
+  <!-- row -->
+
+  <br />
+  <table class="table table-bordered data-table">
+    <thead>
+      <tr>
+        <!-- <th>Project ID</th> -->
+        <th>Full Name</th>
+        <th>Sponsoring Department</th>
+        <th>Date Submitted</th>
+        <th>Project Title</th>
+        <th>Target Period</th>
+        <th>Venue</th>
+        <th>Target Beneficiary</th>
+        <th>Status</th>
+        <th class="action-column">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="role_name === 'Super Admin'">
+      <tr *ngFor="let item of proposalDetails; index as i">
+        <!-- <td>
+          <small>{{
+            getLastDocumentRevision(item._id, "proposal_id", item._id)
+          }}</small>
+        </td> -->
+        <td>{{ getUserDetails(item.user_id) }}</td>
+        <td>
+          {{
+            getLastDocumentRevision(
+              item._id,
+              "sponsor_department",
+              item.sponsor_department
+            )
+          }}
+        </td>
+        <td>
+          {{
+            getLastDocumentRevision(item._id, "createdAt", item.createdAt)
+              | date : "medium"
+          }}
+        </td>
+        <td>
+          {{
+            getLastDocumentRevision(
+              item._id,
+              "project_title",
+              item.project_title
+            )
+          }}
+          <br />
+        </td>
+        <td width="200px">
+          {{
+            getProposalActionPlanDetails(
+              getLastDocumentRevision(item._id, "proposal_id", item._id),
+              "time_frame_start"
+            ) | date : "MMM dd, yyyy"
+          }}
+          to<br />{{
+            getProposalActionPlanDetails(
+              getLastDocumentRevision(item._id, "proposal_id", item._id),
+              "time_frame_end"
+            ) | date : "MMM dd, yyyy"
+          }}
+        </td>
+        <td>{{ getLastDocumentRevision(item._id, "venue", item.venue) }}</td>
+        <td>
+          {{
+            getLastDocumentRevision(
+              item._id,
+              "target_beneficiary",
+              item.target_beneficiary
+            )
+          }}
+        </td>
+        <td>
+          {{ getLastDocumentRevision(item._id, "status", item.status) }} <br />
+        </td>
+
+        <td class="action-cell">
+          <button
+            *ngIf="
+              getLastDocumentRevision(item._id, 'status', item.status) ===
+              'Approved'
+            "
+            class="btn btn-sm btn-secondary edit-button my-1"
+            (click)="
+              onInputImplementationProposal(
+                getLastDocumentRevision(item._id, 'proposal_id', item._id)
+              )
+            "
+          >
+            Implement
+          </button>
+
+          <button
+            (click)="onViewDocumentReport(item._id)"
+            class="btn btn-primary text-white my-1"
+          >
+            <i class="fa fa-eye"></i> View
+          </button>
+          <button
+            *ngIf="
+              getLastDocumentRevision(item._id, 'status', item.status) ===
+              'Done'
+            "
+            (click)="
+              onViewImplementationReport(
+                getLastDocumentRevision(item._id, 'proposal_id', item._id)
+              )
+            "
+            class="btn btn-secondary btn-xs text-white my-1"
+          >
+            <i class="fa fa-eye"></i> View Implementation Report
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <!-- if role_name === 'Super Admin' -->
+
+    <tbody *ngIf="role_name === 'Admin'">
+      <tr *ngFor="let item of proposalDetails; index as i">
+        <!-- <td>
+          <small>{{
+            getLastDocumentRevision(item._id, "proposal_id", item._id)
+          }}</small>
+        </td> -->
+        <td>{{ getUserDetails(item.user_id) }}</td>
+        <td>
+          {{
+            getLastDocumentRevision(
+              item._id,
+              "sponsor_department",
+              item.sponsor_department
+            )
+          }}
+        </td>
+        <td>
+          {{
+            getLastDocumentRevision(item._id, "createdAt", item.createdAt)
+              | date : "medium"
+          }}
+        </td>
+        <td>
+          {{
+            getLastDocumentRevision(
+              item._id,
+              "project_title",
+              item.project_title
+            )
+          }}
+          <br />
+        </td>
+        <td width="200px">
+          {{
+            getProposalActionPlanDetails(
+              getLastDocumentRevision(item._id, "proposal_id", item._id),
+              "time_frame_start"
+            ) | date : "MMM dd, yyyy"
+          }}
+          to<br />{{
+            getProposalActionPlanDetails(
+              getLastDocumentRevision(item._id, "proposal_id", item._id),
+              "time_frame_end"
+            ) | date : "MMM dd, yyyy"
+          }}
+        </td>
+        <td>{{ getLastDocumentRevision(item._id, "venue", item.venue) }}</td>
+        <td>
+          {{
+            getLastDocumentRevision(
+              item._id,
+              "target_beneficiary",
+              item.target_beneficiary
+            )
+          }}
+        </td>
+        <td>
+          {{ getLastDocumentRevision(item._id, "status", item.status) }} <br />
+        </td>
+        <td class="action-cell">
+          <button
+            *ngIf="
+              getLastDocumentRevision(item._id, 'status', item.status) ===
+              'Approved'
+            "
+            class="btn btn-sm btn-secondary edit-button my-1"
+            (click)="
+              onInputImplementationProposal(
+                getLastDocumentRevision(item._id, 'proposal_id', item._id)
+              )
+            "
+          >
+            Implement
+          </button>
+
+          <button
+            (click)="onViewDocumentReport(item._id)"
+            class="btn btn-primary text-white my-1"
+          >
+            <i class="fa fa-eye"></i> View
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <!-- if role_name === 'Admin' -->
+
+    <tbody *ngIf="role_name === 'CSCB'">
+      <tr *ngFor="let item of proposalDetailsCSCB; index as i">
+        <!-- <td>
+          <small>{{
+            getLastDocumentRevision(item._id, "proposal_id", item._id)
+          }}</small>
+        </td> -->
+        <td>{{ getUserDetails(item.user_id) }}</td>
+        <td>
+          {{
+            getLastDocumentRevision(
+              item._id,
+              "sponsor_department",
+              item.sponsor_department
+            )
+          }}
+        </td>
+        <td>
+          {{
+            getLastDocumentRevision(item._id, "createdAt", item.createdAt)
+              | date : "medium"
+          }}
+        </td>
+        <td>
+          {{
+            getLastDocumentRevision(
+              item._id,
+              "project_title",
+              item.project_title
+            )
+          }}
+          <br />
+        </td>
+        <td width="200px">
+          {{
+            getProposalActionPlanDetails(item._id, "time_frame_start")
+              | date : "MMM dd, yyyy"
+          }}
+          to<br />{{
+            getProposalActionPlanDetails(item._id, "time_frame_end")
+              | date : "MMM dd, yyyy"
+          }}
+        </td>
+        <td>{{ getLastDocumentRevision(item._id, "venue", item.venue) }}</td>
+        <td>
+          {{
+            getLastDocumentRevision(
+              item._id,
+              "target_beneficiary",
+              item.target_beneficiary
+            )
+          }}
+        </td>
+        <td>{{ getProposalStatus(item.status) }}</td>
+        <td class="action-cell">
+          <button
+            *ngIf="
+              getLastDocumentRevision(item._id, 'status', item.status) ===
+              'Approved'
+            "
+            class="btn btn-sm btn-secondary edit-button my-1"
+            (click)="
+              onInputImplementationProposal(
+                getLastDocumentRevision(item._id, 'proposal_id', item._id)
+              )
+            "
+          >
+            Implement
+          </button>
+
+          <button
+            (click)="onViewDocumentReport(item._id)"
+            class="btn btn-primary text-white my-1"
+          >
+            <i class="fa fa-eye"></i> View
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <!-- if role_name === 'CSCB' -->
+
+    <tbody *ngIf="role_name === 'Employee'">
+      <tr *ngFor="let item of proposalDetailsFilterByEmployeeUser; index as i">
+        <!-- getLastDocumentRevision returns a value of specified record from field IF the proposal_id is a proposal_root_id of other proposals (revised version of a proposal. hence their proposal_root_id is the first draft of proposal) -->
+
+        <!-- <td>
+          <small>{{
+            getLastDocumentRevision(item._id, "proposal_id", item._id)
+          }}</small>
+        </td> -->
+        <td>{{ getUserDetails(item.user_id) }}</td>
+        <td>
+          {{
+            getLastDocumentRevision(
+              item._id,
+              "sponsor_department",
+              item.sponsor_department
+            )
+          }}
+        </td>
+        <td>
+          {{
+            getLastDocumentRevision(item._id, "createdAt", item.createdAt)
+              | date : "medium"
+          }}
+        </td>
+        <td>
+          {{
+            getLastDocumentRevision(
+              item._id,
+              "project_title",
+              item.project_title
+            )
+          }}
+          <br />
+        </td>
+        <td width="200px">
+          {{
+            getProposalActionPlanDetails(
+              getLastDocumentRevision(item._id, "proposal_id", item._id),
+              "time_frame_start"
+            ) | date : "MMM dd, yyyy"
+          }}
+          to<br />{{
+            getProposalActionPlanDetails(
+              getLastDocumentRevision(item._id, "proposal_id", item._id),
+              "time_frame_end"
+            ) | date : "MMM dd, yyyy"
+          }}
+        </td>
+        <td>{{ getLastDocumentRevision(item._id, "venue", item.venue) }}</td>
+        <td>
+          {{
+            getLastDocumentRevision(
+              item._id,
+              "target_beneficiary",
+              item.target_beneficiary
+            )
+          }}
+        </td>
+        <td>
+          {{ getLastDocumentRevision(item._id, "status", item.status) }} <br />
+        </td>
+        <td class="action-cell">
+          <button
+            *ngIf="
+              getLastDocumentRevision(item._id, 'status', item.status) ===
+              'Approved'
+            "
+            class="btn btn-sm btn-secondary edit-button my-1"
+            (click)="
+              onInputImplementationProposal(
+                getLastDocumentRevision(item._id, 'proposal_id', item._id)
+              )
+            "
+          >
+            Implement
+          </button>
+
+          <button
+            (click)="onViewDocumentReport(item._id)"
+            class="btn btn-primary text-white my-1"
+          >
+            <i class="fa fa-eye"></i> View
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <!-- if role_name === 'Employee' -->
+  </table>
+</div>

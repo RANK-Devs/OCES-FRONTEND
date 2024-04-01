@@ -1,0 +1,645 @@
+<div class="app-content p-md-3 p-lg-4">
+  <div class="container-xl">
+    <!-- organization-form.component.html -->
+
+    <h1 class="app-page-title">Implementation Report</h1>
+
+    <div class="row">
+      <div class="col-10">
+        <div class="app-card app-card-chart h-100 shadow-sm">
+          <div class="app-card-body p-4">
+            <h6 class="alert alert-warning" *ngIf="error_count > 0">
+              <small *ngFor="let error_validation of error_message; index as ii"
+                >{{ error_validation }}<br
+              /></small>
+            </h6>
+
+            <div class="mb-3">
+              <label for="label_default" class="my-1"
+                ><small class="text-black"
+                  >SPONSORING DEPARTMENT(S)/PROPONENT(S)</small
+                ></label
+              >
+              <h6>{{ event_sponsor_department }}</h6>
+            </div>
+
+            <div class="mb-3">
+              <label for="label_default" class="my-1"
+                ><small class="text-black">PROJECT TITLE</small></label
+              >
+              <h6>{{ event_project_title }}</h6>
+            </div>
+
+            <div class="mb-3">
+              <label for="label_default" class="my-1"
+                ><small class="text-black">BENEFICIARIES</small></label
+              >
+              <h6>{{ event_beneficiaries }}</h6>
+            </div>
+
+            <div class="mb-3">
+              <label for="label_default" class="my-1"
+                ><small class="text-black">VENUE of CES Activity</small></label
+              >
+              <h6>{{ event_venue }}</h6>
+            </div>
+
+            <div class="mb-3">
+              <label for="activity_category" class="my-1"
+                ><small class="text-black">Activity Category *</small></label
+              >
+              <select
+                class="form-control"
+                [(ngModel)]="activity_category"
+                #cat="ngModel"
+              >
+                <option
+                  *ngFor="
+                    let cat_item of activity_category_collections;
+                    index as i
+                  "
+                  [value]="cat_item"
+                >
+                  {{ cat_item }}
+                </option>
+              </select>
+              <div
+                *ngIf="cat.invalid && (cat.dirty || cat.touched)"
+                class="text-danger"
+              >
+                <div *ngIf="cat.errors && cat.errors['required']">
+                  Activity Category is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="dateImplemented" class="my-1"
+                ><small class="text-black">Date Implemented *</small></label
+              >
+              <input
+                type="date"
+                id="dateImplemented"
+                class="form-control"
+                max="{{ minDate }}"
+                [(ngModel)]="dateImplemented"
+                name="dateImplemented"
+                #di="ngModel"
+              />
+              <div
+                *ngIf="di.invalid && (di.dirty || di.touched)"
+                class="text-danger"
+              >
+                <div *ngIf="di.errors && di.errors['required']">
+                  Date Implemented is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="timeImplemented"
+                ><small class="text-black">Time Implemented *</small></label
+              >
+              <input
+                type="time"
+                id="timeImplemented"
+                class="form-control"
+                [(ngModel)]="timeImplemented"
+                name="timeImplemented"
+                #ti="ngModel"
+              />
+              <div
+                *ngIf="ti.invalid && (ti.dirty || ti.touched)"
+                class="text-danger"
+              >
+                <div *ngIf="ti.errors && ti.errors['required']">
+                  Time Implemented is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="accomplishedObjective "
+                ><small class="text-black"
+                  >Accomplished Objective *</small
+                ></label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="accomplishedObjective"
+                [(ngModel)]="accomplishedObjective"
+                name="accomplishedObjective"
+                #aoi="ngModel"
+              />
+              <div
+                *ngIf="aoi.invalid && (aoi.dirty || aoi.touched)"
+                class="text-danger"
+              >
+                <div *ngIf="aoi.errors && aoi.errors['required']">
+                  Accomplished Objective is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="briefNarrative "
+                ><small class="text-black">Brief Narrative *</small></label
+              >
+              <textarea
+                id="briefNarrative"
+                class="form-control"
+                [(ngModel)]="briefNarrative"
+                required
+                name="briefNarrative"
+                #bbi="ngModel"
+              ></textarea>
+              <div
+                *ngIf="bbi.invalid && (bbi.dirty || bbi.touched)"
+                class="text-danger"
+              >
+                <div *ngIf="bbi.errors && bbi.errors['required']">
+                  Brief Narrative is required.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br /><br />
+    <div class="row">
+      <div class="col-10">
+        <div class="app-card app-card-chart h-100 shadow-sm">
+          <div class="app-card-body p-4">
+            <div>
+              <h5>
+                Topic(s) Discussed and Resource Speaker(s)/Facilitator(s), (if
+                applicable)
+              </h5>
+            </div>
+
+            <div class="mb-3">
+              <label for="projectTopic "
+                ><small class="text-black">Project Topic</small></label
+              >
+              <input
+                type="text"
+                id="projectTopic"
+                class="form-control"
+                [(ngModel)]="projectTopic"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="activitySpeaker "
+                ><small class="text-black">Activity Speaker</small></label
+              >
+              <input
+                type="text"
+                id="activitySpeaker"
+                class="form-control"
+                [(ngModel)]="activitySpeaker"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br /><br />
+    <div class="row">
+      <div class="col-10">
+        <div class="app-card app-card-chart h-100 shadow-sm">
+          <div class="app-card-body p-4">
+            <div>
+              <h5>Volunteers and Type of Participation:</h5>
+            </div>
+
+            <div class="mb-3">
+              <label for="projectVolunteers "
+                ><small class="text-black">Project Volunteers *</small></label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="projectVolunteers"
+                [(ngModel)]="projectVolunteers"
+                required
+                name="volunteers"
+                #v="ngModel"
+              />
+              <div
+                *ngIf="v.invalid && (v.dirty || v.touched)"
+                class="text-danger"
+              >
+                <div *ngIf="v.errors && v.errors['required']">
+                  Volunteers is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="designation "
+                ><small class="text-black">Designation *</small></label
+              >
+              <input
+                type="text"
+                id="designation"
+                class="form-control"
+                [(ngModel)]="designation"
+                required
+                name="designation"
+                #d="ngModel"
+              />
+              <div
+                *ngIf="d.invalid && (d.dirty || d.touched)"
+                class="text-danger"
+              >
+                <div *ngIf="d.errors && d.errors['required']">
+                  Designation is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="participationType"
+                ><small class="text-black">Participation Type *</small></label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="participationType"
+                [(ngModel)]="participationType"
+                required
+                name="participationType"
+                #pti="ngModel"
+              />
+              <div
+                *ngIf="pti.invalid && (pti.dirty || pti.touched)"
+                class="text-danger"
+              >
+                <div *ngIf="pti.errors && pti.errors['required']">
+                  Participation type is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="prepStartTime"
+                    ><small class="text-black"
+                      >Preparation Start Time *</small
+                    ></label
+                  >
+                  <input
+                    type="time"
+                    id="prepStartTime"
+                    class="form-control"
+                    [(ngModel)]="prepStartTime"
+                    required
+                    name="prepStartTime"
+                    #pst="ngModel"
+                  />
+                  <div
+                    *ngIf="pst.invalid && (pst.dirty || pst.touched)"
+                    class="text-danger"
+                  >
+                    <div *ngIf="pst.errors && pst.errors['required']">
+                      Preparation start time is required.
+                    </div>
+                  </div>
+                </div>
+                <!-- col-md-6 Prep Start Time -->
+
+                <div class="col-md-6">
+                  <label for="prepEndTime"
+                    ><small class="text-black"
+                      >Preparation Start End *</small
+                    ></label
+                  >
+                  <input
+                    type="time"
+                    id="prepEndTime"
+                    class="form-control"
+                    [(ngModel)]="prepEndTime"
+                    required
+                    name="prepEndTime"
+                    #pet="ngModel"
+                  />
+                  <div
+                    *ngIf="pet.invalid && (pet.dirty || pet.touched)"
+                    class="text-danger"
+                  >
+                    <div *ngIf="pet.errors && pet.errors['required']">
+                      Preparation end time is required.
+                    </div>
+                  </div>
+                </div>
+                <!-- col-md-6 Prep Start Time -->
+              </div>
+              <!-- row Prep Start and End -->
+            </div>
+            <!-- mb-3 for Prep Start and Time -->
+
+            <div class="mb-3">
+              <label for="learnings"
+                ><small class="text-black">Learnings/Insights *</small></label
+              >
+              <textarea
+                id="learnings"
+                class="form-control"
+                [(ngModel)]="learnings"
+                required
+                name="learnings"
+                #learn="ngModel"
+              ></textarea>
+              <div
+                *ngIf="learn.invalid && (learn.dirty || learn.touched)"
+                class="text-danger"
+              >
+                <div *ngIf="learn.errors && learn.errors['required']">
+                  Learnings is required.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br /><br />
+    <div class="row">
+      <div class="col-10">
+        <div class="app-card app-card-chart h-100 shadow-sm">
+          <div class="app-card-body p-4">
+            <div><h5>Strengths/Weaknesses/Areas for Improvement:</h5></div>
+
+            <div class="mb-3">
+              <label for="projectStrengths"
+                ><small class="text-black">Project Strengths *</small></label
+              >
+              <textarea
+                id="projectStrengths"
+                class="form-control"
+                [(ngModel)]="projectStrengths"
+                required
+                name="projectStrengths"
+                #strength="ngModel"
+              ></textarea>
+              <div
+                *ngIf="strength.invalid && (strength.dirty || strength.touched)"
+                class="text-danger"
+              >
+                <div *ngIf="strength.errors && strength.errors['required']">
+                  Strength is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="projectWeakness"
+                ><small class="text-black">Project Weakness *</small></label
+              >
+              <textarea
+                id="projectWeakness"
+                class="form-control"
+                [(ngModel)]="projectWeakness"
+                required
+                name="projectWeakness"
+                #weakness="ngModel"
+              ></textarea>
+              <div
+                *ngIf="weakness.invalid && (weakness.dirty || weakness.touched)"
+                class="text-danger"
+              >
+                <div *ngIf="weakness.errors && weakness.errors['required']">
+                  Weakness is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="projectImprovement"
+                ><small class="text-black">Project Improvement *</small></label
+              >
+              <textarea
+                id="projectImprovement"
+                class="form-control"
+                [(ngModel)]="projectImprovement"
+                required
+                name="projectImprovement"
+                #improvement="ngModel"
+              ></textarea>
+              <div
+                *ngIf="
+                  improvement.invalid &&
+                  (improvement.dirty || improvement.touched)
+                "
+                class="text-danger"
+              >
+                <div
+                  *ngIf="improvement.errors && improvement.errors['required']"
+                >
+                  Improvement is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="projectCounterpart"
+                ><small class="text-black">Project Counterpart *</small></label
+              >
+              <input
+                type="text"
+                id="projectCounterpart"
+                class="form-control"
+                [(ngModel)]="projectCounterpart"
+                required
+                name="projectCounterpart"
+                #counterpart="ngModel"
+              />
+              <div
+                *ngIf="
+                  counterpart.invalid &&
+                  (counterpart.dirty || counterpart.touched)
+                "
+                class="text-danger"
+              >
+                <div
+                  *ngIf="counterpart.errors && counterpart.errors['required']"
+                >
+                  Counterpart is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="projectParticulars"
+                ><small class="text-black">Project Particulars *</small></label
+              >
+              <input
+                type="text"
+                id="projectParticulars"
+                class="form-control"
+                [(ngModel)]="projectParticulars"
+                required
+                name="projectParticulars"
+                #particulars="ngModel"
+              />
+              <div
+                *ngIf="
+                  particulars.invalid &&
+                  (particulars.dirty || particulars.touched)
+                "
+                class="text-danger"
+              >
+                <div
+                  *ngIf="particulars.errors && particulars.errors['required']"
+                >
+                  Particulars is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="projectAmount"
+                ><span class="text-black"
+                  ><small class="text-black">Project Amount *</small></span
+                ></label
+              >
+              <input
+                type="number"
+                id="projectAmount"
+                class="form-control"
+                [(ngModel)]="projectAmount"
+                required
+                name="projectAmount"
+                #amount="ngModel"
+              />
+              <div
+                *ngIf="amount.invalid && (amount.dirty || amount.touched)"
+                class="text-danger"
+              >
+                <div *ngIf="amount.errors && amount.errors['required']">
+                  Amount is required.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br /><br />
+    <div class="row">
+      <div class="col-10">
+        <div class="app-card app-card-chart h-100 shadow-sm">
+          <div class="app-card-body p-4">
+            <div><h5>Upload Documentation:</h5></div>
+
+            <div class="mb-3">
+              <label for="imageUpload "
+                ><small class="text-black">Upload 3 Images *</small></label
+              >
+              <input
+                type="file"
+                class="form-control"
+                [(ngModel)]="file_image_string_one"
+                (change)="choose_file_image_one($event)"
+                accept="image/*"
+                required
+                name="imageUpload1"
+                #img1="ngModel"
+              />
+              <div
+                *ngIf="img1.invalid && (img1.dirty || img1.touched)"
+                class="text-danger"
+              >
+                <div *ngIf="img1.errors && img1.errors['required']">
+                  Photo Documentation is required.
+                </div>
+              </div>
+              <input
+                type="file"
+                class="form-control"
+                [(ngModel)]="file_image_string_two"
+                (change)="choose_file_image_two($event)"
+                accept="image/*"
+                required
+                name="imageUpload2"
+                #img2="ngModel"
+              />
+              <div
+                *ngIf="img2.invalid && (img2.dirty || img2.touched)"
+                class="text-danger"
+              >
+                <div *ngIf="img2.errors && img2.errors['required']">
+                  Photo Documentation is required.
+                </div>
+              </div>
+              <input
+                type="file"
+                class="form-control"
+                [(ngModel)]="file_image_string_three"
+                (change)="choose_file_image_three($event)"
+                accept="image/*"
+                required
+                name="imageUpload3"
+                #img3="ngModel"
+              />
+              <div
+                *ngIf="img3.invalid && (img3.dirty || img3.touched)"
+                class="text-danger"
+              >
+                <div *ngIf="img3.errors && img3.errors['required']">
+                  Photo Documentation is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="imageUpload"
+                ><small class="text-black">Upload Evaluation Form</small></label
+              >
+              <input
+                type="file"
+                class="form-control"
+                [(ngModel)]="file_pdf_string"
+                (change)="chooseFile($event)"
+                accept=".pdf"
+                required
+                name="uploadEvalForm"
+                #uploadEvalForm="ngModel"
+              />
+              <div
+                *ngIf="
+                  uploadEvalForm.invalid &&
+                  (uploadEvalForm.dirty || uploadEvalForm.touched)
+                "
+                class="text-danger"
+              >
+                <div
+                  *ngIf="
+                    uploadEvalForm.errors && uploadEvalForm.errors['required']
+                  "
+                >
+                  Evaluation Form is required.
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- app-card-body -->
+        </div>
+        <!-- app-card -->
+      </div>
+    </div>
+    <div class="mb-3 py-4">
+      <button
+        type="button"
+        (click)="onImplement()"
+        class="btn btn-primary btn-lg btn-block text-white"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+</div>

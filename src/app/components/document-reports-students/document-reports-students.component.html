@@ -1,0 +1,341 @@
+<div class="app-content p-md-3 p-lg-4">
+  <div class="container-xl">
+    <div class="row justify-content-between align-items-center">
+      <div class="col-auto">
+        <h1 class="app-page-title">Student Reports</h1>
+        <span class="app-page-subtitle"
+          >As of {{ currentDate | date : "medium" }}</span
+        >
+        <br /><br />
+      </div>
+    </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card p-2 mt-2">
+        <div class="row">
+          <div class="col-md-1">
+            <i class="fa fa-filter fa-2x mx-2"></i>
+          </div>
+          <!-- col-md-2 filter icon -->
+
+          <div class="col-md-5">
+            <!--
+            <span
+              class="btn btn-primary text-white"
+              (click)="onClickAllRecords()"
+              >ALL</span
+            >-->
+          </div>
+
+          <div class="col-md-3">
+            <input
+              type="text"
+              [(ngModel)]="searchInput"
+              (keyup)="onSearchChange()"
+              class="form-control"
+              placeholder="Search"
+            />
+          </div>
+          <!-- col-md-4 -->
+
+          <div class="col-md-3">
+            <button
+              class="btn btn-primary add-button text-white mx-1"
+              (click)="onClickSearch()"
+            >
+              <i class="fa fa-search"></i> Search
+            </button>
+            <!-- btn-primary Search -->
+            <tbody *ngIf="role_name !== 'CSCB' && role_name !== 'Super Admin' && role_name !== 'Admin'">
+            <button
+              class="btn btn-primary add-button text-white mx-1 float-right"
+              (click)="onAddClickProposal()"
+            >
+              <i class="fa fa-plus"></i> Add New
+            </button>
+              </tbody>
+            <!-- btn-primary Add New -->
+            <!-- btn-primary Add New -->
+          </div>
+          <!-- col-md-2 Add New -->
+        </div>
+        <!-- row -->
+      </div>
+      <!-- card -->
+    </div>
+    <!-- col-md-12 -->
+  </div>
+  <!-- row -->
+
+  <br />
+  <table class="table table-bordered data-table">
+    <thead>
+      <tr>
+        <!-- <th>Project ID</th> -->
+        <th>Full Name</th>
+        <th>Sponsoring Department</th>
+        <th>Date Submitted</th>
+        <th>Project Title</th>
+        <th>Venue</th>
+        <th>Target Beneficiary</th>
+        <th>Status</th>
+        <th class="action-column">Actions</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="role_name === 'Super Admin'">
+      <tr *ngFor="let item of proposalIntakeForms; index as i">
+        <!-- <td><small>{{ getLastIntakeDocumentRevision(item._id, 'proposal_id', item._id) }} </small></td> -->
+        <td>{{ getUserDetails(item.user_id) }}</td>
+        <td>
+          {{
+            getLastIntakeDocumentRevision(
+              item._id,
+              "departments",
+              item.departments
+            )
+          }}
+        </td>
+        <td>
+          {{
+            getLastIntakeDocumentRevision(
+              item._id,
+              "date_submitted",
+              item.date_submitted
+            ) | date : "medium"
+          }}
+        </td>
+        <td>
+          {{
+            getLastIntakeDocumentRevision(
+              item._id,
+              "project_title",
+              item.project_title
+            )
+          }}
+        </td>
+        <td>
+          {{
+            getLastIntakeDocumentRevision(
+              item._id,
+              "target_area",
+              item.target_area
+            )
+          }}
+        </td>
+        <td>
+          {{
+            getLastIntakeDocumentRevision(
+              item._id,
+              "target_beneficiary",
+              item.target_beneficiary
+            )
+          }}
+        </td>
+        <td>
+          {{ getLastIntakeDocumentRevision(item._id, "status", item.status) }}
+        </td>
+        <td class="action-cell">
+          <button
+            *ngIf="
+              getLastIntakeDocumentRevision(item._id, 'status', item.status) ===
+              'Approved'
+            "
+            class="btn btn-sm btn-secondary edit-button my-1"
+            (click)="
+              onInputImplementationIntakeProposal(
+                getLastIntakeDocumentRevision(item._id, 'proposal_id', item._id)
+              )
+            "
+          >
+            Implement
+          </button>
+
+          <button
+            (click)="onViewIntakeReport(item._id)"
+            class="btn btn-primary text-white my-1"
+          >
+            <i class="fa fa-eye"></i> View
+          </button>
+          <button
+            *ngIf="
+              getLastIntakeDocumentRevision(item._id, 'status', item.status) ===
+              'Done'
+            "
+            (click)="
+              onViewImplementationReport(
+                getLastIntakeDocumentRevision(item._id, 'proposal_id', item._id)
+              )
+            "
+            class="btn btn-secondary btn-xs text-white my-1"
+          >
+            <i class="fa fa-eye"></i> View Implementation Report
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <!-- administrativeRole -->
+
+    <tbody *ngIf="role_name === 'Admin'">
+      <tr *ngFor="let item of proposalIntakeForms; index as i">
+        <td>
+          <small>{{ item._id }}</small>
+        </td>
+        <!-- <td>{{ getUserDetails(item.user_id) }}</td> -->
+        <td>{{ item.departments }}</td>
+        <td>{{ item.date_submitted | date : "medium" }}</td>
+        <td>{{ item.project_title }}</td>
+        <td>{{ item.target_area }}</td>
+        <td>{{ item.target_beneficiary }}</td>
+        <td>{{ getProposalStatus(item.status) }}</td>
+        <td class="action-cell">
+          <button
+            *ngIf="item.status === '1'"
+            class="btn btn-sm btn-secondary edit-button my-1"
+            (click)="onInputImplementationIntakeProposal(item._id)"
+          >
+            Implement
+          </button>
+
+          <button
+            (click)="onViewIntakeReport(item._id)"
+            class="btn btn-primary text-white my-1"
+          >
+            <i class="fa fa-eye"></i> View
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <!-- administrativeRole -->
+
+    <tbody *ngIf="role_name === 'Student'">
+      <tr *ngFor="let item of proposalIntakeForm; index as i">
+        <!-- <td><small>{{ getLastIntakeDocumentRevision(item._id, 'proposal_id', item._id) }} </small></td> -->
+        <td>{{ getUserDetails(item.user_id) }}</td>
+        <td>
+          {{
+            getLastIntakeDocumentRevision(
+              item._id,
+              "departments",
+              item.departments
+            )
+          }}
+        </td>
+        <td>
+          {{
+            getLastIntakeDocumentRevision(
+              item._id,
+              "date_submitted",
+              item.date_submitted
+            ) | date : "medium"
+          }}
+        </td>
+        <td>
+          {{
+            getLastIntakeDocumentRevision(
+              item._id,
+              "project_title",
+              item.project_title
+            )
+          }}
+        </td>
+        <td>
+          {{
+            getLastIntakeDocumentRevision(
+              item._id,
+              "target_area",
+              item.target_area
+            )
+          }}
+        </td>
+        <td>
+          {{
+            getLastIntakeDocumentRevision(
+              item._id,
+              "target_beneficiary",
+              item.target_beneficiary
+            )
+          }}
+        </td>
+        <td>
+          {{ getLastIntakeDocumentRevision(item._id, "status", item.status) }}
+        </td>
+        <td class="action-cell">
+          <button
+            *ngIf="item.status === '1'"
+            class="btn btn-sm btn-secondary edit-button my-1"
+            (click)="onInputImplementationIntakeProposal(item._id)"
+          >
+            Implement
+          </button>
+
+          <button
+            *ngIf="item.status === '2'"
+            class="btn btn-xs btn-secondary edit-button my-1"
+            (click)="onViewImplementationReport(item._id)"
+          >
+            <i class="fa fa-print"></i> View Implementation Report
+          </button>
+
+          <button
+            (click)="onViewIntakeReport(item._id)"
+            class="btn btn-primary text-white my-1"
+          >
+            <i class="fa fa-eye"></i> View
+          </button>
+        </td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="role_name === 'CSCB'">
+      <tr *ngFor="let item of proposalIntakeFormsCSCB; index as i">
+        <!-- <td><small>{{ item._id }}</small></td> -->
+        <td>{{ getUserDetails(item.user_id) }}</td>
+        <td>{{ item.departments }}</td>
+        <td>{{ item.date_submitted | date : "medium" }}</td>
+        <td>{{ item.project_title }}</td>
+        <td>{{ item.target_area }}</td>
+        <td>{{ item.target_beneficiary }}</td>
+        <td>{{ getProposalStatus(item.status) }}</td>
+        <td class="action-cell">
+          <button
+            *ngIf="
+              getLastIntakeDocumentRevision(item._id, 'status', item.status) ===
+              'Approved'
+            "
+            class="btn btn-sm btn-secondary edit-button my-1"
+            (click)="
+              onInputImplementationIntakeProposal(
+                getLastIntakeDocumentRevision(item._id, 'proposal_id', item._id)
+              )
+            "
+          >
+            Implement
+          </button>
+
+          <button
+            (click)="onViewIntakeReport(item._id)"
+            class="btn btn-primary text-white my-1"
+          >
+            <i class="fa fa-eye"></i> View
+          </button>
+          <button
+            *ngIf="
+              getLastIntakeDocumentRevision(item._id, 'status', item.status) ===
+              'Done'
+            "
+            (click)="
+              onViewImplementationReport(
+                getLastIntakeDocumentRevision(item._id, 'proposal_id', item._id)
+              )
+            "
+            class="btn btn-secondary btn-xs text-white my-1"
+          >
+            <i class="fa fa-eye"></i> View Implementation Report
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <!-- CSCB -->
+  </table>
+</div>

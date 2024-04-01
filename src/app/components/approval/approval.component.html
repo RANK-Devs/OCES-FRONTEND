@@ -1,0 +1,179 @@
+<div class="container dashboard-section">
+    <div class="row justify-content-between align-items-center">
+      <div class="col-auto">
+       
+        <h1 class="app-page-title">Approved Documents</h1>
+        <span class="app-page-subtitle">As of {{ currentDate | date: 'medium' }}</span>
+        <br><br>
+       
+   
+      </div>
+    </div>
+  
+    <div class = "row">
+      <div class="col-md-12">
+        <div class = "card p-2 mt-2">
+  
+          <div class="row">
+            <div class="col-md-1">
+  
+              <i class = "fa fa-filter fa-2x mx-2"></i>
+  
+            </div> <!-- col-md-2 filter icon -->
+  
+            <div class="col-md-5">
+              <span class = "btn btn-primary text-white" (click) = "onClickAllRecords()">ALL</span>
+            </div>
+  
+            <div class="col-md-4">
+  
+              <input type = "text" [(ngModel)] = "searchInput" (keyup) = "onSearchChange()"  class = "form-control" placeholder = "Search"/>
+  
+            </div> <!-- col-md-4 -->
+  
+            <div class="col-md-2 text-right">
+              
+              <button class="btn btn-primary add-button text-white mx-1" (click)="onClickSearch()">
+                <i class = "fa fa-search"></i> Search
+              </button> <!-- btn-primary Search -->         
+             
+            </div> <!-- col-md-2 Add New -->
+  
+          </div> <!-- row -->
+         
+  
+        </div> <!-- card -->
+      </div> <!-- col-md-12 -->
+    </div> <!-- row -->
+  
+  
+  
+  
+    <br />
+
+    <div class="app-card app-card-orders-table shadow-sm mb-5">
+    <div class="app-card-body">
+
+    <div class="table-responsive">
+
+      <table class="table app-table-hover mb-0 text-left">
+          <thead>
+            <tr>
+
+           
+              <th class = "cell">Project ID</th>
+              <th class = "cell">Full Name</th>
+              <th class = "cell">Sponsoring Department</th>
+              <th class = "cell">Date Submitted</th>
+              <th class = "cell">Project Title</th>
+              <th class = "cell">Target Period</th>
+              <th class = "cell">Venue</th>
+              <th class = "cell">Target Beneficiary</th>
+              <th class = "cell">Status</th>
+             
+              <th  class = "cell">Actions</th>
+             
+            </tr>
+          </thead>
+          
+          <tbody *ngIf = "role_name === 'Super Admin'" >
+  
+           
+            <tr *ngFor="let item of allApprovedProposals; index as i">
+    
+    
+              <td class = "cell"><small>{{ item._id }}</small></td>
+              <td class = "cell">{{ getUserDetails(item.user_id,'fullname') }}</td>
+              <td class = "cell">{{ item.departments }}</td>
+              <td class = "cell">{{ item.date_submitted | date: 'medium' }}</td>
+              <td class = "cell">{{ item.project_title }}</td>
+              <td class = "cell" width = "200px">{{ item.target_date | date: 'medium' }}</td>
+              <td class = "cell">{{ item.target_area }}</td>
+              <td class = "cell">{{ item.target_beneficiary }}</td>        
+              <td class = "cell">{{ getProposalStatus(item.status) }}</td>
+            
+              <td class="action-cell">
+      
+            
+                
+                <button
+                  *ngIf = "item.status === '1' && !item.proposal_type"
+                  class="btn btn-secondary edit-button my-1"
+                  (click)="onInputImplementationIntakeProposal(item._id)"
+                >
+                  Implement
+                </button>
+
+                <button
+                *ngIf = "item.status === '1' && item.proposal_type === 'proposal_document'"
+                class="btn btn-secondary edit-button my-1"
+                (click)=" onInputImplementationProposal(item._id)"
+              >
+                Implement
+              </button>
+      
+      
+                <button *ngIf = "!item.proposal_type" (click) = "onViewIntakeDocumentReport(item._id)" class = "btn btn-primary btn-xs text-white my-1"><i class = "fa fa-eye"></i> View Proposal</button>
+                <button *ngIf = "item.proposal_type === 'proposal_document'" (click) = "onViewDocumentReport(item._id)" class = "btn btn-primary btn-xs text-white my-1"><i class = "fa fa-eye"></i> View Proposal</button>
+                <button  *ngIf = "item.status === '2'" (click) = "onViewImplementationReport(item._id)" class = "btn btn-secondary btn-xs text-white my-1"><i class = "fa fa-eye"></i> View Implementation Report</button>
+              
+
+              </td>
+    
+           
+    
+            </tr>
+    
+          </tbody> <!-- administrativeRole -->
+
+          <tbody *ngIf = "role_name === 'Student'" >
+  
+           
+            <tr *ngFor="let item of approvedIntakesStudentUser; index as i">
+    
+              
+              <td class = "cell"><small>{{ item._id }}</small></td>
+              <td class = "cell">{{ item.user_id }}</td>
+              <td class = "cell">{{ item.departments }}</td>
+              <td class = "cell">{{ item.date_submitted | date: 'medium' }}</td>
+              <td class = "cell">{{ item.project_title }}</td>
+              <td class = "cell" width = "200px">{{ item.target_date | date: 'medium' }}</td>
+              <td class = "cell">{{ item.target_area }}</td>
+              <td class = "cell">{{ item.target_beneficiary }}</td>        
+              <td class = "cell">{{ getProposalStatus(item.status) }}</td>
+            
+              <td class="action-cell">
+      
+              
+                
+                <button
+                  *ngIf = "item.status === '1'"
+                  class="btn btn-secondary edit-button my-1"
+                  (click)="onInputImplementationIntake()"
+                >
+                  Implement
+                </button>
+      
+      
+                <button (click) = "onViewDocumentReport(item._id)" class = "btn btn-primary text-white my-1"><i class = "fa fa-eye"></i> View</button>
+      
+              </td>
+    
+    
+            </tr>
+
+            
+    
+          </tbody> <!-- Student -->
+
+      </table>
+
+    </div><!--//table-responsive-->
+
+    </div> <!-- app-card-body -->
+
+    </div> <!-- app-card -->
+
+
+  </div>
+  

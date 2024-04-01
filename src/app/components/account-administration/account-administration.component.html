@@ -1,0 +1,94 @@
+<div class="app-content p-md-3 p-lg-4">
+  <div class="container-xl">
+      <div class="row justify-content-between align-items-center">
+        <div class="col-auto">
+         
+          <h1 class="app-page-title">User Management</h1>
+          <span class="app-page-subtitle">As of {{ currentDate | date: 'medium' }}</span>
+          <br><br>
+         
+         
+        </div>
+      </div>
+  
+    <div class = "row">
+      <div class="col-md-12">
+        <div class = "card p-2 mt-2">
+  
+          <div class="row">
+            <div class="col-md-1">
+  
+              <i class = "fa fa-filter fa-2x mx-2 py-1"></i>
+  
+            </div> <!-- col-md-2 filter icon -->
+  
+            <div class="col-md-5 py-1">
+
+              <span class = "tab_filter_active p-2 mt-5 mx-1"><b>User Accounts</b></span>   
+              <span class = "tab_filter p-2 mt-5 mx-1" (click) = "onClickAuditTrail()">Audit Trail</span>   
+              
+            </div>
+  
+            <div class="col-md-3">
+  
+              <input type = "text" [(ngModel)] = "searchInput" (keyup) = "onSearchChange()"  class = "form-control" placeholder = "Search"/>
+  
+            </div> <!-- col-md-4 -->
+  
+            <div class="col-md-3">
+              
+              <button class="btn btn-primary add-button text-white mx-1">
+                <i class = "fa fa-search"></i> Search
+              </button> <!-- btn-primary Search -->
+         
+              <button class="btn btn-primary add-button text-white mx-1 float-right" (click) = "onCreateAccount()">
+                <i class = "fa fa-plus"></i> Add New
+              </button> <!-- btn-primary Add New -->
+          
+            </div> <!-- col-md-2 Add New -->
+  
+          </div> <!-- row -->
+         
+  
+        </div> <!-- card -->
+      </div> <!-- col-md-12 -->
+    </div> <!-- row -->
+  
+  
+  
+  
+    <br />
+    <table class="table table-bordered data-table">
+      <thead>
+        <tr>
+          <th>User ID</th>
+          <th>Full Name</th>
+          <th>Role</th>
+          <th>Department</th>        
+          <th>Created At</th>        
+          <th class="action-column">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of usersAccountForm; index as i">
+          <td>{{ item._id }}</td>
+          <td>{{ item.lname.toUpperCase()  }} {{ item.fname.toUpperCase() }}, {{ item.mname.toUpperCase()  }}</td>
+          <td>{{ item.role }}</td>     
+          <td>{{ item.department }}</td>     
+          <td>{{ item.createdAt | date: 'medium' }}</td>
+                
+          <td class="action-cell">
+  
+            <button class = "btn btn-secondary my-1 mx-1" (click) = "onClickEditUserDetails(item._id)">Edit Details</button>
+  
+            <button class = "btn btn-primary text-white my-1 mx-1" (click) = "openModal(item._id)"><i class = "fa fa-eye"></i> View</button>
+  
+            <button class = "btn btn-primary text-white my-1 mx-1" (click) = "certifyUser(item._id)"><i class = "fa fa-eye"></i> Certify</button>
+            
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+ 

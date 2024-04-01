@@ -1,0 +1,22 @@
+<div class="app-content p-md-3 p-lg-4">
+    <div class="container-xl">
+  
+      <div class="row justify-content-between align-items-center">
+        <div class="col-auto">
+          <h1 class="app-page-title">Uploaded PDF</h1>
+        </div>
+      </div>
+    
+    
+    <div class="row">
+        <div class="col-md-12" *ngFor = "let cloud_file_item of fileUploadFilter;index as i;">
+          
+            <a [href] = "cloud_file_item.cloud_file_path" target = "_blank" class = "btn btn-success">View PDF</a>
+            <ngx-extended-pdf-viewer [src]="'cloud_file_item.cloud_file_path'" style="display: block; height: 100vh;"></ngx-extended-pdf-viewer>           
+            
+        </div>
+    </div> <!-- row images -->
+   
+   
+</div> <!-- container-fluid -->
+</div>

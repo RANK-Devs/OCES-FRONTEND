@@ -1,0 +1,95 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+
+          
+
+            <h5 *ngFor = "let user_info of userAccountDetails;let i = index;">
+                
+
+
+                <div class="app-card app-card-chart my-2 h-100 shadow-sm">
+                    <div class="app-card-header p-3 border-0">
+                      <h1 class="app-page-title">User Account Profile</h1>
+                    </div><!--//app-card-header-->
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="app-card-body p-4">				   
+                            
+                                <img
+                                    src="/assets/img/defaultpic1.jpg"
+                                    alt="user profile"
+                                    height="150px"
+                                    style="border-radius: 100%"
+                                />
+                            
+                            </div><!--//app-card-body Profile Image -->
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                                 
+                            <div class="app-card-body p-4">				   
+                              
+                                <h6><small class = "text-muted">FULLNAME</small></h6>
+                                <small>{{ fullName }}</small>                     
+                            
+                            </div><!--//app-card-body FULLNAME -->
+        
+                            <div class="app-card-body p-4">			
+        
+                                <h6><small class = "text-muted">E-mail Address</small></h6>
+                                <small>{{ email }}</small>
+        
+                            </div><!--//app-card-body E-mail Address -->
+        
+                            <div class="app-card-body p-4">			
+        
+                                <h6><small class = "text-muted">Registered</small></h6>                            
+                                <small>{{ createdAt | date: 'medium' }}</small><br/><small><small><small>Last Updated {{ updatedAt | date: 'medium' }}</small></small></small>
+        
+                            </div><!--//app-card-body E-mail Address -->
+
+                        </div> <!-- col-md-6 User Profile -->
+                        <div class="col-md-6">
+
+                            <div class="app-card-body p-4">			
+
+                                <h6><small class = "text-muted">Role</small></h6>
+                                <small>{{ roleName }}</small>
+        
+                            </div><!--//app-card-body Department -->
+        
+
+                            <div class="app-card-body p-4">			
+
+                                <h6><small class = "text-muted">Department</small></h6>
+                                <small>{{ department }}</small>
+        
+                            </div><!--//app-card-body Department -->
+        
+                            <div class="app-card-body p-4">			
+        
+                                <h6><small class = "text-muted">Tenure</small></h6>
+                                <small>{{ tenure }}</small>
+        
+                            </div><!--//app-card-body Tenure -->
+
+                        </div> <!-- Department and Tenure -->
+                    </div>
+                 
+
+                   
+
+                  
+
+                  </div><!--//app-card-->
+
+            </h5>
+
+        </div>
+    </div>
+</div>

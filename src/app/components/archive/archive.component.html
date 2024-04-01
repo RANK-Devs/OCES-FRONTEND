@@ -1,0 +1,628 @@
+<div class="app-content p-md-3 p-lg-4">
+  <div class="container-xl">
+    <div class="row g-3 mb-4 align-items-center justify-content-between">
+      <div class="col-auto">
+        <h1 class="app-page-title">Archive</h1>
+        <span class="app-page-subtitle"
+          >As of {{ currentDate | date : "medium" }}</span
+        >
+      </div>
+      <div class="col-auto">
+        <div class="page-utilities">
+          <div
+            class="row g-2 justify-content-start justify-content-md-end align-items-center"
+          >
+            <div class="col-auto">
+              <form class="table-search-form row gx-1 align-items-center">
+                <div class="col-auto">
+                  <input
+                    type="text"
+                    id="search-orders"
+                    name="searchorders"
+                    class="form-control search-orders"
+                    placeholder="Search"
+                  />
+                </div>
+                <div class="col-auto">
+                  <button type="button" class="btn app-btn-primary">
+                    Search
+                  </button>
+                </div>
+              </form>
+            </div>
+            <!--//col-->
+          </div>
+          <!--//row-->
+        </div>
+        <!--//table-utilities-->
+      </div>
+      <!--//col-auto-->
+    </div>
+    <!--//row-->
+
+    <nav
+      id="orders-table-tab"
+      class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4"
+    >
+      <a
+        class="flex-sm-fill text-sm-center nav-link active"
+        id="proposal_compilation-tab"
+        data-bs-toggle="tab"
+        href="#proposal_compilation"
+        role="tab"
+        aria-controls="proposal_compilation"
+        aria-selected="true"
+        >Proposal Compilation</a
+      >
+      <a
+        class="flex-sm-fill text-sm-center nav-link"
+        id="implementation_compilation-tab"
+        data-bs-toggle="tab"
+        href="#implementation_compilation"
+        role="tab"
+        aria-controls="implementation_compilation"
+        aria-selected="false"
+        >Implementation Compilation</a
+      >
+      <a
+        class="flex-sm-fill text-sm-center nav-link"
+        id="output-tab"
+        data-bs-toggle="tab"
+        href="#output"
+        role="tab"
+        aria-controls="output"
+        aria-selected="false"
+        >Output Assessment</a
+      >
+      <a
+        class="flex-sm-fill text-sm-center nav-link"
+        id="outcome-tab"
+        data-bs-toggle="tab"
+        href="#outcome"
+        role="tab"
+        aria-controls="outcome"
+        aria-selected="false"
+        >Outcome Assessment</a
+      >
+    </nav>
+
+    <div class="tab-content" id="orders-table-tab-content">
+      <div
+        class="tab-pane fade show active"
+        id="proposal_compilation"
+        role="tabpanel"
+        aria-labelledby="proposal_compilation-tab"
+      >
+        <div class="app-card app-card-orders-table shadow-sm mb-5">
+          <div class="app-card-body">
+            <div class="table-responsive">
+              <table class="table app-table-hover mb-0 text-left">
+                <thead>
+                  <tr>
+                    <th class="cell">Archive ID</th>
+                    <th class="cell">Role</th>
+                    <th class="cell">Fullname</th>
+                    <th class="cell">School Department</th>
+                    <th class="cell">School Year</th>
+                    <th class="cell">Semester</th>
+                    <th class="cell">Date Completed</th>
+                    <th class="cell">Project Title</th>
+                    <th class="cell">Target Period</th>
+                    <th class="cell">Venue</th>
+                    <th class="cell">Target Beneficiary</th>
+                    <th class="cell">Status</th>
+                    <th class="cell">Action</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr *ngFor="let item of allProposals; index as i">
+                    <td class="cell">
+                      <small>
+                        {{ item._id }}<br />
+                        <i *ngIf="!item.proposal_type">Document Proposal</i>
+                        <i *ngIf="item.proposal_type === 'proposal_intake'"
+                          >Student Intake Proposal</i
+                        >
+                      </small>
+                    </td>
+                    <td class="cell">{{ item.role_name || "Student" }}</td>
+                    <td class="cell">
+                      <div *ngFor="let user_item of allUsers">
+                        <span *ngIf="user_item._id === item.user_id">
+                          {{ user_item.fname }} {{ user_item.mname }}
+                          {{ user_item.lname }}
+                        </span>
+                      </div>
+                    </td>
+
+                    <td class="cell">{{ item.sponsor_department }}</td>
+                    <td class="cell">{{ item.for_schoolyear }}</td>
+                    <td class="cell">
+                      {{ semesterTranslate(item.for_semester) }}
+                    </td>
+                    <td class="cell"></td>
+                    <td class="cell" *ngIf="!item.proposal_type">
+                      {{
+                        getLastDocumentRevision(
+                          item._id,
+                          "project_title",
+                          item.project_title
+                        )
+                      }}
+                    </td>
+                    <td
+                      class="cell"
+                      *ngIf="item.proposal_type === 'proposal_intake'"
+                    >
+                      {{
+                        getLastIntakeDocumentRevision(
+                          item._id,
+                          "project_title",
+                          item.project_title
+                        )
+                      }}
+                    </td>
+
+                    <td class="cell">
+                      {{ getSummaryTimeFrameFromProposedActionPlan(item._id) }}
+
+                      {{ item.time_frame_start | date : "MMM dd, yyyy" }}
+                    </td>
+
+                    <td class="cell">{{ item.venue }}</td>
+                    <td class="cell">{{ item.target_beneficiary }}</td>
+
+                    <td class="cell" *ngIf="!item.proposal_type">
+                      {{
+                        getLastDocumentRevision(item._id, "status", item.status)
+                      }}
+                    </td>
+                    <td
+                      class="cell"
+                      *ngIf="item.proposal_type === 'proposal_intake'"
+                    >
+                      {{
+                        getLastIntakeDocumentRevision(
+                          item._id,
+                          "status",
+                          item.status
+                        )
+                      }}
+                    </td>
+
+                    <td class="cell" *ngIf="!item.proposal_type">
+                      <a
+                        class="btn btn-primary text-white"
+                        (click)="onViewDocumentReport(item._id)"
+                        >View</a
+                      >
+                    </td>
+                    <td
+                      class="cell"
+                      *ngIf="item.proposal_type === 'proposal_intake'"
+                    >
+                      <a
+                        class="btn btn-primary text-white"
+                        (click)="onViewIntakeReport(item._id)"
+                        >View</a
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!--//table-responsive-->
+          </div>
+          <!--//app-card-body-->
+        </div>
+        <!--//app-card proposal_compilation -->
+      </div>
+      <!--//tab-pane proposal_compilation -->
+
+      <div
+        class="tab-pane fade"
+        id="implementation_compilation"
+        role="tabpanel"
+        aria-labelledby="implementation_compilation-tab"
+      >
+        <div class="app-card app-card-orders-table shadow-sm mb-5">
+          <div class="app-card-body">
+            <div class="table-responsive">
+              <table class="table app-table-hover mb-0 text-left">
+                <thead>
+                  <tr>
+                    <th class="cell">Archive ID</th>
+                    <th class="cell">Implementation Submitted by</th>
+                    <th class="cell">Role</th>
+                    <th class="cell">School Department</th>
+                    <th class="cell">School Year</th>
+                    <th class="cell">Semester</th>
+                    <th class="cell">Date Completed</th>
+                    <th class="cell">Project Title</th>
+                    <th class="cell">Target Period</th>
+                    <th class="cell">Venue</th>
+                    <th class="cell">Target Beneficiary</th>
+                    <th class="cell">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of implementationReports; index as i">
+                    <td class="cell">
+                      <small>{{ item._id }}</small>
+                    </td>
+
+                    <td class="cell">{{ getUserFullname(item.user_id) }}</td>
+                    <td class="cell">{{ getUserRoleName(item.user_id) }}</td>
+
+                    <td class="cell">
+                      {{
+                        getAllProposalDetail(
+                          item.proposal_id,
+                          "sponsor_department"
+                        )
+                      }}
+                      school dept.
+                    </td>
+
+                    <td class="cell">
+                      {{
+                        getAllProposalDetail(item.proposal_id, "for_schoolyear")
+                      }}
+                    </td>
+                    <td class="cell">
+                      {{
+                        semesterTranslate(
+                          getAllProposalDetail(item.proposal_id, "for_semester")
+                        )
+                      }}
+                    </td>
+                    <td class="cell">
+                      {{ item.date_implemented | date : "MMM dd, yyyy" }}
+                    </td>
+                    <td class="cell">
+                      {{
+                        getAllProposalDetail(item.proposal_id, "project_title")
+                      }}
+                    </td>
+
+                    <td class="cell">
+                      {{ getSummaryTimeFrameFromProposedActionPlan(item._id) }}
+                      {{
+                        getAllProposalDetail(
+                          item.proposal_id,
+                          "time_frame_start"
+                        ) | date : "MMM dd, yyyy"
+                      }}
+
+                      <span
+                        *ngIf="
+                          getAllProposalDetail(
+                            item.proposal_id,
+                            'time_frame_end'
+                          ) !== ''
+                        "
+                      >
+                        to
+                        {{
+                          getAllProposalDetail(
+                            item.proposal_id,
+                            "time_frame_end"
+                          ) | date : "MMM dd, yyyy"
+                        }}
+                      </span>
+                    </td>
+
+                    <td class="cell">
+                      {{ getAllProposalDetail(item.proposal_id, "venue") }}
+                    </td>
+                    <td class="cell">
+                      {{
+                        getAllProposalDetail(
+                          item.proposal_id,
+                          "target_beneficiary"
+                        )
+                      }}
+                    </td>
+                    <td class="cell">
+                      <a
+                        class="btn btn-primary text-white"
+                        (click)="onViewImplementationReport(item._id)"
+                        >View</a
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!--//table-responsive-->
+          </div>
+          <!--//app-card-body-->
+        </div>
+        <!--//app-card implementation_compilation -->
+      </div>
+      <!--//tab-pane implementation_compilation -->
+
+      <div
+        class="tab-pane fade"
+        id="output"
+        role="tabpanel"
+        aria-labelledby="output-tab"
+      >
+        <div class="app-card app-card-orders-table shadow-sm mb-5">
+          <div class="app-card-body">
+            <div class="table-responsive">
+              <table class="table app-table-hover mb-0 text-left">
+                <thead>
+                  <tr>
+                    <th class="cell">Archive ID</th>
+                    <th class="cell">Role</th>
+                    <th class="cell">Fullname</th>
+                    <th class="cell">School Department</th>
+                    <th class="cell">School Year</th>
+                    <th class="cell">Semester</th>
+                    <th class="cell">Date Completed</th>
+                    <th class="cell">Project Title</th>
+                    <th class="cell">Target Period</th>
+                    <th class="cell">Venue</th>
+                    <th class="cell">Man Hours</th>
+                    <th class="cell">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of implementationReports; index as i">
+                    <td class="cell">
+                      <small>{{ item._id }}</small>
+                    </td>
+                    <td class="cell">{{ getUserRoleName(item.user_id) }}</td>
+                    <td class="cell">{{ getUserFullname(item.user_id) }}</td>
+                    <td class="cell">
+                      {{
+                        getAllProposalDetail(
+                          item.proposal_id,
+                          "sponsor_department"
+                        )
+                      }}
+                    </td>
+                    <td class="cell">
+                      {{
+                        getAllProposalDetail(item.proposal_id, "for_schoolyear")
+                      }}
+                    </td>
+                    <td class="cell">
+                      {{
+                        semesterTranslate(
+                          getAllProposalDetail(item.proposal_id, "for_semester")
+                        )
+                      }}
+                    </td>
+                    <td class="cell">
+                      {{ item.date_implemented | date : "MMM dd, yyyy" }}
+                    </td>
+                    <td class="cell">
+                      {{
+                        getAllProposalDetail(item.proposal_id, "project_title")
+                      }}
+                    </td>
+
+                    <td class="cell">
+                      {{ getSummaryTimeFrameFromProposedActionPlan(item._id) }}
+                      {{
+                        getAllProposalDetail(
+                          item.proposal_id,
+                          "time_frame_start"
+                        ) | date : "MMM dd, yyyy"
+                      }}
+
+                      <span
+                        *ngIf="
+                          getAllProposalDetail(
+                            item.proposal_id,
+                            'time_frame_end'
+                          ) !== ''
+                        "
+                      >
+                        to
+                        {{
+                          getAllProposalDetail(
+                            item.proposal_id,
+                            "time_frame_end"
+                          ) | date : "MMM dd, yyyy"
+                        }}
+                      </span>
+                    </td>
+
+                    <td class="cell">
+                      {{ getAllProposalDetail(item.proposal_id, "venue") }}
+                    </td>
+                    <!-- <td class="cell">
+                      {{
+                        getAllProposalDetail(
+                          item.proposal_id,
+                          "target_beneficiary"
+                        )
+                      }}
+                    </td> -->
+                    <td class="cell">
+                      {{ getAllProposalManHours(item) }}
+                    </td>
+                    <td class="cell">
+                      <a
+                        class="btn btn-primary text-white"
+                        (click)="onViewDocumentOutput(item.proposal_id)"
+                        >View</a
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!--//table-responsive-->
+          </div>
+          <!--//app-card-body-->
+        </div>
+        <!--//app-card implementation_compilation -->
+      </div>
+      <!--//tab-pane-->
+
+      <div
+        class="tab-pane fade"
+        id="outcome"
+        role="tabpanel"
+        aria-labelledby="outcome-tab"
+      >
+        <div class="app-card app-card-orders-table shadow-sm mb-5">
+          <div class="app-card-body">
+            <div class="row">
+              <div class="col-md-2 m-3">
+                <label for="outcome_filter_schoolyear" class="text-black"
+                  ><small>School Year</small></label
+                >
+                <select
+                  id="outcome_filter_schoolyear"
+                  class="form-control"
+                  [(ngModel)]="selected_schoolyear_filter_outcome"
+                  (change)="onFilterOutcome_SY()"
+                >
+                  <option value="">-- All School Year --</option>
+                  <option
+                    *ngFor="let sy of sy_collections; index as i"
+                    [value]="sy"
+                  >
+                    {{ sy }}
+                  </option>
+                </select>
+              </div>
+              <!-- col-md-2 -->
+              <div class="col-md-2 my-4">
+                <label for="outcome_filter_department" class="text-black"
+                  ><small>Department</small></label
+                >
+                <select
+                  id="outcome_filter_department"
+                  [(ngModel)]="selected_department_filter_outcome"
+                  class="form-control"
+                  (change)="onFilterOutcome_department()"
+                >
+                  <option value="">-- All Department --</option>
+                  <option
+                    *ngFor="let dept of departmentNames; index as i"
+                    [value]="dept"
+                  >
+                    {{ dept }}
+                  </option>
+                </select>
+              </div>
+              <!-- col-md-2 -->
+              <div class="col-md-2 my-4">
+                <label for="outcome_filter_category" class="text-black"
+                  ><small>Activity Category</small></label
+                >
+                <select
+                  id="outcome_filter_category"
+                  [(ngModel)]="selected_category_filter_outcome"
+                  class="form-control"
+                  (change)="onFilterOutcome_category()"
+                >
+                  <option value="">-- All Action Category --</option>
+                  <option
+                    *ngFor="
+                      let a_cat of activity_category_collections;
+                      index as i
+                    "
+                    [value]="a_cat"
+                  >
+                    {{ a_cat }}
+                  </option>
+                </select>
+              </div>
+              <!-- col-md-2 -->
+            </div>
+
+            <div class="table-responsive">
+              <table class="table app-table-hover mb-0 text-left">
+                <thead>
+                  <tr>
+                    <th class="cell">Archive ID</th>
+                    <th class="cell">Department</th>
+                    <th class="cell">Category</th>
+                    <th class="cell">Area</th>
+                    <th class="cell">Description</th>
+                    <th class="cell">Date Implemented</th>
+                    <th class="cell">School Year</th>
+                    <th class="cell">Man Hours</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="let item of implementationReportsFilter; index as i"
+                  >
+                    <td class="cell">
+                      <small>
+                        {{ item._id }}
+                      </small>
+                    </td>
+
+                    <td class="cell">
+                      {{ getAllProposalDepartment(item.proposal_id) }}
+                    </td>
+
+                    <td class="cell">
+                      {{ item.activity_category }}
+                    </td>
+
+                    <td class="cell">
+                      {{ item.venue }}
+                    </td>
+                    <td class="cell"></td>
+
+                    <td class="cell">
+                      {{ item.date_implemented | date : "MMM dd, yyyy" }}
+                    </td>
+
+                    <td class="cell">
+                      {{
+                        getAllProposalDetail(item.proposal_id, "for_schoolyear")
+                      }}
+                    </td>
+                    <td class="cell">
+                      {{ getAllProposalManHours(item) }}
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="cell" colspan="5"></td>
+
+                    <td class="cell">
+                      <button
+                        type="button"
+                        (click)="
+                          onViewOutcome(
+                            this.selected_department_filter_outcome,
+                            this.selected_category_filter_outcome,
+                            this.selected_schoolyear_filter_outcome
+                          )
+                        "
+                        class="p-3 btn btn-primary px-5 text-white mt-2"
+                        style="width: 100%"
+                      >
+                        View Outcome
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!--//table-responsive-->
+          </div>
+          <!--//app-card-body-->
+        </div>
+        <!--//app-card OUTCOME LIST -->
+      </div>
+      <!--//tab-pane outcome -->
+    </div>
+    <!--//tab-content-->
+  </div>
+  <!--//container-fluid-->
+</div>
+<!--//app-content-->

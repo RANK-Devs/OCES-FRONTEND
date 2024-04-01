@@ -1,0 +1,96 @@
+
+
+<div class="container-fluid">
+
+
+    <div class="row">
+        <div class="col-md-3 text-center"><img src = "/assets/img/OCES-Logo.png" style = "height:150px;"/></div>
+        <div class="col-md-6 text-center">
+            <h5>OFFICE OF THE COMMUNITY EXTENSION SERVICES</h5>
+            <h6>Institute for Christian Formation and Social Integration</h6>
+            <h6>HOLY ANGEL UNIVERSITY</h6>
+            <h6><small>Sto. Rosario, Angeles City</small></h6>
+        </div>
+        <div class = "col-md-3"></div>
+    </div>  <!-- row header -->
+      
+    
+    <div class="row">
+        <div class="col-md-3 text-center"></div>
+        <div class="col-md-6 text-center">
+    
+            <h5>COMMUNITY EXTENSION SERVICE PROJECT PROPOSAL</h5>
+         
+        </div>
+        <div class = "col-md-3"></div>
+    </div> <!-- row title -->
+      
+    
+        <h6 class="row" *ngFor = "let item of proposalDetailsForm;index as i">
+            
+            <div class="col-md-12 my-3">
+    
+                <table class = "table table-responsive mx-2">            
+                    <tr class = "my-2">
+                        <td class = "mx-5">Sponsoring Department(s)/Proponent(s) :</td>
+                        <td style = "border:solid 1px #000;" width = "65%" class = "p-2"> {{ item.sponsor_department }}</td>
+                    </tr>
+                    <tr>
+                        <td>Project Title :</td>
+                        <td style = "border:solid 1px #000;" width = "65%" class = "p-2">  {{ item.project_title }}</td>
+                    </tr>
+                    <tr>
+                        <td>Target Beneficiaries :</td>
+                        <td style = "border:solid 1px #000;" width = "65%" class = "p-2"> {{ item.target_beneficiary }}</td>
+                    </tr>
+                    <tr>
+                        <td>Venue of CES Activity :</td>
+                        <td style = "border:solid 1px #000;" width = "50%" class = "p-2"> {{ item.venue }}</td>
+                    </tr>
+                </table>
+    
+                
+                
+    
+            </div>
+        
+        </h6> <!-- row details -->
+    
+    
+    
+        <h6 class="row">
+            
+            <div class="col-md-12 my-3">
+    
+                <table class = "table app-table-hover table-bordered mx-2 text-center">            
+                    <thead>
+                        <th>Objectives</th>
+                        <th>Activities</th>
+                        <th>Responsible Person(s)</th>
+                        <th>Budget Requirement</th>
+                        <th>Time Frame</th>
+                        <th>Output</th>
+                    </thead>
+    
+                    <tbody>
+                        <tr *ngFor = "let item_action_plan of proposedActionPlan;index as i">
+                            <td class = "cell"><p>{{  item_action_plan.objectives }}</p></td>
+                            <td class = "cell"><b>{{ item_action_plan.activity_title }}</b><br/><small>{{ item_action_plan.activity_details }}</small></td>
+                            <td class = "cell">{{  item_action_plan.responsible_persons }}</td>
+                            <td class = "cell">{{  item_action_plan.budget_requirements }}</td>
+                            <td class = "cell">{{  item_action_plan.time_frame_start | date: 'MMM dd, yyyy' }} to {{  item_action_plan.time_frame_end | date: 'MMM dd, yyyy' }}</td>
+                            <td class = "cell">{{  item_action_plan.proposed_output }}</td>
+                        </tr>
+                    </tbody>
+                    
+                </table>              
+    
+            </div>
+        
+        </h6> <!-- row proposed action plan -->
+    
+      
+    
+    </div> <!-- container-fluid -->
+    
+    
