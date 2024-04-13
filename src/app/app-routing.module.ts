@@ -62,6 +62,7 @@ const routes: Routes = [
     path: 'reset/:token',
     title: 'Reset Password',
     component: ResetPasswordComponent,
+    data: {title:'ResetPass'}
   },
   { path: 'register', title: 'Register', component: UserRegisterComponent, data: {title:'Register'}  },
   { path: 'user-profile', title: 'User Account Profile', component: UserProfileComponent, data: {title:'User Profile'}},
