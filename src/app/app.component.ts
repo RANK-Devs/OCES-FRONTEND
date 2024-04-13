@@ -26,7 +26,7 @@ export class AppComponent{
       this.routeData = this.activatedRoute.firstChild?.snapshot.data;
       this.current_menu = this.routeData.title;
       
-      if(this.current_menu == "Login" || this.current_menu == "ForgetPassword"){
+      if(this.current_menu == "Login" || this.current_menu == "ForgetPassword" || this.current_menu == "ResetPass"){
         this.isLoggedIn = false;
       }else{
         this.isLoggedIn = true;
